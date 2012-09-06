@@ -1,7 +1,6 @@
 (add-to-list 'load-path "~/.emacs.d/plugins")
 (add-to-list 'load-path "~/.emacs.d/plugins/single-files")
 (require 'eval-after-load)
-
 ;; ========= Modes ==========
 (global-linum-mode t)
 (ido-mode t)
@@ -9,7 +8,7 @@
 (setq transient-mark-mode t)
 (setq which-function-mode t)
 (global-font-lock-mode t)        ;Syntax highlight
-
+(menu-bar-mode nil)
 (menu-bar-mode nil)
 (tool-bar-mode nil)
 ;(pc-selection-mode t)
