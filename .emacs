@@ -10,9 +10,9 @@
 (global-font-lock-mode t)        ;Syntax highlight
 (menu-bar-mode -1)
 (tool-bar-mode -1)
+
 ;(pc-selection-mode t)
 ;(shift-select-mode t)
-
 ;; ========= Varibles ==========
 (setq kill-ring-max 2000);; Set delete record
 (add-hook 'before-save-hook
