@@ -8,14 +8,12 @@
 (setq transient-mark-mode t)
 (setq which-function-mode t)
 (global-font-lock-mode t)        ;Syntax highlight
-
-
-(menu-bar-mode nil)
-(tool-bar-mode nil)
+(menu-bar-mode -1)
+(tool-bar-mode -1)
 ;(pc-selection-mode t)
 ;(shift-select-mode t)
 
-;; ========= Varible ==========
+;; ========= Varibles ==========
 (setq kill-ring-max 2000);; Set delete record
 (add-hook 'before-save-hook
           '(lambda () ;;create directory before saving
