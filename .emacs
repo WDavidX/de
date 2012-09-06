@@ -8,7 +8,7 @@
 (setq transient-mark-mode t)
 (setq which-function-mode t)
 (global-font-lock-mode t)        ;Syntax highlight
-(menu-bar-mode nil)
+
 (menu-bar-mode nil)
 (tool-bar-mode nil)
 ;(pc-selection-mode t)
