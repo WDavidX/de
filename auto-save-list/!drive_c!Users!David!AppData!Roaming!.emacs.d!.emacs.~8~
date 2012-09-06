@@ -1,0 +1,126 @@
+(add-to-list 'load-path "~/.emacs.d/plugins")
+(add-to-list 'load-path "~/.emacs.d/plugins/single-files")
+;; ========= Functions ==========
+(setq transient-mark-mode t)
+(setq which-function-mode t)
+(setq kill-ring-max 2000);; Set delete record
+(global-font-lock-mode t)        ;Syntax highlight
+(add-hook 'before-save-hook
+          '(lambda () ;;create directory before saving
+             (or (file-exists-p (file-name-directory buffer-file-name))
+                 (make-directory (file-name-directory buffer-file-name) t))))
+(add-hook 'before-save-hook (lambda() (delete-trailing-whitespace)))
+(setq visual-bell nil)  ;;; Disable system beep
+(set-scroll-bar-mode t)   ;; no scroll bar, even in x-window system (recommended)
+(auto-image-file-mode t)
+(setq require-final-newline t)
+;(menu-bar-mode t)
+;(tool-bar-mode t)
+(setq enable-recursive-minibuffers t)
+(icomplete-mode t);; icomplete mode in minibuffer
+(setq kill-whole-line t) ;; C-k kill whole line including lind end
+(require 'tramp)
+(setq tramp-default-method "ssh")
+(setq initial-major-mode 'org-mode)
+(setq initial-scratch-message nil)
+(setq column-number-mode t)   ;; Display Cursor Location
+(setq line-number-mode t)
+(setq display-time-12hr-format t);;;; Display Time
+(setq display-time-day-and-date t)
+(display-time)
+(setq inhibit-startup-message t)  ;; Disable Startup Message
+(mouse-wheel-mode t)    ;; Response to mouse scrolling
+(setq-default make-backup-files t)
+(setq-default make-temp-files t)
+(setq auto-save-default nil)  ; disable # files
+(setq kept-new-versions 10 ;; Enable versioning with modified values
+      kept-old-versions 5
+      version-control t
+      delete-old-versions t
+      backup-by-copying t)
+(setq backup-directory-alist (quote ((".*" . "~/.emacs.d/auto-save-list"))))  ;; Save all backup file in this directory.
+
+(setq temporary-file-directory  "~/.emacs.d/temp-list")
+(setq-default fill-column 72)    ;; Set Fill Column and auto fill
+(setq auto-fill-mode 1)
+(setq scroll-margin 3  scroll-conservatively 10000)
+(fset 'yes-or-no-p 'y-or-n-p)  ;; ask by y or n
+(setq frame-title-format "%f %p %l")  ;; Title Display %f full path, %p page percent %l linenumber
+(require 'paren)
+(show-paren-mode t)
+(setq show-paren-delay 1)
+(setq show-paren-style 'parenthesis)
+(remove-hook 'coding-hook 'turn-on-hl-line-mode)
+(pc-selection-mode t)
+(if (eq window-system 'w32) (set-frame-font "Consolas 11") )
+(global-linum-mode t)
+; ========= Keyboard Definition ==========
+(global-set-key "\C-x\C-b" 'ibuffer)
+(global-set-key "\C-x\C-j" 'dired-jump)
+(global-set-key "\C-xk" 'kill-this-buffer)
+(global-set-key "\C-x\C-k" 'kill-this-buffer)
+(global-unset-key "\C-o")
+(global-set-key (kbd "<C-tab>") 'other-window)
+(global-unset-key "\C-z")
+(global-set-key "\C-z" 'undo)
+(global-unset-key [insert])
+(global-unset-key [backspace] )
+(global-set-key [backspace] 'delete-backward-char)
+(global-unset-key [delete] )
+(global-set-key [delete] 'delete-char)
+(global-set-key [C-delete] 'kill-word)
+(define-key global-map [home] `beginning-of-line)
+(define-key global-map [end] `end-of-line)
+(define-key global-map (kbd "RET") 'newline-and-indent)
+(setq standard-indent 2)
+(normal-erase-is-backspace-mode 1)
+(global-set-key [(f2)] 'set-mark-command)    ;set F2 as set mark
+(define-key isearch-mode-map '[backspace] 'isearch-delete-char)
+;; ==================== Coding ====================
+(setq buffer-file-coding-system 'utf-8-unix)
+(setq default-file-name-coding-system 'utf-8-unix)
+(setq default-keyboard-coding-system 'utf-8-unix)
+(setq default-process-coding-system '(utf-8-unix . utf-8-unix))
+(setq default-sendmail-coding-system 'utf-8-unix)
+(setq default-terminal-coding-system 'utf-8-unix)
+;; ============== What I defined ================
+(global-set-key [(f12)] 'eval-buffer) ;; evaluate buffer
+(defun my-open-customization()
+  (interactive)
+  (find-file "~/.emacs.d/.emacs"))
+(global-unset-key [(f11)])
+(global-set-key [(f11)] 'my-open-customization )
+(defun my-open-scrach()
+  (interactive)
+  (switch-to-buffer "*scratch*"))
+(global-unset-key [(f9)])
+(global-set-key [(f9)] 'my-open-scrach)
+;; ========= Plugins ==========
+
+(add-to-list 'load-path "~/.emacs.d/plugins/yasnippet")
+;(require 'yasnippet) ;; not yasnippet-bundle
+;(yas--initialize)
+;(yas/load-directory "~/.emacs.d/plugins/yasnippet/snippets")
+
+(require 'yas-jit)
+(setq yas/root-directory "~/.emacs.d/plugins/yasnippet")
+(yas/jit-load)
+
+;(add-to-list 'load-path "~/.emacs.d/plugins/yasnippet")
+;(require 'yasnippet-bundle)
+
+(add-to-list 'load-path "~/.emacs.d/plugins/auto-complete-131")
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/plugins/auto-complete-131/ac-dict")
+(ac-config-default)
+
+(add-to-list 'load-path "~/.emacs.d/plugins/color-theme-660")
+(require 'color-theme)
+(eval-after-load "color-theme"
+  '(progn
+     (color-theme-initialize)
+     (color-theme-hober)))
+
+(require 'cursor-chg)  ; Load the library
+(toggle-cursor-type-when-idle 1) ; Turn on cursor change when Emacs is idle
+(change-cursor-mode 1) ; Turn on change for overwrite, read-only, and input mode
