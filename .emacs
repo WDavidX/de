@@ -9,12 +9,13 @@
 (setq which-function-mode t)
 (global-font-lock-mode t)        ;Syntax highlight
 
+
 (menu-bar-mode nil)
 (tool-bar-mode nil)
 ;(pc-selection-mode t)
 ;(shift-select-mode t)
 
-;; ========= Varibles ==========
+;; ========= Varible ==========
 (setq kill-ring-max 2000);; Set delete record
 (add-hook 'before-save-hook
           '(lambda () ;;create directory before saving
