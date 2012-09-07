@@ -19,7 +19,8 @@
           '(lambda () ;;create directory before saving
              (or (file-exists-p (file-name-directory buffer-file-name))
                  (make-directory (file-name-directory buffer-file-name) t))))
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
+(add-hook 'before-save-hook 'delete-blank-lines)
 (setq visual-bell nil)  ;;; Disable system beep
 (auto-image-file-mode t)
 (setq enable-recursive-minibuffers t)
@@ -124,5 +125,3 @@
 ;(require 'kill-ring-ido)
 (require 'browse-kill-ring+)
 (load-file "~/.emacs.d/my_key_settings.el")
-
-
