@@ -10,7 +10,7 @@
 (global-font-lock-mode t)        ;Syntax highlight
 (menu-bar-mode -1)
 (tool-bar-mode -1)
-
+(set-scroll-bar-mode t)
 ;(pc-selection-mode t)
 ;(shift-select-mode t)
 ;; ========= Varibles ==========
@@ -19,11 +19,9 @@
           '(lambda () ;;create directory before saving
              (or (file-exists-p (file-name-directory buffer-file-name))
                  (make-directory (file-name-directory buffer-file-name) t))))
-(add-hook 'before-save-hook (lambda() (delete-trailing-whitespace)))
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 (setq visual-bell nil)  ;;; Disable system beep
-(set-scroll-bar-mode t)   ;; no scroll bar, even in x-window system (recommended)
 (auto-image-file-mode t)
-(setq require-final-newline t)
 (setq enable-recursive-minibuffers t)
 (icomplete-mode t);; icomplete mode in minibuffer
 (setq kill-whole-line t) ;; C-k kill whole line including lind end
@@ -92,10 +90,10 @@
 (setq default-terminal-coding-system 'utf-8-unix)
 
 ;;----------------------------------------------------------------------
-(add-to-list 'load-path "~/.emacs.d/plugins/yasnippet")
-(require 'yas-jit)
-(setq yas/root-directory "~/.emacs.d/plugins/yasnippet")
-(yas/jit-load)
+;; (add-to-list 'load-path "~/.emacs.d/plugins/yasnippet")
+;; (require 'yas-jit)
+;; (setq yas/root-directory "~/.emacs.d/plugins/yasnippet")
+;; (yas/jit-load)
 
 ;;----------------------------------------------------------------------
 (add-to-list 'load-path "~/.emacs.d/plugins/auto-complete-131")
