@@ -61,6 +61,33 @@
               (comment-or-uncomment-region (line-beginning-position) (line-end-position))
             (comment-dwim arg)))
 
+(defadvice show-paren-function
+      (after show-matching-paren-offscreen activate)
+      "If the matching paren is offscreen, show the matching line in the
+        echo area. Has no effect if the character before point is not of
+        the syntax class ')'."
+      (interactive)
+      (if (not (minibuffer-prompt))
+          (let ((matching-text nil))
+            ;; Only call `blink-matching-open' if the character before point
+            ;; is a close parentheses type character. Otherwise, there's not
+            ;; really any point, and `blink-matching-open' would just echo
+            ;; "Mismatched parentheses", which gets really annoying.
+            (if (char-equal (char-syntax (char-before (point))) ?\))
+                (setq matching-text (blink-matching-open)))
+            (if (not (null matching-text))
+                (message matching-text)))))
+
+;; ==================== show paren ====================
+(set-face-background 'show-paren-mismatch-face "red")
+(set-face-foreground 'show-paren-mismatch-face nil) 
+(set-face-background 'show-paren-match-face nil)
+(set-face-foreground 'show-paren-match-face "green")
+(set-face-attribute 'show-paren-match-face nil 
+        :weight 'extra-bold :underline t :overline nil :slant 'oblique)
+(set-face-attribute 'show-paren-mismatch-face nil
+	:strike-through t
+        :weight 'black :underline nil :overline nil :slant 'oblique)
 ;; ==================== Coding ====================
 (setq buffer-file-coding-system 'utf-8-unix)
 (setq default-file-name-coding-system 'utf-8-unix)
@@ -68,7 +95,6 @@
 (setq default-process-coding-system '(utf-8-unix . utf-8-unix))
 (setq default-sendmail-coding-system 'utf-8-unix)
 (setq default-terminal-coding-system 'utf-8-unix)
-
 ;;--------------------------------------------------------------------
 ;; Function Keys
 (global-set-key "\C-q" 'comment-dwim-line)
@@ -79,3 +105,5 @@
 (global-unset-key [(f10)]) (global-set-key [(f10)] (lambda() (interactive) (find-file "~/.emacs.d/my_key_settings.el")))
 (global-unset-key [(f11)]) (global-set-key [(f11)] (lambda() (interactive) (find-file "~/.emacs.d/.emacs")))
 (global-set-key [(f12)] 'eval-buffer) ;; evaluate buffer
+(global-unset-key [(f1)])
+(global-set-key [(f1)] 'onekey-compile)

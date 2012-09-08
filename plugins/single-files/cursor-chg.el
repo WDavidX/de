@@ -160,7 +160,7 @@ use either \\[customize] or command `change-cursor-mode'."
   :type (if (>= emacs-major-version 21) 'color 'string) :group 'cursor)
 
 ;;;###autoload
-(defcustom curchg-default-cursor-type 'bar "*Default text cursor type."
+(defcustom curchg-default-cursor-type 'hbar "*Default text cursor type."
   :type 'symbol :group 'cursor)
 
 ;;;###autoload

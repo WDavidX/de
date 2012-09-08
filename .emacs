@@ -19,7 +19,8 @@
           '(lambda () ;;create directory before saving
              (or (file-exists-p (file-name-directory buffer-file-name))
                  (make-directory (file-name-directory buffer-file-name) t))))
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
+(add-hook 'before-save-hook 'delete-blank-lines)
 (setq visual-bell nil)  ;;; Disable system beep
 (auto-image-file-mode t)
 (setq enable-recursive-minibuffers t)
@@ -52,7 +53,7 @@
 (setq scroll-margin 3  scroll-conservatively 10000)
 (fset 'yes-or-no-p 'y-or-n-p)  ;; ask by y or n
 (setq frame-title-format (list "%b %p  " (getenv "USERNAME") "   [ %f ]  " emacs-version))
-(blink-cursor-mode nil)
+(blink-cursor-mode t)
 (require 'paren)
 (show-paren-mode t)
 (setq show-paren-delay 0)
@@ -121,8 +122,7 @@
 (require 'smart-operator)
 (require 'autopair) (autopair-global-mode) ;; to enable in all buffers
 (require 'auto-pair+)
+(require 'highlight-sexp)
 ;(require 'kill-ring-ido)
 (require 'browse-kill-ring+)
 (load-file "~/.emacs.d/my_key_settings.el")
-
-
