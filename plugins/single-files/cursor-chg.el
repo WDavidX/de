@@ -175,7 +175,7 @@ This has no effect if `curchg-change-cursor-on-input-method-flag' is nil."
   :type (if (>= emacs-major-version 21) 'color 'string) :group 'cursor)
 
 ;;;###autoload
-(defcustom curchg-overwrite/read-only-cursor-type 'box
+(defcustom curchg-overwrite/read-only-cursor-type 'hollow
   "*Default text cursor type for overwrite mode or read-only buffer.
 This applies only to non-special frames.  This has no effect if
 `curchg-change-cursor-on-overwrite/read-only-flag' is nil."
