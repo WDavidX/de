@@ -186,7 +186,7 @@ This applies only to non-special frames.  This has no effect if
 
 (defvar curchg-last-cursor-type curchg-default-cursor-type "Saved last cursor type.")
 
-(defvar curchg-idle-interval 2
+(defvar curchg-idle-interval 10
   "Number of seconds to wait before changing to alternate cursor type.
 The alternate cursor type is `curchg-idle-cursor-type'.
 Do NOT change this yourself to change the wait period; instead, use
