@@ -1,4 +1,18 @@
-((("delete-blank-lines" .
+((("eval-last-sexp-1" .
+   [0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0])
+  ("interactive" .
+   [0 0 0 0 0 0 0 1 0 0 0])
+  ("other-" .
+   [0 0 0 0 0 1])
+  ("lambda" .
+   [1 0 0 0 0 0])
+  ("global-set-key" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("switch-to-buffer" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2])
+  ("other-buffer" .
+   [0 0 0 0 1 0 1 0 1 0 0 0])
+  ("delete-blank-lines" .
    [0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0])
   ("show" .
    [1 0 0 0])

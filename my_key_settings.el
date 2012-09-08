@@ -77,13 +77,37 @@
                 (setq matching-text (blink-matching-open)))
             (if (not (null matching-text))
                 (message matching-text)))))
-
+;; ========= Keyboard Definition ==========
+(global-set-key "\C-x\C-b" 'ibuffer)
+(global-set-key "\C-x\C-j" 'dired-jump)
+(global-set-key "\C-xk" 'kill-this-buffer)
+(global-set-key "\C-x\C-k" 'kill-this-buffer)
+(global-unset-key "\C-o")
+(global-set-key (kbd "<C-tab>") 'other-window)
+(global-unset-key "\C-z")
+(global-set-key "\C-z" 'undo)
+(global-unset-key [insert])
+(global-unset-key [backspace] )
+(global-set-key [backspace] 'delete-backward-char)
+(global-unset-key [delete] )
+(global-set-key [delete] 'delete-char)
+(global-set-key [C-delete] 'kill-word)
+(define-key global-map [home] `beginning-of-line)
+(define-key global-map [end] `end-of-line)
+(define-key global-map (kbd "RET") 'newline-and-indent)
+(normal-erase-is-backspace-mode 1)
+(global-set-key [(f2)] 'set-mark-command)    ;set F2 as set mark
+(define-key isearch-mode-map '[backspace] 'isearch-delete-char)
 ;; ==================== show paren ====================
+(require 'paren)
+(show-paren-mode t)
+(setq show-paren-delay 0)
+(setq show-paren-style 'parenthesis)
 (set-face-background 'show-paren-mismatch-face "red")
-(set-face-foreground 'show-paren-mismatch-face nil) 
+(set-face-foreground 'show-paren-mismatch-face nil)
 (set-face-background 'show-paren-match-face nil)
 (set-face-foreground 'show-paren-match-face "green")
-(set-face-attribute 'show-paren-match-face nil 
+(set-face-attribute 'show-paren-match-face nil
         :weight 'extra-bold :underline t :overline nil :slant 'oblique)
 (set-face-attribute 'show-paren-mismatch-face nil
 	:strike-through t
@@ -98,8 +122,9 @@
 ;;--------------------------------------------------------------------
 ;; Function Keys
 (global-set-key "\C-q" 'comment-dwim-line)
+(global-set-key "\C-o" '(lambda() (interactive) (switch-to-buffer (other-buffer))))
 (global-set-key [insert] 'onekey-compile)
-(global-set-key "\C-\\" 'onekey-compile)
+(global-set-key "\C-\\" 'eval-last-sexp)
 (global-set-key [(f8)] 'open-eshell-other-buffer)
 (global-unset-key [(f9)]) (global-set-key [(f9)] (lambda()(interactive) (switch-to-buffer "*scratch*")))
 (global-unset-key [(f10)]) (global-set-key [(f10)] (lambda() (interactive) (find-file "~/.emacs.d/my_key_settings.el")))
