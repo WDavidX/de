@@ -28,7 +28,7 @@
                  (make-directory (file-name-directory buffer-file-name) t))))
 (setq hippie-expand-verbose t)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
-(add-hook 'before-save-hook 'delete-blank-lines)
+;; (add-hook 'before-save-hook 'delete-blank-lines)
 (setq visual-bell -1)  ;;; Disable system beep
 (auto-image-file-mode t)
 (setq enable-recursive-minibuffers t)
@@ -63,9 +63,6 @@
 (setq frame-title-format (list "%b %p  [%f] " (getenv "USERNAME") " %s %Z   " emacs-version))
 (setq standard-indent 2)
 (remove-hook 'coding-hook 'turn-on-hl-line-mode)
-(if (eq window-system 'w32) (set-frame-font "Consolas 11") )
-
-
 ;;----------------------------------------------------------------------
 ;; (add-to-list 'load-path "~/.emacs.d/plugins/yasnippet")
 ;; (require 'yas-jit)
@@ -77,7 +74,7 @@
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/plugins/auto-complete-131/ac-dict")
 (ac-config-default)
-
+(require 'auto-complete-extension)
 ;;----------------------------------------------------------------------
 (add-to-list 'load-path "~/.emacs.d/plugins/color-theme-660")
 (add-to-list 'load-path "~/.emacs.d/plugins/color-theme-660/themes")
@@ -107,7 +104,7 @@
 (require 'browse-kill-ring+)
 (require 'maxframe) (maximize-frame)
 ;; (global-set-key "\M-q" 'iswitchb-kill-buffer)
-(global-set-key "\M-q" '( lambda() ((kill-buffer (current-buffer)))))
+(global-set-key "\M-q" ( lambda() (interactive)(kill-buffer (current-buffer))))
 (global-set-key "\M-b" 'kill-this-buffer-if-not-scratch)
 (load-file "~/.emacs.d/my_key_settings.el")
 ;(if (eq window-system 'w32) (emacs-maximize) )

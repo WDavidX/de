@@ -1,3 +1,14 @@
+;; ======================= Windows Fonts =======================
+;; (if (eq window-system 'w32) (set-frame-font "Bitstream Vera Sans 14") )
+;; (if (eq window-system 'w32) (set-frame-font "Inconsolata 14") )
+;; (if (eq window-system 'w32) (set-frame-font "Lucida Sans Typewriter 14") )
+;; (if (eq window-system 'w32) (set-frame-font "Lucida Console 14") )
+(if (eq window-system 'w32) (set-frame-font "Monaco 14") )  ;good
+;; (if (eq window-system 'w32) (set-frame-font "Anonymous 12") ) ;good
+;; (if (eq window-system 'w32) (set-frame-font "DejaVu Sans Mono 14") )
+;; (if (eq window-system 'w32) (set-frame-font "Consolas 11") ) ;good
+
+;; ================== Some functions==============
 ;; set new method of kill a whole line
 (defadvice kill-ring-save (before slickcopy activate compile)
   "When called interactively with no active region, copy a single line instead."
