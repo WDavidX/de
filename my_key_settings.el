@@ -77,6 +77,19 @@
                 (setq matching-text (blink-matching-open)))
             (if (not (null matching-text))
                 (message matching-text)))))
+
+;; ============ iswitch-buffer settings ==============
+(defun iswitchb-local-keys ()
+      "Using the arrow keys to select a buffer"
+      (mapc (lambda (K)
+	      (let* ((key (car K)) (fun (cdr K)))
+    	        (define-key iswitchb-mode-map (edmacro-parse-keys key) fun)))
+	    '(("<right>" . iswitchb-next-match)
+	      ("<left>"  . iswitchb-prev-match)
+	      ("<up>"    . ignore             )
+	      ("<down>"  . ignore             ))))
+(add-hook 'iswitchb-define-mode-map-hook 'iswitchb-local-keys)
+(setq iswitchb-buffer-ignore '("^ " "*Message*" "*Compile-log*" "*Help*" "*Ibuffer"))
 ;; ========= Keyboard Definition ==========
 (global-set-key "\C-x\C-b" 'ibuffer)
 (global-set-key "\C-x\C-j" 'dired-jump)
@@ -98,6 +111,60 @@
 (normal-erase-is-backspace-mode 1)
 (global-set-key [(f2)] 'set-mark-command)    ;set F2 as set mark
 (define-key isearch-mode-map '[backspace] 'isearch-delete-char)
+
+;; ==================== Screen Settings========================
+(defun window-half-height ()
+     (max 1 (/ (1- (window-height (selected-window))) 2)))
+
+(defun scroll-up-half ()
+     (interactive)
+     (scroll-up (window-half-height)))
+
+(defun scroll-down-half ()
+     (interactive)
+     (scroll-down (window-half-height)))
+
+(defun emacs-maximize ()
+  "Maximize emacs window in windows os"
+  (interactive)
+  (w32-send-sys-command 61488))        ; WM_SYSCOMMAND #xf030 maximize
+(defun emacs-minimize ()
+  "Minimize emacs window in windows os"
+  (interactive)
+  (w32-send-sys-command #xf020))    ; #xf020 minimize
+(defun emacs-normal ()
+  "Normal emacs window in windows os"
+  (interactive)
+  (w32-send-sys-command #xf120))    ; #xf120 normalimize
+
+;; (defun set-frame-size-according-to-resolution ()
+;;   (interactive)
+;;   (if window-system
+;;   (progn
+;;     ;; use 120 char wide window for largeish displays
+;;     ;; and smaller 80 column windows for smaller displays
+;;     ;; pick whatever numbers make sense for you
+;;     (if (> (x-display-pixel-width) 1280)
+;;            (add-to-list 'default-frame-alist (cons 'width 120))
+;;            (add-to-list 'default-frame-alist (cons 'width 80)))
+;;     ;; for the height, subtract a couple hundred pixels
+;;     ;; from the screen height (for panels, menubars and
+;;     ;; whatnot), then divide by the height of a char to
+;;     ;; get the height we want
+;;     (add-to-list 'default-frame-alist
+;;          (cons 'height (/ (- (x-display-pixel-height) 200)
+;;                              (frame-char-height)))))))
+;(set-frame-position current-frame 0 0)
+;(set-frame-size-according-to-resolution)
+
+;(defun toggle-fullscreen ()
+ ; (interactive)
+;  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
+;	    		 '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
+;  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
+;	    		 '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0))
+;)
+;(toggle-fullscreen)
 ;; ==================== show paren ====================
 (require 'paren)
 (show-paren-mode t)
@@ -132,3 +199,38 @@
 (global-set-key [(f12)] (lambda() (interactive)(save-some-buffers (buffer-file-name)) (eval-buffer))) ;; evaluate buffer
 (global-unset-key [(f1)])
 (global-set-key [(f1)] 'onekey-compile)
+
+;;======== The following messes up with original settings
+;(global-set-key "\C-l" 'forward-char)
+(global-set-key "\C-k" 'backward-char)
+(global-set-key "\C-l" 'forward-char)
+(global-set-key "\M-k" 'backward-word)
+(global-set-key "\M-l" 'forward-word)
+;(global-set-key "\C-u" 'scroll-up)
+;(global-set-key "\C-i" 'scroll-down)
+;; (global-set-key "\C-u" '(lambda() (forward-line 1))
+(global-set-key "\M-i"
+  (lambda () (interactive)
+    (condition-case nil (scroll-up)
+      (end-of-buffer (goto-char (point-max))))))
+(global-set-key "\M-j"
+  (lambda () (interactive)
+    (condition-case nil (scroll-down)
+      (beginning-of-buffer (goto-char (point-min))))))
+
+(global-set-key "\C-i" '(lambda() (interactive)(forward-line -1)))
+(global-set-key "\C-j" '(lambda() (interactive)(forward-line 1)))
+
+(global-set-key "\M-p" 'beginning-of-buffer)
+(global-set-key "\M-n" 'end-of-buffer)
+(global-set-key "\C-p" 'previous-line)
+(global-set-key "\C-n" 'next-line)
+
+(global-set-key "\C-f" 'delete-backward-char)
+(global-set-key "\M-f" 'backward-kill-word)
+(global-set-key "\M-w" 'kill-ring-save)
+(global-set-key "\C-w" 'kill-region)
+(global-set-key "\C-v" 'yank)
+(global-set-key "\M-v" 'yank-pop)
+(global-set-key "\C-y" 'yank)
+(global-set-key "\C-b" 'kill-line)

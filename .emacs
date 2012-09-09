@@ -1,7 +1,9 @@
 (add-to-list 'load-path "~/.emacs.d/plugins")
 (add-to-list 'load-path "~/.emacs.d/plugins/single-files")
 (require 'eval-after-load)
-(load-file "~/.emacs.d/my_key_settings.el")
+(global-unset-key [(f10)]) (global-set-key [(f10)] (lambda() (interactive) (find-file "~/.emacs.d/my_key_settings.el")))
+(global-unset-key [(f11)]) (global-set-key [(f11)] (lambda() (interactive) (find-file "~/.emacs.d/.emacs")))
+(global-set-key [(f12)] (lambda() (interactive)(save-some-buffers (buffer-file-name)) (eval-buffer))) ;; evaluate buffer
 ;; ========= Modes ==========
 (global-linum-mode t)
 (ido-mode t)
@@ -13,15 +15,18 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (icomplete-mode t);; icomplete mode in minibuffer
+(iswitchb-mode t)
 ;; (blink-cursor-mode t)
 ;;(pc-selection-mode t)
 ;(shift-select-mode t)
 ;; ========= Varibles ==========
 (setq kill-ring-max 2000);; Set delete record
+(setq-default tab-width 4)
 (add-hook 'before-save-hook
           '(lambda () ;;create directory before saving
              (or (file-exists-p (file-name-directory buffer-file-name))
                  (make-directory (file-name-directory buffer-file-name) t))))
+(setq hippie-expand-verbose t)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (add-hook 'before-save-hook 'delete-blank-lines)
 (setq visual-bell -1)  ;;; Disable system beep
@@ -42,6 +47,7 @@
 (setq-default make-backup-files t)
 (setq-default make-temp-files t)
 (setq auto-save-default t)  ; disable # files%p
+(auto-save-mode t)
 (setq kept-new-versions 10 ;; Enable versioning with modified values
       kept-old-versions 5
       version-control t
@@ -74,11 +80,14 @@
 
 ;;----------------------------------------------------------------------
 (add-to-list 'load-path "~/.emacs.d/plugins/color-theme-660")
+(add-to-list 'load-path "~/.emacs.d/plugins/color-theme-660/themes")
 (require 'color-theme)
 (eval-after-load "color-theme"
   '(progn
      (color-theme-initialize)
      (color-theme-hober)))
+;; (color-theme-sons-of-obsidian)
+(color-theme-arjen)
 ;;----------------------------------------------------------------------
 (require 'cursor-chg)  ; Load the library
 (toggle-cursor-type-when-idle 1) ; Turn on cursor change when Emacs is idle
@@ -93,5 +102,12 @@
 (require 'auto-pair+)
 (require 'highlight-sexp)
 (require 'icomplete+)
+(require 'buffcycle)
 ;(require 'kill-ring-ido)
 (require 'browse-kill-ring+)
+;; (global-set-key "\M-q" 'iswitchb-kill-buffer)
+(global-set-key "\M-q" '( lambda() ((kill-buffer (current-buffer)))))
+(global-set-key "\M-b" 'kill-this-buffer-if-not-scratch)
+(load-file "~/.emacs.d/my_key_settings.el")
+;(if (eq window-system 'w32) (emacs-maximize) )
+;(global-set-key "\C-q" 'comment-dwim-line)

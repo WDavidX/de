@@ -1,13 +1,39 @@
-((("eval-last-sexp-1" .
+((("move-beginning-of-line" .
+   [0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 0])
+  ("next-line" .
+   [0 0 0 0 0 0 0 0 1])
+  ("other-window" .
+   [0 0 0 0 0 0 0 0 0 1 0 0])
+  ("kill-whole-line" .
+   [0 0 0 0 0 0 0 1 0 0 0 0 0 0 0])
+  ("current-frame-configuration" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("this" .
+   [1 0 0 0])
+  ("yank" .
+   [1 0 0 0])
+  ("kill-this-buffer-if-not-scratch" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0])
+  ("global-unset-key" .
+   [0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0])
+  ("tab-width" .
+   [0 0 0 0 0 0 0 0 1])
+  ("kill-line" .
+   [1 0 0 0 0 0 0 1 0])
+  ("kill-sentence" .
+   [0 0 0 0 0 0 0 0 0 1 0 0 0])
+  ("kbd" .
+   [1 0 0])
+  ("eval-last-sexp-1" .
    [0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0])
   ("interactive" .
-   [0 0 0 0 0 0 0 1 0 0 0])
+   [2 0 0 0 0 0 0 2 0 0 0])
   ("other-" .
    [0 0 0 0 0 1])
   ("lambda" .
-   [1 0 0 0 0 0])
+   [3 0 0 0 0 0])
   ("global-set-key" .
-   [1 0 0 0 0 0 0 0 0 0 0 0 0 0])
+   [6 0 0 0 0 0 0 0 0 0 1 0 1 2])
   ("switch-to-buffer" .
    [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2])
   ("other-buffer" .
@@ -21,4 +47,40 @@
   ("inc" .
    [1 0 0])
   ("showme" .
-   [0 0 0 0 1 0])))
+   [0 0 0 0 1 0])
+  ("hippie-expand" .
+   [0 0 0 1 0 0 0 0 0 0 0 0 0])
+  ("set-default-file-modes" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1])
+  ("set-default-font" .
+   [0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0])
+  ("glyph-char" .
+   [0 0 0 1 0 0 0 0 0 0])
+  ("glyph-face" .
+   [0 0 0 1 0 0 0 0 0 0])
+  ("forward-sexp" .
+   [0 0 0 0 1 0 1 0 1 0 0 0])
+  ("forward-char" .
+   [0 0 0 0 0 0 0 0 0 0 2 0])
+  ("backward-char" .
+   [0 0 0 0 0 0 1 0 0 0 0 0 0])
+  ("scroll-up" .
+   [1 0 0 0 0 0 0 0 0])
+  ("scroll-down" .
+   [1 0 0 0 0 0 0 0 0 0 1])
+  ("yank-pop" .
+   [0 0 0 0 1 0 0 0])
+  ("if" .
+   [1 0])
+  ("emacs-maximize" .
+   [0 0 0 0 0 0 0 0 1 0 0 0 0 0])
+  ("previous-line" .
+   [0 0 0 0 1 0 0 0 0 0 0 0 1])
+  ("next" .
+   [2 0 0 0])
+  ("defun" .
+   [0 0 0 0 1])
+  ("intern" .
+   [0 0 0 0 0 1])
+  ("forward-line" .
+   [2 0 0 0 0 0 0 0 0 0 0 0])))
