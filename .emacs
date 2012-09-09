@@ -105,9 +105,12 @@
 (require 'buffcycle)
 ;(require 'kill-ring-ido)
 (require 'browse-kill-ring+)
+(require 'maxframe) (maximize-frame)
 ;; (global-set-key "\M-q" 'iswitchb-kill-buffer)
 (global-set-key "\M-q" '( lambda() ((kill-buffer (current-buffer)))))
 (global-set-key "\M-b" 'kill-this-buffer-if-not-scratch)
 (load-file "~/.emacs.d/my_key_settings.el")
 ;(if (eq window-system 'w32) (emacs-maximize) )
 ;(global-set-key "\C-q" 'comment-dwim-line)
+
+;(setq initial-frame-alist '((top . 0) (left . 0) (width . 80) (height . 30)))

@@ -1,4 +1,8 @@
-((("move-beginning-of-line" .
+((("maximize-frame" .
+   [0 0 0 0 1 0 0 0 0 0 0 0 0 0])
+  ("maxframe" .
+   [1 0 0 0 0 0 0 0])
+  ("move-beginning-of-line" .
    [0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 0])
   ("next-line" .
    [0 0 0 0 0 0 0 0 1])
@@ -83,4 +87,6 @@
   ("intern" .
    [0 0 0 0 0 1])
   ("forward-line" .
-   [2 0 0 0 0 0 0 0 0 0 0 0])))
+   [2 0 0 0 0 0 0 0 0 0 0 0])
+  ("mf" .
+   [1 0])))
