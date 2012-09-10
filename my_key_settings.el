@@ -1,12 +1,4 @@
-;; ======================= Windows Fonts =======================
-;; (if (eq window-system 'w32) (set-frame-font "Bitstream Vera Sans 14") )
-;; (if (eq window-system 'w32) (set-frame-font "Inconsolata 14") )
-;; (if (eq window-system 'w32) (set-frame-font "Lucida Sans Typewriter 14") )
-;; (if (eq window-system 'w32) (set-frame-font "Lucida Console 14") )
-(if (eq window-system 'w32) (set-frame-font "Monaco 14") )  ;good
-;; (if (eq window-system 'w32) (set-frame-font "Anonymous 12") ) ;good
-;; (if (eq window-system 'w32) (set-frame-font "DejaVu Sans Mono 14") )
-;; (if (eq window-system 'w32) (set-frame-font "Consolas 11") ) ;good
+
 
 ;; ================== Some functions==============
 ;; set new method of kill a whole line
@@ -73,8 +65,7 @@
             (comment-dwim arg)))
 
 (defadvice show-paren-function
-      (after show-matching-paren-offscreen activate)
-      "If the matching paren is offscreen, show the matching line in the
+      (after show-matching-paren-offscreen activate)     "If the matching paren is offscreen, show the matching line in the
         echo area. Has no effect if the character before point is not of
         the syntax class ')'."
       (interactive)
@@ -207,7 +198,7 @@
 (global-unset-key [(f9)]) (global-set-key [(f9)] (lambda()(interactive) (switch-to-buffer "*scratch*")))
 (global-unset-key [(f10)]) (global-set-key [(f10)] (lambda() (interactive) (find-file "~/.emacs.d/my_key_settings.el")))
 (global-unset-key [(f11)]) (global-set-key [(f11)] (lambda() (interactive) (find-file "~/.emacs.d/.emacs")))
-(global-set-key [(f12)] (lambda() (interactive)(save-some-buffers (buffer-file-name)) (eval-buffer))) ;; evaluate buffer
+(global-set-key [(f12)] (lambda() (interactive)(save-some-buffers (buffer-file-name))(eval-buffer))) ;; evaluate buffer
 (global-unset-key [(f1)])
 (global-set-key [(f1)] 'onekey-compile)
 
@@ -245,3 +236,14 @@
 (global-set-key "\M-v" 'yank-pop)
 (global-set-key "\C-y" 'yank)
 (global-set-key "\C-b" 'kill-line)
+
+;; ======================= Windows Fonts =======================
+;; (if (eq window-system 'w32) (set-frame-font "Bitstream Vera Sans 14") )
+;; (if (eq window-system 'w32) (set-frame-font "Inconsolata 14") )
+;; (if (eq window-system 'w32) (set-frame-font "Lucida Sans Typewriter 14") )
+;; (if (eq window-system 'w32) (set-frame-font "Lucida Console 14") )
+;; (if (eq window-system 'w32) (set-frame-font "Monaco 14") )  ;good
+(if (eq window-system 'w32) (set-frame-font "Monaco 12") )  ;good
+;; (if (eq window-system 'w32) (set-frame-font "Anonymous 12") ) ;good
+;; (if (eq window-system 'w32) (set-frame-font "DejaVu Sans Mono 14") )
+;; (if (eq window-system 'w32) (set-frame-font "Consolas 11") ) ;good

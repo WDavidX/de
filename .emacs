@@ -1,6 +1,10 @@
 (add-to-list 'load-path "~/.emacs.d/plugins")
 (add-to-list 'load-path "~/.emacs.d/plugins/single-files")
 (require 'eval-after-load)
+(load-file "~/.emacs.d/plugins/cedet-1.1/common/cedet.el")
+(global-ede-mode 1)                      ; Enable the Project management system
+(semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion
+(global-srecode-minor-mode 1)            ; Enable template insertion menu
 (global-unset-key [(f10)]) (global-set-key [(f10)] (lambda() (interactive) (find-file "~/.emacs.d/my_key_settings.el")))
 (global-unset-key [(f11)]) (global-set-key [(f11)] (lambda() (interactive) (find-file "~/.emacs.d/.emacs")))
 (global-set-key [(f12)] (lambda() (interactive)(save-some-buffers (buffer-file-name)) (eval-buffer))) ;; evaluate buffer
@@ -8,6 +12,7 @@
 (global-linum-mode t)
 (ido-mode t)
 (delete-selection-mode t)
+(visual-line-mode 1)
 (setq transient-mark-mode t)
 (setq which-function-mode t)
 (global-font-lock-mode t)        ;Syntax highlight
@@ -90,6 +95,7 @@
 (toggle-cursor-type-when-idle 1) ; Turn on cursor change when Emacs is idle
 (change-cursor-mode 1) ; Turn on change for overwrite, read-only, and input mode
 (curchg-change-cursor-when-idle-interval 10) ; change the idle timer
+
 ;;----------------------------------------------------------------------
 (require 'dired-lis)
 (require 'smart-compile)
@@ -102,11 +108,11 @@
 (require 'buffcycle)
 ;(require 'kill-ring-ido)
 (require 'browse-kill-ring+)
-(require 'maxframe) (maximize-frame)
 ;; (global-set-key "\M-q" 'iswitchb-kill-buffer)
 (global-set-key "\M-q" ( lambda() (interactive)(kill-buffer (current-buffer))))
 (global-set-key "\M-b" 'kill-this-buffer-if-not-scratch)
 (load-file "~/.emacs.d/my_key_settings.el")
+(require 'maxframe) (maximize-frame)
 ;(if (eq window-system 'w32) (emacs-maximize) )
 ;(global-set-key "\C-q" 'comment-dwim-line)
 
