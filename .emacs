@@ -8,28 +8,7 @@
 (global-unset-key [(f10)]) (global-set-key [(f10)] (lambda() (interactive) (find-file "~/.emacs.d/my_key_settings.el")))
 (global-unset-key [(f11)]) (global-set-key [(f11)] (lambda() (interactive) (find-file "~/.emacs.d/.emacs")))
 (global-set-key [(f12)] (lambda() (interactive)(save-some-buffers (buffer-file-name)) (eval-buffer))) ;; evaluate buffer
-;; ========= org mode ==========
-(setq org-support-shift-select t)
-;(require 'org-mode)
-; Some initial langauges we want org-babel to support
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '(
-   (sh . t)
-   (python . t)
-   (R . t)
-   (ruby . t)
-   (ditaa . t)
-   (dot . t)
-   (octave . t)
-   (sqlite . t)
-   (perl . t)
-   ))
-; Add short cut keys for the org-agenda
-(global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-cc" 'org-capture)
-(global-set-key "\C-ca" 'org-agenda)
-(global-set-key "\C-cb" 'org-export-as-html-and-open)
+
 ;; ========= Modes ==========
 (global-linum-mode t)
 (ido-mode t)
@@ -117,7 +96,31 @@
 (toggle-cursor-type-when-idle 1) ; Turn on cursor change when Emacs is idle
 (change-cursor-mode 1) ; Turn on change for overwrite, read-only, and input mode
 (curchg-change-cursor-when-idle-interval 10) ; change the idle timer
-
+;; ========= org mode ==========
+(setq load-path (cons "~/.emacs.d/plugins/org-7.9.1/lisp" load-path))
+(setq load-path (cons "~/.emacs.d/plugins/org-7.9.1/contrib/lisp" load-path))
+(require 'org-install)
+(setq org-support-shift-select t)
+;(require 'org-mode)
+; Some initial langauges we want org-babel to support
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '(
+   (sh . t)
+   (python . t)
+   (R . t)
+   (ruby . t)
+   (ditaa . t)
+   (dot . t)
+   (octave . t)
+   (sqlite . t)
+   (perl . t)
+   ))
+; Add short cut keys for the org-agenda
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-export-as-html-and-open)
 ;;----------------------------------------------------------------------
 (require 'dired-lis)
 (require 'smart-compile)
