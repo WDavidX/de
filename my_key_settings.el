@@ -44,7 +44,8 @@
     (setq progname (file-name-sans-extension filename))
     (setq suffix (file-name-extension filename))
     (if (string= suffix "c") (setq compiler (concat "gcc -g -Wall -o " progname " ")))
-    (if (or (string= suffix "cc") (string= suffix "cpp")) (setq compiler (concat "g++ -g -Wall -o " progname " ")))
+    (if (or (string= suffix "cc") (string= suffix "cpp"))
+		(setq compiler (concat "g++ -g -Wall -o " progname " ")))
     (if (string= suffix "tex") (setq compiler "pdflatex "))
     (if (string= suffix "py") (setq compiler "python "))
     (compile (concat compiler filename))))
@@ -63,7 +64,8 @@
             (comment-dwim arg)))
 
 (defadvice show-paren-function
-      (after show-matching-paren-offscreen activate)     "If the matching paren is offscreen, show the matching line in the
+      (after show-matching-paren-offscreen activate)
+	  "If the matching paren is offscreen, show the matching line in the
         echo area. Has no effect if the character before point is not of
         the syntax class ')'."
       (interactive)
@@ -78,7 +80,7 @@
             (if (not (null matching-text))
                 (message matching-text)))))
 
-;; ============ iswitch-buffer settings ==============
+;; ==================== iswitch-buffer settings ====================
 (defun iswitchb-local-keys ()
       "Using the arrow keys to select a buffer"
       (mapc (lambda (K)
@@ -90,12 +92,11 @@
 	      ("<down>"  . ignore             ))))
 (add-hook 'iswitchb-define-mode-map-hook 'iswitchb-local-keys)
 (setq iswitchb-buffer-ignore '("^ " "*Message*" "*Compile-log*" "*Help*" "*Ibuffer"))
-;; ========= Keyboard Definition ==========
-(global-set-key "\C-x\C-b" 'ibuffer)
-(global-set-key "\C-x\C-j" 'dired-jump)
+;; ==================== Keyboard Definition ====================
+;; (global-set-key "\C-x\C-b" 'ibuffer)
 (global-set-key "\C-xk" 'kill-this-buffer)
 (global-set-key "\C-x\C-k" 'kill-this-buffer)
-(global-unset-key "\C-o")
+;; (global-unset-key "\C-o")
 (global-set-key (kbd "<C-tab>") 'other-window)
 (global-unset-key "\C-z")
 (global-set-key "\C-z" 'undo)
@@ -176,28 +177,32 @@
 (set-face-attribute 'show-paren-mismatch-face nil
 	:strike-through t
         :weight 'black :underline nil :overline nil :slant 'oblique)
-;; ==================== Coding ====================
+;; ==================== System Coding ====================
 (setq buffer-file-coding-system 'utf-8-unix)
 (setq default-file-name-coding-system 'utf-8-unix)
 (setq default-keyboard-coding-system 'utf-8-unix)
 (setq default-process-coding-system '(utf-8-unix . utf-8-unix))
 (setq default-sendmail-coding-system 'utf-8-unix)
 (setq default-terminal-coding-system 'utf-8-unix)
-;;--------------------------------------------------------------------
-;; Function Keys
+;; ========================= Function Keys ========================
 (global-set-key "\C-q" 'comment-dwim-line)
 (global-set-key "\C-o" '(lambda() (interactive) (switch-to-buffer (other-buffer))))
 (global-set-key [insert] 'onekey-compile)
 (global-set-key "\C-\\" 'eval-last-sexp)
 (global-set-key [(f8)] 'open-eshell-other-buffer)
-(global-unset-key [(f9)]) (global-set-key [(f9)] (lambda()(interactive) (switch-to-buffer "*scratch*")))
-(global-unset-key [(f10)]) (global-set-key [(f10)] (lambda() (interactive) (find-file "~/.emacs.d/my_key_settings.el")))
-(global-unset-key [(f11)]) (global-set-key [(f11)] (lambda() (interactive) (find-file "~/.emacs.d/.emacs")))
-(global-set-key [(f12)] (lambda() (interactive)(save-some-buffers (buffer-file-name))(eval-buffer))) ;; evaluate buffer
+(global-unset-key [(f9)]) (global-set-key [(f9)]
+	(lambda()(interactive) (switch-to-buffer "*scratch*")))
+(global-unset-key [(f10)]) (global-set-key [(f10)]
+	(lambda() (interactive) (find-file "~/.emacs.d/my_key_settings.el")))
+(global-unset-key [(f11)]) (global-set-key [(f11)]
+	(lambda() (interactive) (find-file "~/.emacs.d/.emacs")))
+(global-set-key [(f12)]
+	(lambda() (interactive)(save-some-buffers (buffer-file-name))(eval-buffer)))
 (global-unset-key [(f1)])
 (global-set-key [(f1)] 'onekey-compile)
+(global-set-key "\C-k" 'kill-line)
 
-;;======== The following messes up with original settings
+;;==================== The following messes up with original settings
 ;; ;(global-set-key "\C-l" 'forward-char)
 ;; (global-set-key "\C-k" 'backward-char)
 ;; (global-set-key "\C-l" 'forward-char)
@@ -206,14 +211,15 @@
 ;; ;(global-set-key "\C-u" 'scroll-up)
 ;; ;(global-set-key "\C-i" 'scroll-down)
 ;; ;; (global-set-key "\C-u" '(lambda() (forward-line 1))
-;; (global-set-key "\M-i"
-;;   (lambda () (interactive)
-;;     (condition-case nil (scroll-up)
-;;       (end-of-buffer (goto-char (point-max))))))
-;; (global-set-key "\M-j"
-;;   (lambda () (interactive)
-;;     (condition-case nil (scroll-down)
-;;       (beginning-of-buffer (goto-char (point-min))))))
+
+(global-set-key "\M-n"
+  (lambda () (interactive)
+    (condition-case nil (scroll-up)
+      (end-of-buffer (goto-char (point-max))))))
+(global-set-key "\M-p"
+  (lambda () (interactive)
+    (condition-case nil (scroll-down)
+      (beginning-of-buffer (goto-char (point-min))))))
 
 ;; (global-set-key "\C-i" '(lambda() (interactive)(forward-line -1)))
 ;; (global-set-key "\C-j" '(lambda() (interactive)(forward-line 1)))
@@ -223,7 +229,7 @@
 ;; (global-set-key "\C-p" 'previous-line)
 ;; (global-set-key "\C-n" 'next-line)
 
-;; (global-set-key "\C-f" 'delete-backward-char)
+;; (global-set-key "\C-f" 'delete- backward-char)
 ;; (global-set-key "\M-f" 'backward-kill-word)
 ;; (global-set-key "\M-w" 'kill-ring-save)
 ;; (global-set-key "\C-w" 'kill-region)

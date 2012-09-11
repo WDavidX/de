@@ -1,3 +1,7 @@
 auto-save-list
 tramp
 ac-comphist.dat
+.emacs.desktop
+.emacs.desktop.lock
+.\#*
+.org-id-locations
