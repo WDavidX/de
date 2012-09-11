@@ -25,6 +25,8 @@
 ;; (blink-cursor-mode t)
 ;;(pc-selection-mode t)
 ;(shift-select-mode t)
+
+
 ;; ========= Varibles ==========
 (setq kill-ring-max 2000);; Set delete record
 (setq-default tab-width 4)
@@ -126,7 +128,7 @@
 (add-to-list 'load-path "~/.emacs.d/plugins/icicles")
 (require 'icicles)
 ;;----------------------------------------------------------------------
-
+;; (require 'desktop-recover-setup)
 (require 'dired-lis)
 (require 'smart-compile)
 (require 'compile-dwim)
@@ -138,6 +140,7 @@
 (require 'buffcycle)
 ;(require 'kill-ring-ido)
 (require 'browse-kill-ring+)
+(require 'recentf)(recentf-mode 1)
 ;; (global-set-key "\M-q" 'iswitchb-kill-buffer)
 (global-set-key "\M-q" ( lambda() (interactive)(kill-buffer (current-buffer))))
 (global-set-key "\M-b" 'kill-this-buffer-if-not-scratch)
