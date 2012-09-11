@@ -28,7 +28,7 @@
 (scroll-bar-mode -1)
 (icomplete-mode t);; icomplete mode in minibuffer
 (auto-fill-mode 1)
-(iswitchb-mode t)
+(iswitchb-mode t) 
 ;; (blink-cursor-mode t)
 ;; (pc-selection-mode t)
 ;; (shift-select-mode t)
