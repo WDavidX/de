@@ -1,5 +1,3 @@
-
-
 ;; ================== Some functions==============
 ;; set new method of kill a whole line
 (defadvice kill-ring-save (before slickcopy activate compile)
@@ -117,15 +115,12 @@
 ;; ==================== Screen Settings========================
 (defun window-half-height ()
      (max 1 (/ (1- (window-height (selected-window))) 2)))
-
 (defun scroll-up-half ()
      (interactive)
      (scroll-up (window-half-height)))
-
 (defun scroll-down-half ()
      (interactive)
      (scroll-down (window-half-height)))
-
 (defun emacs-maximize ()
   "Maximize emacs window in windows os"
   (interactive)
