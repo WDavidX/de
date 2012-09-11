@@ -1,0 +1,51 @@
+;; -*- mode: emacs-lisp; coding: emacs-mule; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Tue Sep 11 14:09:19 2012
+;; Desktop file format version 206
+;; Emacs version 23.4.1
+
+;; Global section:
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name nil)
+(setq tags-table-list nil)
+(setq search-ring nil)
+(setq regexp-search-ring nil)
+(setq register-alist nil)
+(setq file-name-history '("~/.emacs.d/desktop-save/"))
+
+;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 206
+  "c:/Users/xuxxx625/AppData/Roaming/.emacs.d/my_key_settings.el"
+  "my_key_settings.el"
+  'emacs-lisp-mode
+  '(senator-minor-mode semantic-idle-scheduler-mode semantic-idle-summary-mode semantic-mru-bookmark-mode srecode-minor-mode linum-mode auto-complete-mode autopair-mode)
+  436
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-dos)))
+
+(desktop-create-buffer 206
+  "c:/Users/xuxxx625/AppData/Roaming/.emacs.d/.emacs.desktop"
+  ".emacs.desktop"
+  'emacs-lisp-mode
+  '(senator-minor-mode semantic-idle-scheduler-mode semantic-idle-summary-mode semantic-mru-bookmark-mode srecode-minor-mode linum-mode auto-complete-mode autopair-mode)
+  618
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . emacs-mule-dos)))
+
+(desktop-create-buffer 206
+  "c:/Users/xuxxx625/AppData/Roaming/.emacs.d/.emacs"
+  ".emacs"
+  'emacs-lisp-mode
+  '(senator-minor-mode semantic-idle-scheduler-mode semantic-idle-summary-mode semantic-mru-bookmark-mode srecode-minor-mode linum-mode auto-complete-mode autopair-mode)
+  1276
+  '(1276 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-dos)))
+
