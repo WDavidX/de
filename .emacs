@@ -11,7 +11,7 @@
 
 ;; ========= Modes ==========
 (global-linum-mode t)
-(ido-mode t)
+;; (ido-mode t)
 (delete-selection-mode t)
 (visual-line-mode 1)
 (setq transient-mark-mode t)
@@ -121,7 +121,12 @@
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-export-as-html-and-open)
+
+;; ================== icicles =====================
+(add-to-list 'load-path "~/.emacs.d/plugins/icicles")
+(require 'icicles)
 ;;----------------------------------------------------------------------
+
 (require 'dired-lis)
 (require 'smart-compile)
 (require 'compile-dwim)
