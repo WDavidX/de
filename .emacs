@@ -12,7 +12,7 @@
 		(lambda() (interactive) (find-file "~/.emacs.d/.emacs")))
 (global-set-key [(f12)] (lambda()
 		(interactive)(save-some-buffers (buffer-file-name)) (eval-buffer))) ;; evaluate buffer
-(setq default-frame-alist '((top . 0) (left . 0) ))
+(setq default-frame-alist '((top .0) (left . 0) ))
 ;; (setq initial-frame-alist '((top . 0) (left . 0) (width . 80) (height . 20)))
 ;; ==================== Modes ====================
 (global-linum-mode t)
