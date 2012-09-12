@@ -68,13 +68,13 @@
 ;;                    being activated
 ;; v1.2 -> v1.3:  fix for some emacsen not having `file-remote-p'
 
-(defvar backup-each-save-mirror-location "~/.emacs.d/backups/")
+(defvar backup-each-save-mirror-location "~/.emacs.d/backups")
 
 (defvar backup-each-save-remote-files nil
   "Whether to backup remote files at each save.
 Defaults to nil.")
 
-(defvar backup-each-save-time-format "%Y%m%d_%H%M%S"
+(defvar backup-each-save-time-format "%Y%m%d-%H%M%S"
   "Format given to `format-time-string' which is appended to the filename.")
 
 (defvar backup-each-save-filter-function 'identity
@@ -110,11 +110,12 @@ on the system \"/[EMAIL PROTECTED]:\"."
                (funcall backup-each-save-filter-function bfn)
                (or (not backup-each-save-size-limit)
                    (<= (buffer-size) backup-each-save-size-limit)))
-      (copy-file bfn (backup-each-save-compute-location (file-name-sans-extension bfn)) t))))
+      (copy-file bfn (backup-each-save-compute-location  bfn) t))))
 
 (defun backup-each-save-compute-location (filename)
   (let* ((containing-dir (file-name-directory filename))
-         (basename (file-name-nondirectory filename))
+         (basename (file-name-sans-extension filename))
+				 (extensionname (file-name-extension filename))
          (backup-container
           ;; (format "%s/%s"
                   ;; backup-each-save-mirror-location
@@ -122,10 +123,9 @@ on the system \"/[EMAIL PROTECTED]:\"."
 					(format "%s" backup-each-save-mirror-location )))
     (when (not (file-exists-p backup-container))
       (make-directory backup-container t))
-		(message "%s/%s-%s.bak" backup-container basename
+		(message "%s/%s_%s-%s.txt" backup-container basename extensionname
             (format-time-string backup-each-save-time-format))
-    (format "%s/%s-%s.bak" backup-container basename
+    (format "%s/%s_%s-%s.txt" backup-container basename extensionname
             (format-time-string backup-each-save-time-format))))
-
 
 (provide 'backup-each-save)
