@@ -1,4 +1,3 @@
-(add-to-list 'load-path "~/.emacs.d/plugins")
 (add-to-list 'load-path "~/.emacs.d/plugins/single-files")
 (require 'eval-after-load)
 ;; (load-file "~/.emacs.d/plugins/cedet-1.1/common/cedet.el")
@@ -28,34 +27,39 @@
 (scroll-bar-mode -1)
 (icomplete-mode t);; icomplete mode in minibuffer
 (auto-fill-mode 1)
-(iswitchb-mode t) 
+(iswitchb-mode t)
+(file-name-shadow-mode t)
+;; (auto-show-make-point-visible)
 ;; (blink-cursor-mode t)
 ;; (pc-selection-mode t)
 ;; (shift-select-mode t)
-(setq desktop-load-locked-desktop t)
-(desktop-change-dir "~/.emacs.d/desktop-save/")
-(setq desktop-dirname "~/.emacs.d/desktop-save/")
-(setq history-length 50)
-(add-to-list 'desktop-globals-to-save 'file-name-history)
-(desktop-save-mode 1)
-(defun desktop-auto-save ()
-    "Added to auto-save-hook so the desktop is not lost."
-    (desktop-save "~/.emacs.d/desktop-save/desktop-save")
-    (message "Wrote desktop.")
-    )
-(add-hook 'auto-save-hook 'desktop-auto-save t)
+;; (setq desktop-load-locked-desktop t)
+;; (desktop-change-dir "~/.emacs.d/desktop-save/")
+;; (setq desktop-dirname "~/.emacs.d/desktop-save/")
+;; (setq history-length 50)
+;; (add-to-list 'desktop-globals-to-save 'file-name-history)
+;; (desktop-save-mode 1)
+;; (defun desktop-auto-save ()
+;;     "Added to auto-save-hook so the desktop is not lost."
+;;     (desktop-save "~/.emacs.d/desktop-save/desktop-save")
+;;     (message "Wrote desktop.")
+;;     )
+;; (add-hook 'auto-save-hook 'desktop-auto-save t)
 ;; ==================== Varibles ====================
+(setq ido-save-directory-list-file "~/.emacs.d/desktop-save/ido-last.txt")
+(setq search-highlight t)
+(setq require-final-newline t)
 (setq kill-ring-max 2000);; Set delete record
 (setq minibuffer-message-timeout 1)
 (setq default-tab-width 2)
 (setq truncat-lines -1)
+(setq-default truncate-partial-width-windows -1)
 (add-hook 'before-save-hook
           '(lambda () ;;create directory before saving
              (or (file-exists-p (file-name-directory buffer-file-name))
                  (make-directory (file-name-directory buffer-file-name) t))))
 (setq hippie-expand-verbose t)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
-;; (add-hook 'before-save-hook 'delete-blank-lines)
 (setq visual-bell -1)  ;;; Disable system beep
 (auto-image-file-mode t)
 (setq enable-recursive-minibuffers t)
@@ -87,13 +91,18 @@
 (fset 'yes-or-no-p 'y-or-n-p)  ;; ask by y or n
 (setq frame-title-format (list "%b %p  [%f] " (getenv "USERNAME") " %s %Z   " emacs-version))
 (setq standard-indent 2)
+(setq-default indent-tabs-mode -1)
+(setq message-log-max 512)
+(setq c-auto-newline 1)
 (remove-hook 'coding-hook 'turn-on-hl-line-mode)
+(setq comint-buffer-maximum-size 10240)
+(setq font-lock-maximum-decoration t)
+
 ;;================================================================================
 ;; (add-to-list 'load-path "~/.emacs.d/plugins/yasnippet")
 ;; (require 'yas-jit)
 ;; (setq yas/root-directory "~/.emacs.d/plugins/yasnippet")
 ;; (yas/jit-load)
-
 ;;================================================================================
 (add-to-list 'load-path "~/.emacs.d/plugins/auto-complete-131")
 (require 'auto-complete-config)
@@ -114,6 +123,9 @@
 (toggle-cursor-type-when-idle 1) ; Turn on cursor change when Emacs is idle
 (change-cursor-mode 1) ; Turn on change for overwrite, read-only, and input mode
 (curchg-change-cursor-when-idle-interval 10) ; change the idle timer
+(require 'recentf) (require 'recentf-ext)
+(setq recentf-max-menu-items 5)(setq recentf-max-saved-items 5) (recentf-mode 1)
+(setq recentf-save-list "~/.emacs.d/desktop-save/recentf-list.txt")
 ;; ==================== org mode ====================
 (setq load-path (cons "~/.emacs.d/plugins/org-7.9.1/lisp" load-path))
 (setq load-path (cons "~/.emacs.d/plugins/org-7.9.1/contrib/lisp" load-path))
@@ -134,7 +146,7 @@
 ;; ==================== icicles ====================
 ;; (add-to-list 'load-path "~/.emacs.d/plugins/icicles")(require 'icicles)
 ;; ==================================================================
-
+(require 'hungry-delete) (turn-on-hungry-delete-mode)
 (require 'dired-lis)
 (require 'smart-compile)
 (require 'compile-dwim)
@@ -146,6 +158,7 @@
 (require 'buffcycle)
 ;(require 'kill-ring-ido)
 (require 'browse-kill-ring+)
+(require 'auto-show)(auto-show-mode 1)(setq-default auto-show-mode t)
 ;; (global-set-key "\M-q" 'iswitchb-kill-buffer)
 (global-set-key "\M-q" ( lambda() (interactive)(kill-buffer (current-buffer))))
 ;; (global-set-key "\M-b" 'kill-this-buffer-if-not-scratch)

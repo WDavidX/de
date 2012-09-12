@@ -38,7 +38,7 @@
 ;;  (recentf-mode 1)
 
 ;;; History:
-;; 
+;;
 
 ;;; Code:
 
@@ -320,7 +320,7 @@ Do not change this variable directly but always use customize!"
                                 nil
                                 'recentf-cleanup))
              )))))
-                           
+
 ;;;;
 ;;;; Common functions
 ;;;;
@@ -932,7 +932,7 @@ Arrange them in sub-menus following rules in `recentf-arrange-rules'."
     ;; It is important to preserve auto-mode-alist order
     ;; to ensure the right file <-> mode association
     (nreverse rules)))
-         
+
 (defun recentf-arrange-by-mode (l)
   "Filter the list of menu-elements L to build sub-menus for each major mode."
   (let ((recentf-arrange-rules (recentf-build-mode-rules))
@@ -1021,7 +1021,7 @@ Each filter is defined by a pair (FILTER-FUN . FILTER-LBL) where:
                (setq filters (cdr filters)))))
     (if (consp filters)
         (car filters))))
-        
+
 (defun recentf-filter-changer (l)
   "Manage a ring of filters.
 `recentf-filter-changer-alist' defines the filters in the ring.
@@ -1162,7 +1162,7 @@ arguments."
         (setq recentf-edit-selected-items
               (nconc (list value) recentf-edit-selected-items))
         (message "%s added to selection." value)))))
-  
+
 ;;;###autoload
 (defun recentf-edit-list ()
   "Allow the user to edit the files that are kept in the recent list."
@@ -1360,7 +1360,7 @@ were operated on recently."
       (setq recentf-initialized-p nil)
       (recentf-save-list)
       (easy-menu-remove-item nil recentf-menu-path recentf-menu-title)
-      (remove-hook 'find-file-hooks  'recentf-add-file-hook)
+			(remove-hook 'find-file-hooks  'recentf-add-file-hook)
       (remove-hook 'write-file-hooks 'recentf-add-file-hook)
       (remove-hook (if (featurep 'xemacs)
                        'activate-menubar-hook
