@@ -1,0 +1,28 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("d:/test/" . "t1.c/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "d:/test/t1.c/"
+)
+
+;; ----- ido-work-file-list -----
+(
+
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("d:/test/t1.c/" (20558 44536) "../" "./")
+
+ ("d:/test/" (20560 1141) "testtex.tex" "testtex.pdf" "testtex.log" "testtex.aux" "testpy.py" "t1.c/" "show.c" "orglearning.tex" "orglearning.pdf" "orglearning.org" "orglearning.html" "learning.el" "elisp_learning.txt" "c1.exe" "c1.c" "#orglearning.org#" "../" "./")
+
+ ("d:/David/Documents/Dropbox/Misc/Apps/emacs241/bin/" (20560 1670) "runemacs.exe" "movemail.exe" "libXpm.dll" "hexl.exe" "etags.exe" "emacsclientw.exe" "emacsclient.exe" "emacs.exe" "ebrowse.exe" "ddeclient.exe" "ctags.exe" "COPYING" "cmdproxy.exe" "addpm.exe" ".emacs.desktop.lock" ".emacs.desktop" "#%2Ascratch%2A#8968f4s#" "#%2Ascratch%2A#7396F4H#" "#%2Ascratch%2A#738038_#" "#%2Ascratch%2A#7352O6q#" "#%2Ascratch%2A#6472376#" "#%2Ascratch%2A#6220FC7#" "#%2Ascratch%2A#259661h#" "#%2Ascratch%2A#2096gA7#" "../" "./")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t

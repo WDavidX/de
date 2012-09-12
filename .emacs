@@ -4,6 +4,8 @@
 ;; (global-ede-mode 1)                      ; Enable the Project management system
 ;; (semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion
 ;; (global-srecode-minor-mode 1)            ; Enable template insertion menu
+
+
 (global-unset-key [(f10)])
 (global-set-key [(f10)]
 		(lambda() (interactive) (find-file "~/.emacs.d/my_key_settings.el")))
@@ -85,7 +87,9 @@
       delete-old-versions t
       backup-by-copying t)
 (setq backup-directory-alist (quote ((".*" . "~/.emacs.d/auto-save-list"))))  ;; Set backup dir
-(setq temporary-file-directory  "~/.emacs.d/temp-list")
+;; (setq auto-save-file-name-transforms `((".*" ,"~/.emacs.d/auto-save-list" t)))
+;; (setq backup-directory-alist (quote ("~/.emacs.d/auto-save-list"))))  ;; Set backup dir
+(setq temporary-file-directory  "~/.emacs.d/temp-list/")
 (setq-default fill-column 72)    ;; Set Fill Column and auto fill
 (setq scroll-margin 3  scroll-conservatively 10000)
 (fset 'yes-or-no-p 'y-or-n-p)  ;; ask by y or n
@@ -125,7 +129,8 @@
 (curchg-change-cursor-when-idle-interval 10) ; change the idle timer
 (require 'recentf) (require 'recentf-ext)
 (setq recentf-max-menu-items 5)(setq recentf-max-saved-items 5) (recentf-mode 1)
-(setq recentf-save-list "~/.emacs.d/desktop-save/recentf-list.txt")
+;; (setq recentf-save-list "~/.emacs.d/desktop-save/recentf-list.txt")
+(setq recentf-save-file "~/.emacs.d/desktop-save/recentf-list.txt")
 ;; ==================== org mode ====================
 (setq load-path (cons "~/.emacs.d/plugins/org-7.9.1/lisp" load-path))
 (setq load-path (cons "~/.emacs.d/plugins/org-7.9.1/contrib/lisp" load-path))
@@ -158,10 +163,14 @@
 (require 'buffcycle)
 ;(require 'kill-ring-ido)
 (require 'browse-kill-ring+)
+(require 'wcy-desktop)
+(require 'wcy-desktop-settings)
 (require 'auto-show)(auto-show-mode 1)(setq-default auto-show-mode t)
+(require 'backup-each-save) (add-hook 'after-save-hook 'backup-each-save)
 ;; (global-set-key "\M-q" 'iswitchb-kill-buffer)
 (global-set-key "\M-q" ( lambda() (interactive)(kill-buffer (current-buffer))))
 ;; (global-set-key "\M-b" 'kill-this-buffer-if-not-scratch)
 (load-file "~/.emacs.d/my_key_settings.el")
 (require 'maxframe) (maximize-frame)
 ;; (if (eq window-system 'w32) (emacs-maximize) )
+;
