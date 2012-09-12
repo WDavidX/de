@@ -1,3 +1,4 @@
+;; http://www.emacswiki.org/emacs-de/backup-each-save.el
 ;;; backup-each-save.el --- backup each savepoint of a file
 
 ;; Copyright (C) 2004  Free Software Foundation, Inc.

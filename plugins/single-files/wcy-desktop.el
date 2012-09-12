@@ -35,10 +35,12 @@
 ;;;###autoload
 (defvar wcy-desktop-file-name "~/.emacs.d/desktop-save/desktop-save.txt")
 (defvar wcy-desktop-key-map nil)
+
 (when (null wcy-desktop-key-map)
   (setq wcy-desktop-key-map (make-keymap))
   (define-key wcy-desktop-key-map (kbd "C-x") ctl-x-map)
   (fillarray (cadr wcy-desktop-key-map) 'wcy-desktop-load-file))
+
 (defun  wcy-desktop-on-kill-emacs ()
   "save the buffer list, this should be part of kill-emacs-hook"
   (with-temp-file wcy-desktop-file-name
@@ -90,4 +92,4 @@ it (wcy-desktop-init) in your ~/.emacs "
       (when (eq major-mode 'not-loaded-yet)
         (fundamental-mode)))))
 (provide 'wcy-desktop)
-;;; wcy-desktop.el ends here
+;; wcy-desktop.el ends here

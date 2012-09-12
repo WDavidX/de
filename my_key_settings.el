@@ -188,7 +188,7 @@
 (global-set-key "\C-q" 'comment-dwim-line)
 (global-set-key "\C-o" '(lambda() (interactive) (switch-to-buffer (other-buffer))))
 (global-set-key [insert] 'onekey-compile)
-(global-set-key "\C-\\" 'eval-last-sexp)
+(global-set-key "\C-\\" '(lambda() (eval-last-sexp)))
 (global-set-key [(f8)] 'open-eshell-other-buffer)
 (global-unset-key [(f9)]) (global-set-key [(f9)]
 	(lambda()(interactive) (switch-to-buffer "*scratch*")))

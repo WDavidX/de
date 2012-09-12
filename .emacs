@@ -174,3 +174,8 @@
 (require 'maxframe) (maximize-frame)
 ;; (if (eq window-system 'w32) (emacs-maximize) )
 ;
+(wcy-desktop-load-file "my_key_settings.el")
+(wcy-desktop-load-file ".emacs")
+(switch-to-buffer "*scratch*")
+
+(message " Loading Acommplished ")
