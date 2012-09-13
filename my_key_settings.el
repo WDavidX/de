@@ -202,6 +202,9 @@
 (global-set-key [(f1)] 'onekey-compile)
 (global-set-key "\C-k" 'kill-line)
 
+
+;; (require 'recentf) (require 'recentf-ext)(setq recentf-max-menu-items 5)(setq recentf-max-saved-items 5) (recentf-mode 1)(setq recentf-save-file "~/.emacs.d/desktop-save/recentf-list.txt")
+
 (defcustom my-open-recent-file-history-sources '(file-name-history)
   "*Determines which history source `my-open-recent-file' uses.
 Normal file name history uses the file name history saved by
@@ -243,7 +246,7 @@ where to get the file name history."
 (recentf-mode t)
 
 ; 50 files ought to be enough.
-(setq recentf-max-saved-items 50)
+(setq recentf-max-saved-items 5)
 
 (defun ido-recentf-open ()
   "Use `ido-completing-read' to \\[find-file] a recent file"
@@ -301,3 +304,8 @@ where to get the file name history."
 ;; (if (eq window-system 'w32) (set-frame-font "Anonymous 12") ) ;good
 ;; (if (eq window-system 'w32) (set-frame-font "DejaVu Sans Mono 14") )
 ;; (if (eq window-system 'w32) (set-frame-font "Consolas 11") ) ;good
+
+
+
+
+;; End of my keyboard and function settings

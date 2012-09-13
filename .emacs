@@ -14,7 +14,6 @@
 		(lambda() (interactive) (find-file "~/.emacs.d/.emacs")))
 (global-set-key [(f12)] (lambda()
 		(interactive)(save-some-buffers (buffer-file-name)) (eval-buffer))) ;; evaluate buffer
-(setq default-frame-alist '((top .0) (left . 0) ))
 ;; (setq initial-frame-alist '((top . 0) (left . 0) (width . 80) (height . 20)))
 ;; ==================== Modes ====================
 (global-linum-mode t)
@@ -48,7 +47,15 @@
 ;;     )
 ;; (add-hook 'auto-save-hook 'desktop-auto-save t)
 ;; ==================== Varibles ====================
+(setq vc-handled-backends nil)
 (setq ido-save-directory-list-file "~/.emacs.d/desktop-save/ido-last.txt")
+(setq ido-save-history nil )
+(custom-set-variables
+ '(ido-enable-last-directory-history -1)
+ '(ido-record-commands nil)
+ '(ido-max-work-directory-list 0)
+ '(ido-max-work-file-list 0))
+
 (setq search-highlight t)
 (setq require-final-newline t)
 (setq kill-ring-max 2000);; Set delete record
@@ -112,41 +119,37 @@
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/plugins/auto-complete-131/ac-dict")
 (ac-config-default)
-(require 'auto-complete-extension)
+;; (require 'auto-complete-extension)
 ;;================================================================================
-(add-to-list 'load-path "~/.emacs.d/plugins/color-theme-660")
-(add-to-list 'load-path "~/.emacs.d/plugins/color-theme-660/themes")
-(require 'color-theme)
-(eval-after-load "color-theme"
-  '(progn
-     (color-theme-initialize)
-     (color-theme-arjen)))
+;; (add-to-list 'load-path "~/.emacs.d/plugins/color-theme-660")
+;; (add-to-list 'load-path "~/.emacs.d/plugins/color-theme-660/themes")
+;; (require 'color-theme)
+;; (eval-after-load "color-theme"
+;;   '(progn
+;;      (color-theme-initialize)
+;;      (color-theme-arjen)))
 ;; (color-theme-sons-of-obsidian)
 ;;================================================================================
 (require 'cursor-chg)  ; Load the library
 (toggle-cursor-type-when-idle 1) ; Turn on cursor change when Emacs is idle
 (change-cursor-mode 1) ; Turn on change for overwrite, read-only, and input mode
 (curchg-change-cursor-when-idle-interval 10) ; change the idle timer
-(require 'recentf) (require 'recentf-ext)
-(setq recentf-max-menu-items 5)(setq recentf-max-saved-items 5) (recentf-mode 1)
-;; (setq recentf-save-list "~/.emacs.d/desktop-save/recentf-list.txt")
-(setq recentf-save-file "~/.emacs.d/desktop-save/recentf-list.txt")
 ;; ==================== org mode ====================
-(setq load-path (cons "~/.emacs.d/plugins/org-7.9.1/lisp" load-path))
-(setq load-path (cons "~/.emacs.d/plugins/org-7.9.1/contrib/lisp" load-path))
-(require 'org-install)
-(require 'org-special-blocks)
-(setq org-support-shift-select t)
-; Some initial langauges we want org-babel to support
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((sh . t)  (python . t)   (R . t)   (ruby . t)   (ditaa . t)   (dot . t)
-   (octave . t)   (sqlite . t)   (perl . t)   ))
-; Add short cut keys for the org-agenda
-(global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-cc" 'org-capture)
-(global-set-key "\C-ca" 'org-agenda)
-(global-set-key "\C-cb" 'org-export-as-html-and-open)
+;; (setq load-path (cons "~/.emacs.d/plugins/org-7.9.1/lisp" load-path))
+;; (setq load-path (cons "~/.emacs.d/plugins/org-7.9.1/contrib/lisp" load-path))
+;; (require 'org-install)
+;; (require 'org-special-blocks)
+;; (setq org-support-shift-select t)
+;; ; Some initial langauges we want org-babel to support
+;; (org-babel-do-load-languages
+;;  'org-babel-load-languages
+;;  '((sh . t)  (python . t)   (R . t)   (ruby . t)   (ditaa . t)   (dot . t)
+;;    (octave . t)   (sqlite . t)   (perl . t)   ))
+;; ; Add short cut keys for the org-agenda
+;; (global-set-key "\C-cl" 'org-store-link)
+;; (global-set-key "\C-cc" 'org-capture)
+;; (global-set-key "\C-ca" 'org-agenda)
+;; (global-set-key "\C-cb" 'org-export-as-html-and-open)
 
 ;; ==================== icicles ====================
 ;; (add-to-list 'load-path "~/.emacs.d/plugins/icicles")(require 'icicles)
@@ -161,21 +164,16 @@
 (require 'highlight-sexp)
 (require 'icomplete+)
 (require 'buffcycle)
+(require 'color-theme-single) (color-theme-arjen)
 ;(require 'kill-ring-ido)
 (require 'browse-kill-ring+)
-(require 'wcy-desktop)
-(require 'wcy-desktop-settings)
+;; (require 'wcy-desktop)(require 'wcy-desktop-settings)
 (require 'auto-show)(auto-show-mode 1)(setq-default auto-show-mode t)
-(require 'backup-each-save) (add-hook 'after-save-hook 'backup-each-save)
+;; (require 'backup-each-save) (add-hook 'after-save-hook 'backup-each-save)
 ;; (global-set-key "\M-q" 'iswitchb-kill-buffer)
 (global-set-key "\M-q" ( lambda() (interactive)(kill-buffer (current-buffer))))
 ;; (global-set-key "\M-b" 'kill-this-buffer-if-not-scratch)
 (load-file "~/.emacs.d/my_key_settings.el")
 (require 'maxframe) (maximize-frame)
 ;; (if (eq window-system 'w32) (emacs-maximize) )
-;
-(wcy-desktop-load-file "my_key_settings.el")
-(wcy-desktop-load-file ".emacs")
-(switch-to-buffer "*scratch*")
-
 (message " Loading Acommplished ")
