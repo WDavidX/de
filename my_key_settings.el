@@ -160,6 +160,8 @@
 (global-set-key "\C-k" 'kill-line)
 (global-set-key "\C-x k" 'kill-this-buffer-if-not-scratch)
 ;;==================== The following messes up with original settings
+(global-set-key "\C-g" 'delete-backward-char)
+(global-set-key "\C-t" 'keyboard-quit)
 (global-set-key "\C-f" 'backward-char)
 (global-set-key "\M-f" 'backward-word)
 (global-set-key "\C-b" 'forward-char)
