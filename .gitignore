@@ -9,3 +9,4 @@ desktop-recover-tmp
 backups
 desktop-save
 ./*~
+eshell
