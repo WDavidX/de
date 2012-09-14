@@ -33,18 +33,6 @@
 ;; (blink-cursor-mode t)
 ;; (pc-selection-mode t)
 ;; (shift-select-mode t)
-;; (setq desktop-load-locked-desktop t)
-;; (desktop-change-dir "~/.emacs.d/desktop-save/")
-;; (setq desktop-dirname "~/.emacs.d/desktop-save/")
-;; (setq history-length 50)
-;; (add-to-list 'desktop-globals-to-save 'file-name-history)
-;; (desktop-save-mode 1)
-;; (defun desktop-auto-save ()
-;;     "Added to auto-save-hook so the desktop is not lost."
-;;     (desktop-save "~/.emacs.d/desktop-save/desktop-save")
-;;     (message "Wrote desktop.")
-;;     )
-;; (add-hook 'auto-save-hook 'desktop-auto-save t)
 ;; ==================== Varibles ====================
 (setq vc-handled-backends nil)
 (setq ido-save-directory-list-file "~/.emacs.d/desktop-save/ido-last.txt")
