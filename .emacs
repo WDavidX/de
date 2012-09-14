@@ -1,11 +1,10 @@
 (add-to-list 'load-path "~/.emacs.d/plugins/single-files")
+(load-file "~/.emacs.d/my_key_settings.el")
 (require 'eval-after-load)
 ;; (load-file "~/.emacs.d/plugins/cedet-1.1/common/cedet.el")
 ;; (global-ede-mode 1)                      ; Enable the Project management system
 ;; (semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion
 ;; (global-srecode-minor-mode 1)            ; Enable template insertion menu
-
-
 (global-unset-key [(f10)])
 (global-set-key [(f10)]
 		(lambda() (interactive) (find-file "~/.emacs.d/my_key_settings.el")))
@@ -119,7 +118,7 @@
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/plugins/auto-complete-131/ac-dict")
 (ac-config-default)
-;; (require 'auto-complete-extension)
+(require 'auto-complete-extension)
 ;;================================================================================
 ;; (add-to-list 'load-path "~/.emacs.d/plugins/color-theme-660")
 ;; (add-to-list 'load-path "~/.emacs.d/plugins/color-theme-660/themes")
@@ -163,17 +162,19 @@
 (require 'auto-pair+)
 (require 'highlight-sexp)
 (require 'icomplete+)
-(require 'buffcycle)
+(require 'iswitchb-fc)
+;;(require 'buffcycle)
+(require 'ebs)(ebs-initialize)(global-set-key [(control tab)] 'ebs-switch-buffer)
 (require 'color-theme-single) (color-theme-arjen)
 ;(require 'kill-ring-ido)
 (require 'browse-kill-ring+)
 ;; (require 'wcy-desktop)(require 'wcy-desktop-settings)
 (require 'auto-show)(auto-show-mode 1)(setq-default auto-show-mode t)
-;; (require 'backup-each-save) (add-hook 'after-save-hook 'backup-each-save)
+(require 'backup-each-save) (add-hook 'after-save-hook 'backup-each-save)
 ;; (global-set-key "\M-q" 'iswitchb-kill-buffer)
 (global-set-key "\M-q" ( lambda() (interactive)(kill-buffer (current-buffer))))
 ;; (global-set-key "\M-b" 'kill-this-buffer-if-not-scratch)
-(load-file "~/.emacs.d/my_key_settings.el")
+
 (require 'maxframe) (maximize-frame)
 ;; (if (eq window-system 'w32) (emacs-maximize) )
 (message " Loading Acommplished ")

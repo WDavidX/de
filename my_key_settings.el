@@ -6,14 +6,12 @@
    (if mark-active (list (region-beginning) (region-end))
      (list (line-beginning-position)
            (line-beginning-position 2)))))
-
 (defadvice kill-region (before slickcut activate compile)
   "When called interactively with no active region, kill a single line instead."
   (interactive
    (if mark-active (list (region-beginning) (region-end))
      (list (line-beginning-position)
            (line-beginning-position 2)))))
-
 (defun open-eshell-other-buffer ()
    "Open eshell in other buffer"
    (interactive)
@@ -21,10 +19,7 @@
    (other-window 1)
    (eshell)
    )
-
 ;; Page down/up move the point, not the screen.
-;; In practice, this means that they can move the
-;; point to the beginning or end of the buffer.
 (global-set-key [next]
   (lambda () (interactive)
     (condition-case nil (scroll-up)
@@ -91,13 +86,12 @@
 	      ("<up>"    . ignore             )
 	      ("<down>"  . ignore             ))))
 (add-hook 'iswitchb-define-mode-map-hook 'iswitchb-local-keys)
-(setq iswitchb-buffer-ignore '("^ " "*Message*" "*Compile-log*" "*Help*" "*Ibuffer"))
+(setq iswitchb-buffer-ignore '("^ "  "*Compile-log*" "*Help*" "*Ibuffer" "*Completion*"))
 ;; ==================== Keyboard Definition ====================
 ;; (global-set-key "\C-x\C-b" 'ibuffer)
 (global-set-key "\C-xk" 'kill-this-buffer)
 (global-set-key "\C-x\C-k" 'kill-this-buffer)
-;; (global-unset-key "\C-o")
-(global-set-key (kbd "<C-tab>") 'other-window)
+;; (global-set-key (kbd "<C-tab>") 'other-window)
 (global-unset-key "\C-z")
 (global-set-key "\C-z" 'undo)
 (global-unset-key [insert])
@@ -113,56 +107,19 @@
 (global-set-key [(f2)] 'set-mark-command)    ;set F2 as set mark
 (define-key isearch-mode-map '[backspace] 'isearch-delete-char)
 
-;; ==================== Screen Settings========================
-(defun window-half-height ()
-     (max 1 (/ (1- (window-height (selected-window))) 2)))
-(defun scroll-up-half ()
-     (interactive)
-     (scroll-up (window-half-height)))
-(defun scroll-down-half ()
-     (interactive)
-     (scroll-down (window-half-height)))
-(defun emacs-maximize ()
-  "Maximize emacs window in windows os"
+;; ==================== Recent File ====================
+(require 'recentf) (require 'recentf-ext)
+(setq recentf-max-menu-items 5)(setq recentf-max-saved-items 5)
+(setq recentf-save-file "~/.emacs.d/desktop-save/recentf-list.txt")
+(recentf-mode t)
+(defun ido-recentf-open ()
+  "Use `ido-completing-read' to \\[find-file] a recent file"
   (interactive)
-  (w32-send-sys-command 61488))        ; WM_SYSCOMMAND #xf030 maximize
-(defun emacs-minimize ()
-  "Minimize emacs window in windows os"
-  (interactive)
-  (w32-send-sys-command #xf020))    ; #xf020 minimize
-(defun emacs-normal ()
-  "Normal emacs window in windows os"
-  (interactive)
-  (w32-send-sys-command #xf120))    ; #xf120 normalimize
+  (if (find-file (ido-completing-read "Find recent file: " recentf-list))
+      (message "Opening file...")
+    (message "Aborting")))
+(global-set-key (kbd "C-x C-r") 'ido-recentf-open)
 
-;; (defun set-frame-size-according-to-resolution ()
-;;   (interactive)
-;;   (if window-system
-;;   (progn
-;;     ;; use 120 char wide window for largeish displays
-;;     ;; and smaller 80 column windows for smaller displays
-;;     ;; pick whatever numbers make sense for you
-;;     (if (> (x-display-pixel-width) 1280)
-;;            (add-to-list 'default-frame-alist (cons 'width 120))
-;;            (add-to-list 'default-frame-alist (cons 'width 80)))
-;;     ;; for the height, subtract a couple hundred pixels
-;;     ;; from the screen height (for panels, menubars and
-;;     ;; whatnot), then divide by the height of a char to
-;;     ;; get the height we want
-;;     (add-to-list 'default-frame-alist
-;;          (cons 'height (/ (- (x-display-pixel-height) 200)
-;;                              (frame-char-height)))))))
-;(set-frame-position current-frame 0 0)
-;(set-frame-size-according-to-resolution)
-
-;(defun toggle-fullscreen ()
- ; (interactive)
-;  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
-;	    		 '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
-;  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
-;	    		 '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0))
-;)
-;(toggle-fullscreen)
 ;; ==================== show paren ====================
 (require 'paren)
 (show-paren-mode t)
@@ -201,64 +158,12 @@
 (global-unset-key [(f1)])
 (global-set-key [(f1)] 'onekey-compile)
 (global-set-key "\C-k" 'kill-line)
-
-
-;; (require 'recentf) (require 'recentf-ext)(setq recentf-max-menu-items 5)(setq recentf-max-saved-items 5) (recentf-mode 1)(setq recentf-save-file "~/.emacs.d/desktop-save/recentf-list.txt")
-
-(defcustom my-open-recent-file-history-sources '(file-name-history)
-  "*Determines which history source `my-open-recent-file' uses.
-Normal file name history uses the file name history saved by
-`find-file', saved in the variable `file-name-history', Recentf
-history uses `recentf-list' from recentf.el (enable recentf-mode
-to use this) and Session uses `session-file-alist' from
-session.el (external package)."
-  :type '(set (const :tag "Normal file name history" file-name-history)
-              (const :tag "Recentf history" recentf-list)
-              (const :tag "Session" session))
-  :group 'files)
-
-(defun my-open-recent-file (fname)
-  "Using iswitchb, interactively open recently opened file.
-Configure `my-open-recent-file-history-sources' to control from
-where to get the file name history."
-  (interactive (list (flet ((iswitchb-make-buflist
-                             (default)
-                             (setq iswitchb-buflist
-                                   (my-open-recent-file-list))))
-                       (iswitchb-read-buffer "Open file: "))))
-  (find-file fname))
-
-(defun my-open-recent-file-list ()
-  (let (result)
-    (dolist (x my-open-recent-file-history-sources result)
-      (setq result (append result (symbol-value x))))
-    (remove-duplicates result :test 'equal)))
-
-;; I don't use `frame-configuration-to-register'
-;; (global-set-key (kbd "C-x C-r") 'my-open-recent-file)
-
-(global-set-key (kbd "C-x C-r") 'ido-recentf-open)
-;; get rid of `find-file-read-only' and replace it with something
-;; more useful.
-(global-set-key (kbd "C-x C-r") 'ido-recentf-open)
-
-;; enable recent files mode.
-(recentf-mode t)
-
-; 50 files ought to be enough.
-(setq recentf-max-saved-items 5)
-
-(defun ido-recentf-open ()
-  "Use `ido-completing-read' to \\[find-file] a recent file"
-  (interactive)
-  (if (find-file (ido-completing-read "Find recent file: " recentf-list))
-      (message "Opening file...")
-    (message "Aborting")))
-
-(if (file-readable-p recentf-save-file)
-   (if (> (length recentf-list) 0)
-      (find-file (car (recentf-elements 1)))))
+(global-set-key "\C-x k" 'kill-this-buffer-if-not-scratch)
 ;;==================== The following messes up with original settings
+(global-set-key "\C-f" 'backward-char)
+(global-set-key "\M-f" 'backward-word)
+(global-set-key "\C-b" 'forward-char)
+(global-set-key "\M-b" 'forward-word)
 ;; ;(global-set-key "\C-l" 'forward-char)
 ;; (global-set-key "\C-k" 'backward-char)
 ;; (global-set-key "\C-l" 'forward-char)

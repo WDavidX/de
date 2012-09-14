@@ -193,3 +193,25 @@ system."
 (defalias 'mf 'maximize-frame)
 
 (provide 'maxframe)
+
+;; ;; ==================== Screen Settings========================
+;; (defun window-half-height ()
+;;      (max 1 (/ (1- (window-height (selected-window))) 2)))
+;; (defun scroll-up-half ()
+;;      (interactive)
+;;      (scroll-up (window-half-height)))
+;; (defun scroll-down-half ()
+;;      (interactive)
+;;      (scroll-down (window-half-height)))
+;; (defun emacs-maximize ()
+;;   "Maximize emacs window in windows os"
+;;   (interactive)
+;;   (w32-send-sys-command 61488))        ; WM_SYSCOMMAND #xf030 maximize
+;; (defun emacs-minimize ()
+;;   "Minimize emacs window in windows os"
+;;   (interactive)
+;;   (w32-send-sys-command #xf020))    ; #xf020 minimize
+;; (defun emacs-normal ()
+;;   "Normal emacs window in windows os"
+;;   (interactive)
+;;   (w32-send-sys-command #xf120))    ; #xf120 normalimize

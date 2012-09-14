@@ -52,8 +52,8 @@
     (message "this is scratch unkillable"))))
 
 ;; Buffer Cycling keybindings
-(global-set-key (kbd "<C-tab>") 'next-buffer-cycle)
-(global-set-key (kbd "C-q") 'kill-this-buffer-if-not-scratch)
+(global-set-key (kbd "<C-o>") 'next-buffer-cycle)
+;; (global-set-key (kbd "C-q") 'kill-this-buffer-if-not-scratch)
 
 (provide 'buffcycle)
 
