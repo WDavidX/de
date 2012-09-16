@@ -162,7 +162,7 @@
 (require 'auto-show)(auto-show-mode 1)(setq-default auto-show-mode t)
 (require 'backup-each-save) (add-hook 'after-save-hook 'backup-each-save)
 ;; (global-set-key "\M-q" 'iswitchb-kill-buffer)
-(global-set-key "\M-q" ( lambda() (interactive)(kill-buffer (current-buffer))))
+;; (global-set-key "\M-q" ( lambda() (interactive)(kill-buffer (current-buffer))))
 ;; (global-set-key "\M-b" 'kill-this-buffer-if-not-scratch)
 
 (require 'maxframe) (maximize-frame)

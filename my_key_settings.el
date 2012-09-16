@@ -74,7 +74,17 @@
                 (setq matching-text (blink-matching-open)))
             (if (not (null matching-text))
                 (message matching-text)))))
+(defun delete-word (arg)
+  "Delete characters forward until encountering the end of a word.
+With argument, do this that many times."
+  (interactive "p")
+  (delete-region (point) (progn (forward-word arg) (point))))
 
+(defun delete-backward-word (arg)
+  "Delete characters backward until encountering the end of a word.
+With argument, do this that many times."
+  (interactive "p")
+  (delete-word (- arg)))
 ;; ==================== iswitch-buffer settings ====================
 (defun iswitchb-local-keys ()
       "Using the arrow keys to select a buffer"
@@ -87,25 +97,6 @@
 	      ("<down>"  . ignore             ))))
 (add-hook 'iswitchb-define-mode-map-hook 'iswitchb-local-keys)
 (setq iswitchb-buffer-ignore '("^ "  "*Compile-log*" "*Help*" "*Ibuffer" "*Completion*"))
-;; ==================== Keyboard Definition ====================
-;; (global-set-key "\C-x\C-b" 'ibuffer)
-(global-set-key "\C-xk" 'kill-this-buffer)
-(global-set-key "\C-x\C-k" 'kill-this-buffer)
-;; (global-set-key (kbd "<C-tab>") 'other-window)
-(global-unset-key "\C-z")
-(global-set-key "\C-z" 'undo)
-(global-unset-key [insert])
-(global-unset-key [backspace] )
-(global-set-key [backspace] 'delete-backward-char)
-(global-unset-key [delete] )
-(global-set-key [delete] 'delete-char)
-(global-set-key [C-delete] 'kill-word)
-(define-key global-map [home] `beginning-of-line)
-(define-key global-map [end] `end-of-line)
-(define-key global-map (kbd "RET") 'newline-and-indent)
-(normal-erase-is-backspace-mode 1)
-(global-set-key [(f2)] 'set-mark-command)    ;set F2 as set mark
-(define-key isearch-mode-map '[backspace] 'isearch-delete-char)
 
 ;; ==================== Recent File ====================
 (require 'recentf) (require 'recentf-ext)
@@ -141,24 +132,43 @@
 (setq default-process-coding-system '(utf-8-unix . utf-8-unix))
 (setq default-sendmail-coding-system 'utf-8-unix)
 (setq default-terminal-coding-system 'utf-8-unix)
-;; ========================= Function Keys ========================
-(global-set-key "\C-q" 'comment-dwim-line)
+;; ==================== Keyboard Definition ====================
+(global-set-key "\C-x\C-b" 'ibuffer)
+(global-set-key "\C-xk" 'kill-this-buffer)
+(global-set-key "\C-x\C-k" 'kill-this-buffer-if-not-scratch)
+(global-unset-key "\C-z") (global-set-key "\C-z" 'undo)
+(global-set-key [delete] 'delete-char)
+(global-set-key [C-delete] 'kill-word)
+(define-key global-map [home] `beginning-of-line)
+(define-key global-map [end] `end-of-line)
+(define-key global-map (kbd "RET") 'newline-and-indent)
+(normal-erase-is-backspace-mode 1)
+(global-set-key [(f2)] 'set-mark-command)    ;set F2 as set mark
+(define-key isearch-mode-map '[backspace] 'isearch-delete-char)
+(global-set-key "\C-k" 'kill-line)
+(global-set-key "\M-q" 'comment-dwim-line)
 (global-set-key "\C-o" '(lambda() (interactive) (switch-to-buffer (other-buffer))))
 (global-set-key [insert] 'onekey-compile)
 (global-set-key "\C-\\" '(lambda() (eval-last-sexp)))
-(global-set-key [(f8)] 'open-eshell-other-buffer)
-(global-unset-key [(f9)]) (global-set-key [(f9)]
-	(lambda()(interactive) (switch-to-buffer "*scratch*")))
-(global-unset-key [(f10)]) (global-set-key [(f10)]
-	(lambda() (interactive) (find-file "~/.emacs.d/my_key_settings.el")))
-(global-unset-key [(f11)]) (global-set-key [(f11)]
-	(lambda() (interactive) (find-file "~/.emacs.d/.emacs")))
-(global-set-key [(f12)]
-	(lambda() (interactive)(save-some-buffers (buffer-file-name))(eval-buffer)))
+;; ========================= Function Keys ========================
 (global-unset-key [(f1)])
-(global-set-key [(f1)] 'onekey-compile)
-(global-set-key "\C-k" 'kill-line)
-(global-set-key "\C-x k" 'kill-this-buffer-if-not-scratch)
+(global-unset-key [(f9)])
+(global-unset-key [(f8)])
+(global-unset-key [(f10)])
+(global-unset-key [(f11)])
+(global-unset-key [(f12)])
+(global-unset-key [backspace] )
+(global-unset-key [insert])
+(global-unset-key [delete] )
+
+(global-set-key [(f1)] 'recompile)
+(global-set-key [(f8)] 'open-eshell-other-buffer)
+(global-set-key [(f9)]	(lambda()(interactive) (switch-to-buffer "*scratch*")))
+(global-set-key [(f10)]	(lambda() (interactive) (find-file "~/.emacs.d/my_key_settings.el")))
+(global-set-key [(f11)] 	(lambda() (interactive) (find-file "~/.emacs.d/.emacs")))
+(global-set-key [(f12)] 	(lambda() (interactive)(save-some-buffers (buffer-file-name))(eval-buffer)))
+(global-set-key [backspace] 'delete-backward-char)
+
 ;;==================== The following messes up with original settings
 (global-set-key "\C-g" 'delete-backward-char)
 (global-set-key "\C-t" 'keyboard-quit)
@@ -212,6 +222,7 @@
 ;; (if (eq window-system 'w32) (set-frame-font "DejaVu Sans Mono 14") )
 ;; (if (eq window-system 'w32) (set-frame-font "Consolas 11") ) ;good
 
+(if (eq window-system 'x) (set-frame-font "Monospace 14") )  ;good
 
 
 
