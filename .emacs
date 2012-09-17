@@ -160,6 +160,7 @@
 (require 'browse-kill-ring+)
 (require 'auto-show)(auto-show-mode 1)(setq-default auto-show-mode t)
 (require 'backup-each-save) (add-hook 'after-save-hook 'backup-each-save)
+(require 'saveplace) (setq save-place-file "~/.emacs.d/desktop-save/saveplace.txt")(setq-default save-place t)
 (load-file "~/.emacs.d/my_key_settings.el")
 (require 'maxframe) (maximize-frame)
 

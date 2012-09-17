@@ -163,6 +163,7 @@ With argument, do this that many times."
 (require 'redo+)(global-set-key (kbd "C-S-z") 'redo)
 (require 'buffcycle) (global-set-key "\C-x\C-k" 'kill-this-buffer-if-not-scratch)
 (global-set-key "\C-b" '(lambda() (interactive) (switch-to-buffer (other-buffer))))
+(global-set-key (kbd "C-S-b") 'kill-line)
 (global-set-key "\C-t" 'comment-dwim-line)
 (global-set-key "\M-b" 'delete-blank-lines)
 (global-set-key (kbd "C-v") 'yank)
