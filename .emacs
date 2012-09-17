@@ -28,6 +28,7 @@
 (icomplete-mode t);; icomplete mode in minibuffer
 (auto-fill-mode 1)
 (iswitchb-mode t)
+(normal-erase-is-backspace-mode t)
 (file-name-shadow-mode t)
 ;; (auto-show-make-point-visible)
 ;; (blink-cursor-mode t)
@@ -80,8 +81,8 @@
       version-control t
       delete-old-versions t
       backup-by-copying t)
-(setq backup-directory-alist (quote (("*" . "~/.emacs.d/auto-save-list"))))  ;; Set backup dir
-(setq auto-save-file-name-transforms `(("*" ,"~/.emacs.d/auto-save-list" t)))
+(setq backup-directory-alist (quote ((".*" . "~/.emacs.d/auto-save-list"))))  ;; Set backup dir
+(setq auto-save-file-name-transforms `((".*" ,"~/.emacs.d/auto-save-list" t)))
 ;; (setq backup-directory-alist (quote ("~/.emacs.d/auto-save-list"))))  ;; Set backup dir
 (setq temporary-file-directory  "~/.emacs.d/temp-list/")
 (setq-default fill-column 72)    ;; Set Fill Column and auto fill

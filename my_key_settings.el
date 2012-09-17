@@ -137,21 +137,42 @@ With argument, do this that many times."
 (global-set-key "\C-xk" 'kill-this-buffer)
 (global-set-key "\C-x\C-k" 'kill-this-buffer-if-not-scratch)
 (global-unset-key "\C-z") (global-set-key "\C-z" 'undo)
-(global-set-key [delete] 'delete-char)
-(global-set-key [C-delete] 'kill-word)
-(define-key global-map [home] `beginning-of-line)
-(define-key global-map [end] `end-of-line)
-(define-key global-map (kbd "RET") 'newline-and-indent)
-(normal-erase-is-backspace-mode 1)
-(global-set-key [(f2)] 'set-mark-command)    ;set F2 as set mark
-(define-key isearch-mode-map '[backspace] 'isearch-delete-char)
-(global-set-key "\C-k" 'kill-line)
-(global-set-key "\M-q" 'comment-dwim-line)
+(global-set-key (kbd "C-S-k") 'kill-line)
+(global-set-key (kbd "C-\'") 'delete-other-windows)
 (global-set-key "\C-o" '(lambda() (interactive) (switch-to-buffer (other-buffer))))
-(global-set-key [insert] 'onekey-compile)
 (global-set-key "\C-\\" '(lambda() (eval-last-sexp)))
+(global-set-key "\M-p" 'scroll-down-line)
+(global-set-key "\M-n" 'scroll-up-line)
+
+;;==================== The following messes up with original settings
+(global-set-key "\C-t" 'comment-dwim-line)
+(global-set-key (kbd "C-v") 'yank)
+(global-set-key (kbd "C-f") 'kill-ring-save)
+
+(global-set-key (kbd "C-q") 'backward-delete-char)
+(global-set-key (kbd "C-S-q") 'delete-backward-word)
+(global-set-key (kbd "C-S-d") 'kill-word)
+
+(global-set-key "\C-k" 'backward-char)
+(global-set-key "\C-l" 'forward-char)
+(global-set-key (kbd "C-S-k") 'backward-word)
+(global-set-key (kbd "C-S-l") 'forward-word)
+
+(global-set-key (kbd "C-\.")     ; page down
+  (lambda () (interactive)
+    (condition-case nil (scroll-up)
+      (end-of-buffer (goto-char (point-max))))))
+
+(global-set-key (kbd "C-\,")
+  (lambda () (interactive) ; page up
+    (condition-case nil (scroll-down)
+      (beginning-of-buffer (goto-char (point-min))))))
+
+;; (global-set-key "\C-i" '(lambda() (interactive)(forward-line -1)))
+;; (global-set-key "\C-j" '(lambda() (interactive)(forward-line 1)))
 ;; ========================= Function Keys ========================
 (global-unset-key [(f1)])
+(global-unset-key [(f2)])
 (global-unset-key [(f9)])
 (global-unset-key [(f8)])
 (global-unset-key [(f10)])
@@ -162,54 +183,22 @@ With argument, do this that many times."
 (global-unset-key [delete] )
 
 (global-set-key [(f1)] 'recompile)
+(global-set-key [(f2)] 'set-mark-command)    ;set F2 as set mark
 (global-set-key [(f8)] 'open-eshell-other-buffer)
 (global-set-key [(f9)]	(lambda()(interactive) (switch-to-buffer "*scratch*")))
 (global-set-key [(f10)]	(lambda() (interactive) (find-file "~/.emacs.d/my_key_settings.el")))
 (global-set-key [(f11)] 	(lambda() (interactive) (find-file "~/.emacs.d/.emacs")))
 (global-set-key [(f12)] 	(lambda() (interactive)(save-some-buffers (buffer-file-name))(eval-buffer)))
+
 (global-set-key [backspace] 'delete-backward-char)
+(global-set-key [delete] 'delete-char)
+(global-set-key [C-delete] 'kill-word)
+(define-key global-map [home] `beginning-of-line)
+(define-key global-map [end] `end-of-line)
+(define-key global-map (kbd "RET") 'newline-and-indent)
+(global-set-key [insert] 'onekey-compile)
+(define-key isearch-mode-map '[backspace] 'isearch-delete-char)
 
-;;==================== The following messes up with original settings
-(global-set-key "\C-g" 'delete-backward-char)
-(global-set-key "\C-t" 'keyboard-quit)
-(global-set-key "\C-f" 'backward-char)
-(global-set-key "\M-f" 'backward-word)
-(global-set-key "\C-b" 'forward-char)
-(global-set-key "\M-b" 'forward-word)
-;; ;(global-set-key "\C-l" 'forward-char)
-;; (global-set-key "\C-k" 'backward-char)
-;; (global-set-key "\C-l" 'forward-char)
-;; (global-set-key "\M-k" 'backward-word)
-;; (global-set-key "\M-l" 'forward-word)
-;; ;(global-set-key "\C-u" 'scroll-up)
-;; ;(global-set-key "\C-i" 'scroll-down)
-;; ;; (global-set-key "\C-u" '(lambda() (forward-line 1))
-
-(global-set-key "\M-n"
-  (lambda () (interactive)
-    (condition-case nil (scroll-up)
-      (end-of-buffer (goto-char (point-max))))))
-(global-set-key "\M-p"
-  (lambda () (interactive)
-    (condition-case nil (scroll-down)
-      (beginning-of-buffer (goto-char (point-min))))))
-
-;; (global-set-key "\C-i" '(lambda() (interactive)(forward-line -1)))
-;; (global-set-key "\C-j" '(lambda() (interactive)(forward-line 1)))
-
-;; (global-set-key "\M-p" 'beginning-of-buffer)
-;; (global-set-key "\M-n" 'end-of-buffer)
-;; (global-set-key "\C-p" 'previous-line)
-;; (global-set-key "\C-n" 'next-line)
-
-;; (global-set-key "\C-f" 'delete- backward-char)
-;; (global-set-key "\M-f" 'backward-kill-word)
-;; (global-set-key "\M-w" 'kill-ring-save)
-;; (global-set-key "\C-w" 'kill-region)
-;; (global-set-key "\C-v" 'yank)
-;; (global-set-key "\M-v" 'yank-pop)
-;; (global-set-key "\C-y" 'yank)
-;; (global-set-key "\C-b" 'kill-line)
 
 ;; ======================= Windows Fonts =======================
 ;; (if (eq window-system 'w32) (set-frame-font "Bitstream Vera Sans 14") )
@@ -225,5 +214,18 @@ With argument, do this that many times."
 (if (eq window-system 'x) (set-frame-font "Monospace 14") )  ;good
 
 
-
 ;; End of my keyboard and function settings
+
+
+    (defun quick-copy-line ()
+      "Copy the whole line that point is on and move to the beginning of the next line.
+    Consecutive calls to this command append each line to the
+    kill-ring."
+      (interactive)
+      (let ((beg (line-beginning-position 1))
+            (end (line-beginning-position 2)))
+        (if (eq last-command 'quick-copy-line)
+            (kill-append (buffer-substring beg end) (< end beg))
+          ;; (kill-new (buffer-substring beg (- end 1))))
+          (kill-new (buffer-substring beg end))))
+      (beginning-of-line 2))
