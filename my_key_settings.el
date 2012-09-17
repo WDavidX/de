@@ -74,6 +74,17 @@
                 (setq matching-text (blink-matching-open)))
             (if (not (null matching-text))
                 (message matching-text)))))
+(defun kill-whitespace ()
+   "Kill the whitespace between two non-whitespace characters"
+   (interactive "*")
+     (save-excursion
+       (save-restriction
+         (save-match-data
+                  (progn
+                  (re-search-backward "[^ \t\r\n]" nil t)
+                  (re-search-forward "[ \t\r\n]+" nil t)
+                  (replace-match " " nil nil))))))
+
 (defun delete-word (arg)
   "Delete characters forward until encountering the end of a word.
 With argument, do this that many times."
@@ -135,20 +146,25 @@ With argument, do this that many times."
 ;; ==================== Keyboard Definition ====================
 (global-set-key "\C-x\C-b" 'ibuffer)
 (global-set-key "\C-xk" 'kill-this-buffer)
-(global-set-key "\C-x\C-k" 'kill-this-buffer-if-not-scratch)
-(global-unset-key "\C-z") (global-set-key "\C-z" 'undo)
 (global-set-key (kbd "C-S-k") 'kill-line)
+(global-set-key (kbd "M-\'") 'split-window-horizontally)
 (global-set-key (kbd "C-\'") 'delete-other-windows)
-(global-set-key "\C-o" '(lambda() (interactive) (switch-to-buffer (other-buffer))))
 (global-set-key "\C-\\" '(lambda() (eval-last-sexp)))
 (global-set-key "\M-p" 'scroll-down-line)
 (global-set-key "\M-n" 'scroll-up-line)
-
+(global-set-key (kbd "C-\;") 'center-line)
 ;;==================== The following messes up with original settings
+(global-set-key "\C-o" 'other-window)
+(global-set-key "\C-z" 'undo)
+(require 'redo+)(global-set-key (kbd "C-S-z") 'redo)
+(require 'buffcycle) (global-set-key "\C-x\C-k" 'kill-this-buffer-if-not-scratch)
+(global-set-key "\C-b" '(lambda() (interactive) (switch-to-buffer (other-buffer))))
 (global-set-key "\C-t" 'comment-dwim-line)
+(global-set-key "\M-b" 'delete-blank-lines)
 (global-set-key (kbd "C-v") 'yank)
+(global-set-key (kbd "C-S-v") 'yank-pop)
+(global-set-key (kbd "M-d") 'kill-whitespace)
 (global-set-key (kbd "C-f") 'kill-ring-save)
-
 (global-set-key (kbd "C-q") 'backward-delete-char)
 (global-set-key (kbd "C-S-q") 'delete-backward-word)
 (global-set-key (kbd "C-S-d") 'kill-word)
@@ -158,12 +174,12 @@ With argument, do this that many times."
 (global-set-key (kbd "C-S-k") 'backward-word)
 (global-set-key (kbd "C-S-l") 'forward-word)
 
-(global-set-key (kbd "C-\.")     ; page down
+(global-set-key (kbd "C-\,")     ; page down
   (lambda () (interactive)
     (condition-case nil (scroll-up)
       (end-of-buffer (goto-char (point-max))))))
 
-(global-set-key (kbd "C-\,")
+(global-set-key (kbd "C-\m")
   (lambda () (interactive) ; page up
     (condition-case nil (scroll-down)
       (beginning-of-buffer (goto-char (point-min))))))
@@ -198,7 +214,7 @@ With argument, do this that many times."
 (define-key global-map (kbd "RET") 'newline-and-indent)
 (global-set-key [insert] 'onekey-compile)
 (define-key isearch-mode-map '[backspace] 'isearch-delete-char)
-
+(require 'ebs)(ebs-initialize)(global-set-key [(control tab)] 'ebs-switch-buffer)
 
 ;; ======================= Windows Fonts =======================
 ;; (if (eq window-system 'w32) (set-frame-font "Bitstream Vera Sans 14") )
@@ -215,17 +231,3 @@ With argument, do this that many times."
 
 
 ;; End of my keyboard and function settings
-
-
-    (defun quick-copy-line ()
-      "Copy the whole line that point is on and move to the beginning of the next line.
-    Consecutive calls to this command append each line to the
-    kill-ring."
-      (interactive)
-      (let ((beg (line-beginning-position 1))
-            (end (line-beginning-position 2)))
-        (if (eq last-command 'quick-copy-line)
-            (kill-append (buffer-substring beg end) (< end beg))
-          ;; (kill-new (buffer-substring beg (- end 1))))
-          (kill-new (buffer-substring beg end))))
-      (beginning-of-line 2))

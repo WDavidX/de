@@ -154,7 +154,6 @@
 (require 'highlight-sexp)
 (require 'icomplete+)
 (require 'iswitchb-fc)
-;;(require 'buffcycle)
 (require 'ebs)(ebs-initialize)(global-set-key [(control tab)] 'ebs-switch-buffer)
 (require 'color-theme-single) (color-theme-arjen)
 ;(require 'kill-ring-ido)

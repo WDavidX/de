@@ -20,8 +20,8 @@
 ;;; Commentary:
 ;;; Simple Buffer cycling for Emacs between file buffers only using C-tab
 ;;; and killing buffer using C-q
-;;; To use add 
-;;; (require 'buffcycle) 
+;;; To use add
+;;; (require 'buffcycle)
 ;;; to your .emacs
 
 ;; Buffer Cycling
@@ -39,7 +39,7 @@
 	   (next-buffer)
 	   (while (and (booleanp (buffer-file-name)) (not (string= (buffer-name) cur-buffer)))
 	     (next-buffer))
-	   (setq *buffcycle-last-time* (float-time)) 
+	   (setq *buffcycle-last-time* (float-time))
 	   (if (string= cur-buffer (buffer-name))
 	       (ibuffer)))))
 
@@ -52,8 +52,7 @@
     (message "this is scratch unkillable"))))
 
 ;; Buffer Cycling keybindings
-(global-set-key (kbd "<C-o>") 'next-buffer-cycle)
+(global-set-key (kbd "C-S-o") 'next-buffer-cycle)
 ;; (global-set-key (kbd "C-q") 'kill-this-buffer-if-not-scratch)
 
 (provide 'buffcycle)
-
