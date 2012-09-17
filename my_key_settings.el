@@ -74,6 +74,7 @@
                 (setq matching-text (blink-matching-open)))
             (if (not (null matching-text))
                 (message matching-text)))))
+
 (defun kill-whitespace ()
    "Kill the whitespace between two non-whitespace characters"
    (interactive "*")
@@ -110,17 +111,17 @@ With argument, do this that many times."
 (setq iswitchb-buffer-ignore '("^ "  "*Compile-log*" "*Help*" "*Ibuffer" "*Completion*"))
 
 ;; ==================== Recent File ====================
-(require 'recentf) (require 'recentf-ext)
-(setq recentf-max-menu-items 5)(setq recentf-max-saved-items 5)
-(setq recentf-save-file "~/.emacs.d/desktop-save/recentf-list.txt")
-(recentf-mode t)
-(defun ido-recentf-open ()
-  "Use `ido-completing-read' to \\[find-file] a recent file"
-  (interactive)
-  (if (find-file (ido-completing-read "Find recent file: " recentf-list))
-      (message "Opening file...")
-    (message "Aborting")))
-(global-set-key (kbd "C-x C-r") 'ido-recentf-open)
+;(require 'recentf)
+;(setq recentf-max-menu-items 5) (setq recentf-max-saved-items 5)
+;(setq recentf-save-file "~/.emacs.d/desktop-save/recentf-list.txt")
+;(require 'recentf-ext)(recentf-mode t)
+;(defun ido-recentf-open ()
+;  "Use `ido-completing-read' to \\[find-file] a recent file"
+;  (interactive)
+;  (if (find-file (ido-completing-read "Find recent file: " recentf-list))
+;      (message "Opening file...")
+;    (message "Aborting")))
+;(global-set-key (kbd "C-x C-r") 'ido-recentf-open)
 
 ;; ==================== show paren ====================
 (require 'paren)
@@ -140,22 +141,23 @@ With argument, do this that many times."
 (setq buffer-file-coding-system 'utf-8-unix)
 (setq default-file-name-coding-system 'utf-8-unix)
 (setq default-keyboard-coding-system 'utf-8-unix)
-(setq default-process-coding-system '(utf-8-unix . utf-8-unix))
 (setq default-sendmail-coding-system 'utf-8-unix)
 (setq default-terminal-coding-system 'utf-8-unix)
+;; ==================== Add hooks ====================
+(add-hook 'emacs-lisp-mode-hook (lambda () (define-key emacs-lisp-mode-map "\C-\\" 'eval-last-sexp)))
 ;; ==================== Keyboard Definition ====================
 (global-set-key "\C-x\C-b" 'ibuffer)
 (global-set-key "\C-xk" 'kill-this-buffer)
 (global-set-key (kbd "C-S-k") 'kill-line)
 (global-set-key (kbd "M-\'") 'split-window-horizontally)
 (global-set-key (kbd "C-\'") 'delete-other-windows)
-(global-set-key "\C-\\" '(lambda() (eval-last-sexp)))
 (global-set-key "\M-p" 'scroll-down-line)
 (global-set-key "\M-n" 'scroll-up-line)
-(global-set-key (kbd "C-\;") 'center-line)
+(global-set-key (kbd "C-\;") 'recenter-top-bottom)
 ;;==================== The following messes up with original settings
 (global-set-key "\C-o" 'other-window)
 (global-set-key "\C-z" 'undo)
+(global-set-key "\M-z" 'repeat-complex-command)
 (require 'redo+)(global-set-key (kbd "C-S-z") 'redo)
 (require 'buffcycle) (global-set-key "\C-x\C-k" 'kill-this-buffer-if-not-scratch)
 (global-set-key "\C-b" '(lambda() (interactive) (switch-to-buffer (other-buffer))))
@@ -174,12 +176,12 @@ With argument, do this that many times."
 (global-set-key (kbd "C-S-k") 'backward-word)
 (global-set-key (kbd "C-S-l") 'forward-word)
 
-(global-set-key (kbd "C-\,")     ; page down
+(global-set-key (kbd "C-\.")     ; page down
   (lambda () (interactive)
     (condition-case nil (scroll-up)
       (end-of-buffer (goto-char (point-max))))))
 
-(global-set-key (kbd "C-\m")
+(global-set-key (kbd "C-\,")
   (lambda () (interactive) ; page up
     (condition-case nil (scroll-down)
       (beginning-of-buffer (goto-char (point-min))))))
@@ -211,10 +213,10 @@ With argument, do this that many times."
 (global-set-key [C-delete] 'kill-word)
 (define-key global-map [home] `beginning-of-line)
 (define-key global-map [end] `end-of-line)
-(define-key global-map (kbd "RET") 'newline-and-indent)
 (global-set-key [insert] 'onekey-compile)
 (define-key isearch-mode-map '[backspace] 'isearch-delete-char)
 (require 'ebs)(ebs-initialize)(global-set-key [(control tab)] 'ebs-switch-buffer)
+(define-key global-map (kbd "RET") 'newline-and-indent)
 
 ;; ======================= Windows Fonts =======================
 ;; (if (eq window-system 'w32) (set-frame-font "Bitstream Vera Sans 14") )
@@ -231,3 +233,5 @@ With argument, do this that many times."
 
 
 ;; End of my keyboard and function settings
+
+(message "End of key settings")

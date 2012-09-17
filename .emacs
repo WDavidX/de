@@ -1,5 +1,4 @@
 (add-to-list 'load-path "~/.emacs.d/plugins/single-files")
-(load-file "~/.emacs.d/my_key_settings.el")
 (require 'eval-after-load)
 ;; (load-file "~/.emacs.d/plugins/cedet-1.1/common/cedet.el")
 ;; (global-ede-mode 1)                      ; Enable the Project management system
@@ -43,7 +42,8 @@
  '(ido-record-commands nil)
  '(ido-max-work-directory-list 0)
  '(ido-max-work-file-list 0))
-
+(setq split-height-threshold nil)
+(setq split-width-threshold 0)
 (setq search-highlight t)
 (setq require-final-newline t)
 (setq kill-ring-max 2000);; Set delete record
@@ -150,7 +150,7 @@
 (require 'compile-dwim)
 (require 'smart-operator)
 (require 'autopair) (autopair-global-mode t) ;; to enable in all buffers
-(require 'auto-pair+)
+(require 'auto-pair+) (global-unset-key "\C-m")
 (require 'highlight-sexp)
 (require 'icomplete+)
 (require 'iswitchb-fc)
@@ -158,13 +158,11 @@
 (require 'color-theme-single) (color-theme-arjen)
 ;(require 'kill-ring-ido)
 (require 'browse-kill-ring+)
-;; (require 'wcy-desktop)(require 'wcy-desktop-settings)
 (require 'auto-show)(auto-show-mode 1)(setq-default auto-show-mode t)
 (require 'backup-each-save) (add-hook 'after-save-hook 'backup-each-save)
-;; (global-set-key "\M-q" 'iswitchb-kill-buffer)
-;; (global-set-key "\M-q" ( lambda() (interactive)(kill-buffer (current-buffer))))
-;; (global-set-key "\M-b" 'kill-this-buffer-if-not-scratch)
-
+(load-file "~/.emacs.d/my_key_settings.el")
 (require 'maxframe) (maximize-frame)
+
+
 ;; (if (eq window-system 'w32) (emacs-maximize) )
 (message " Loading Acommplished ")
