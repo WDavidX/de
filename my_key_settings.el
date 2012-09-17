@@ -140,13 +140,11 @@ With argument, do this that many times."
 ;; ==================== System Coding ====================
 (setq buffer-file-coding-system 'utf-8-unix)
 (setq default-file-name-coding-system 'utf-8-unix)
-(setq default-keyboard-coding-system 'utf-8-unix) ;
+(setq default-keyboard-coding-system 'utf-8-unix)
 (setq default-sendmail-coding-system 'utf-8-unix)
 (setq default-terminal-coding-system 'utf-8-unix)
 ;; ==================== Add hooks ====================
 (add-hook 'emacs-lisp-mode-hook (lambda () (define-key emacs-lisp-mode-map "\C-\\" 'eval-last-sexp)))
-;; (add-hook 'emacs-lisp-mode-hook (lambda ()					(define-key emacs-lisp-mode-map "\C-\\" (eval-region (line-beginning-position)(line-end-position)))))
-
 ;; ==================== Keyboard Definition ====================
 (global-set-key "\C-x\C-b" 'ibuffer)
 (global-set-key "\C-xk" 'kill-this-buffer)
@@ -156,6 +154,8 @@ With argument, do this that many times."
 (global-set-key "\M-p" 'scroll-down-line)
 (global-set-key "\M-n" 'scroll-up-line)
 (global-set-key (kbd "C-\;") 'recenter-top-bottom)
+(global-set-key "\M-z" 'repeat-complex-command)
+(global-set-key "\M-c" 'eval-region)
 ;;==================== The following messes up with original settings
 (global-set-key "\C-o" 'other-window)
 (global-set-key "\C-z" 'undo)
@@ -227,12 +227,6 @@ With argument, do this that many times."
 ;; (if (eq window-system 'w32) (set-frame-font "Lucida Console 14") )
 ;; (if (eq window-system 'w32) (set-frame-font "Monaco 14") )  ;good
 (if (eq window-system 'w32) (set-frame-font "Monaco 12") )  ;good
-;; Chinese Font
-(if (eq window-system 'w32)
-(dolist (charset '(kana han symbol cjk-misc bopomofo))
-    (set-fontset-font (frame-parameter nil 'font)
-                      charset
-                      (font-spec :family "Microsoft Yahei" :size 26)))
 ;; (if (eq window-system 'w32) (set-frame-font "Anonymous 12") ) ;good
 ;; (if (eq window-system 'w32) (set-frame-font "DejaVu Sans Mono 14") )
 ;; (if (eq window-system 'w32) (set-frame-font "Consolas 11") ) ;good

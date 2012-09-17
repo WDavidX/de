@@ -34,9 +34,6 @@
 ;; (pc-selection-mode t)
 ;; (shift-select-mode t)
 ;; ==================== Varibles ====================
-;; (setq-default c-basic-offset 4)
-(setq c-default-style "linux"
-          c-basic-offset 4)
 (setq vc-handled-backends nil)
 (setq ido-save-directory-list-file "~/.emacs.d/desktop-save/ido-last.txt")
 (setq ido-save-history nil )
