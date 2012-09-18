@@ -89,7 +89,7 @@
 (setq scroll-margin 3  scroll-conservatively 10000)
 (fset 'yes-or-no-p 'y-or-n-p)  ;; ask by y or n
 (setq frame-title-format (list "%b %p  [%f] " (getenv "USERNAME") " %s %Z   " emacs-version))
-(setq standard-indent 4)
+(setq standard-indent 2)
 
 (setq-default indent-tabs-mode 1)
 (setq-default tab-always-indent 'complete)
@@ -170,4 +170,5 @@
 
 
 ;; (if (eq window-system 'w32) (emacs-maximize) )
+
 (message " Loading Acommplished ")
