@@ -1,4 +1,14 @@
 ;; ================== Some functions==============
+(defun indent-or-expand (arg)
+  "Either indent according to mode, or expand the word preceding
+point."
+  (interactive "*P")
+  (if (and
+       (or (bobp) (= ?w (char-syntax (char-before))))
+       (or (eobp) (not (= ?w (char-syntax (char-after))))))
+      (dabbrev-expand arg)
+    (indent-according-to-mode)))
+
 ;; set new method of kill a whole line
 (defadvice kill-ring-save (before slickcopy activate compile)
   "When called interactively with no active region, copy a single line instead."
@@ -174,10 +184,13 @@ With argument, do this that many times."
 (global-set-key (kbd "C-S-q") 'delete-backward-word)
 (global-set-key (kbd "C-S-d") 'kill-word)
 
-(global-set-key "\C-k" 'backward-char)
-(global-set-key "\C-l" 'forward-char)
-(global-set-key (kbd "C-S-k") 'backward-word)
-(global-set-key (kbd "C-S-l") 'forward-word)
+
+(global-set-key "\C-j" 'backward-char)
+(global-set-key "\C-k" 'forward-char)
+(global-set-key (kbd "C-S-j") 'backward-word)
+(global-set-key (kbd "C-S-k") 'forward-word)
+(add-hook 'org-mode-hook (lambda () (define-key org-mode-map "\C-k" 'forward-char)))
+(add-hook 'org-mode-hook (lambda () (define-key org-mode-map (kbd "C-S-k") 'forward-word)))
 
 (global-set-key (kbd "C-\.")     ; page down
   (lambda () (interactive)

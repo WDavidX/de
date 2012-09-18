@@ -89,8 +89,10 @@
 (setq scroll-margin 3  scroll-conservatively 10000)
 (fset 'yes-or-no-p 'y-or-n-p)  ;; ask by y or n
 (setq frame-title-format (list "%b %p  [%f] " (getenv "USERNAME") " %s %Z   " emacs-version))
-(setq standard-indent 2)
-(setq-default indent-tabs-mode -1)
+(setq standard-indent 4)
+
+(setq-default indent-tabs-mode 1)
+(setq-default tab-always-indent 'complete)
 (setq message-log-max 512)
 (setq c-auto-newline 1)
 (remove-hook 'coding-hook 'turn-on-hl-line-mode)
@@ -108,6 +110,8 @@
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/plugins/auto-complete-131/ac-dict")
 (ac-config-default)
 (require 'auto-complete-extension)
+(define-key ac-complete-mode-map "\C-n" 'ac-next)
+(define-key ac-complete-mode-map "\C-p" 'ac-previous)
 ;;================================================================================
 ;; (add-to-list 'load-path "~/.emacs.d/plugins/color-theme-660")
 ;; (add-to-list 'load-path "~/.emacs.d/plugins/color-theme-660/themes")
