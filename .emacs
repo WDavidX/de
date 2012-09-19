@@ -107,10 +107,10 @@
 (setq font-lock-maximum-decoration t)
 
 ;;================================================================================
-;; (add-to-list 'load-path "~/.emacs.d/plugins/yasnippet")
-;; (require 'yas-jit)
-;; (setq yas/root-directory "~/.emacs.d/plugins/yasnippet")
-;; (yas/jit-load)
+(add-to-list 'load-path "~/.emacs.d/plugins/yasnippet")
+(require 'yas-jit)
+(setq yas/root-directory "~/.emacs.d/plugins/yasnippet")
+(yas/jit-load)
 ;;================================================================================
 (add-to-list 'load-path "~/.emacs.d/plugins/auto-complete-131")
 (require 'auto-complete-config)
