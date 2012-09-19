@@ -98,9 +98,8 @@
 (setq frame-title-format (list "%b %p  [%f] " (getenv "USERNAME") " %s %Z   " emacs-version))
 (setq standard-indent 2)
 
-
 (setq-default indent-tabs-mode 1)
-(setq-default tab-always-indent 'complete)
+(setq-default tab-always-indent nil)
 (setq message-log-max 512)
 (setq c-auto-newline 1)
 (remove-hook 'coding-hook 'turn-on-hl-line-mode)
@@ -176,7 +175,5 @@
 (load-file "~/.emacs.d/my_key_settings.el")
 (require 'maxframe) (maximize-frame)
 
-
 ;; (if (eq window-system 'w32) (emacs-maximize) )
-
 (message " Loading Acommplished ")
