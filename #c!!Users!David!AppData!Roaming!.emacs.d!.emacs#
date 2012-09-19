@@ -147,7 +147,7 @@
 (add-hook 'org-mode-hook  (lambda () (setq truncate-lines t)))
 ;; ==================== icicles ====================
 ;; (add-to-list 'load-path "~/.emacs.d/plugins/icicles")(require 'icicles)
-;; ==================================================================
+;; =================================================== ===============
 (require 'hungry-delete) (turn-on-hungry-delete-mode)
 (require 'dired-lis)
 (require 'smart-compile)
