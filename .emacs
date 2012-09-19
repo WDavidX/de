@@ -29,7 +29,7 @@
 (iswitchb-mode t)
 (normal-erase-is-backspace-mode t)
 (file-name-shadow-mode t)
-
+(global-auto-revert-mode -1)
 ;; (auto-show-make-point-visible)
 ;; (blink-cursor-mode t)
 ;; (pc-selection-mode t)
