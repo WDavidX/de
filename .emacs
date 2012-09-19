@@ -29,6 +29,7 @@
 (iswitchb-mode t)
 (normal-erase-is-backspace-mode t)
 (file-name-shadow-mode t)
+
 ;; (auto-show-make-point-visible)
 ;; (blink-cursor-mode t)
 ;; (pc-selection-mode t)
@@ -74,22 +75,29 @@
 (mouse-wheel-mode t)    ;; Response to mouse scrolling
 (setq-default make-backup-files t)
 (setq-default make-temp-files t)
+(setq mouse-sel-retain-highlight t) ; Keep mouse high-lightening
 (setq auto-save-default t)  ; disable # files%p
+(setq make-backup-files nil) ;; do not make backup files
 (auto-save-mode t)
 (setq kept-new-versions 10 ;; Enable versioning with modified values
       kept-old-versions 5
       version-control t
       delete-old-versions t
       backup-by-copying t)
-(setq backup-directory-alist (quote ((".*" . "~/.emacs.d/auto-save-list"))))  ;; Set backup dir
-(setq auto-save-file-name-transforms `((".*" ,"~/.emacs.d/auto-save-list" t)))
-;; (setq backup-directory-alist (quote ("~/.emacs.d/auto-save-list"))))  ;; Set backup dir
+(setq backup-directory-alist `((".*" . "~/.emacs.d/auto-save-list/")))
+(setq auto-save-file-name-transforms `((".*" ,
+																				"~/.emacs.d/auto-save-list" t)))
+(setq make-backup-files         nil) ; Don't want any backup files
+(setq auto-save-list-file-name  nil) ; Don't want any .saves files
+(setq auto-save-default         nil) ; Don't want any auto saving
+
 (setq temporary-file-directory  "~/.emacs.d/temp-list/")
 (setq-default fill-column 72)    ;; Set Fill Column and auto fill
 (setq scroll-margin 3  scroll-conservatively 10000)
 (fset 'yes-or-no-p 'y-or-n-p)  ;; ask by y or n
 (setq frame-title-format (list "%b %p  [%f] " (getenv "USERNAME") " %s %Z   " emacs-version))
 (setq standard-indent 2)
+
 
 (setq-default indent-tabs-mode 1)
 (setq-default tab-always-indent 'complete)
