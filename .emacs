@@ -98,8 +98,8 @@
 (setq frame-title-format (list "%b %p  [%f] " (getenv "USERNAME") " %s %Z   " emacs-version))
 (setq standard-indent 2)
 
-(setq-default indent-tabs-mode 1)
-(setq-default tab-always-indent nil)
+(setq-default indent-tabs-mode -1)
+(setq-default tab-always-indent -1)
 (setq message-log-max 512)
 (setq c-auto-newline 1)
 (remove-hook 'coding-hook 'turn-on-hl-line-mode)
@@ -107,10 +107,11 @@
 (setq font-lock-maximum-decoration t)
 
 ;;================================================================================
-(add-to-list 'load-path "~/.emacs.d/plugins/yasnippet")
-(require 'yas-jit)
-(setq yas/root-directory "~/.emacs.d/plugins/yasnippet")
-(yas/jit-load)
+;; (add-to-list 'load-path "~/.emacs.d/plugins/yasnippet")
+;; (require 'yas-jit)
+;; (setq yas/root-directory "~/.emacs.d/plugins/yasnippet")
+;; (yas/jit-load)
+(require 'yasnippet-bundle)(yas/minor-mode t)(yas/global-mode t)
 ;;================================================================================
 (add-to-list 'load-path "~/.emacs.d/plugins/auto-complete-131")
 (require 'auto-complete-config)
