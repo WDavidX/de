@@ -191,6 +191,8 @@ With argument, do this that many times."
 (global-set-key (kbd "C-S-k") 'forward-word)
 (add-hook 'org-mode-hook (lambda () (define-key org-mode-map "\C-k" 'forward-char)))
 (add-hook 'org-mode-hook (lambda () (define-key org-mode-map (kbd "C-S-k") 'forward-word)))
+(add-hook 'c-mode-hook (lambda () (define-key c-mode-map "\C-j" 'backward-char)))
+(add-hook 'c-mode-hook (lambda () (define-key c-mode-map (kbd "C-S-j") 'backward-word)))
 
 (global-set-key (kbd "C-\.")     ; page down
   (lambda () (interactive)
