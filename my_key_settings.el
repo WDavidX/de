@@ -218,7 +218,7 @@ With argument, do this that many times."
 (global-unset-key [insert])
 (global-unset-key [delete] )
 
-(global-set-key [(f1)] 'recompile)
+(global-set-key [(f1)] (lambda() (interactive)  (save-some-buffers (buffer-file-name)) (recompile)))
 (global-set-key [(f2)] 'set-mark-command)    ;set F2 as set mark
 (global-set-key [(f8)] 'open-eshell-other-buffer)
 (global-set-key [(f9)]	(lambda()(interactive) (switch-to-buffer "*scratch*")))

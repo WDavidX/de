@@ -178,5 +178,10 @@
 (load-file "~/.emacs.d/my_key_settings.el")
 (require 'maxframe) (maximize-frame)
 
+;; (define-key 'c-mode-map  "\C-c \C-c" 'Compile)
 ;; (if (eq window-system 'w32) (emacs-maximize) )
+(global-unset-key "\C-c \C-c")
+(global-set-key "\C-c \C-c" 'compile)
+
+(local-set-key "\C-c \C-c" 'compile)
 (message " Loading Acommplished ")
