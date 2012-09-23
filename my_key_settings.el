@@ -181,9 +181,9 @@ With argument, do this that many times."
 (global-set-key (kbd "M-d") 'kill-whitespace)
 (global-set-key (kbd "C-f") 'kill-ring-save)
 (global-set-key (kbd "C-q") 'backward-delete-char)
+(global-set-key (kbd "M-q") 'backward-delete-char)
 (global-set-key (kbd "C-S-q") 'delete-backward-word)
 (global-set-key (kbd "C-S-d") 'kill-word)
-
 
 (global-set-key "\C-j" 'backward-char)
 (global-set-key "\C-k" 'forward-char)
