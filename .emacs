@@ -15,7 +15,6 @@
 ;; (setq initial-frame-alist '((top . 0) (left . 0) (width . 80) (height . 20)))
 ;; ==================== Modes ====================
 (global-linum-mode t)
-(global-auto-revert-mode -1)
 (ido-mode t)
 (delete-selection-mode t)
 (visual-line-mode 1)
@@ -36,9 +35,11 @@
 ;; (pc-selection-mode t)
 ;; (shift-select-mode t)
 ;; ==================== Varibles ====================
+(setq compilation-ask-about-save -1)
+(setq c-default-style "linux" c-basic-offset 4)
 (setq vc-handled-backends nil)
 (setq ido-save-directory-list-file "~/.emacs.d/desktop-save/ido-last.txt")
-(setq ido-save-history -1)
+(setq ido-save-history nil )
 (custom-set-variables
  '(ido-enable-last-directory-history -1)
  '(ido-record-commands nil)
@@ -65,7 +66,7 @@
 (setq kill-whole-line t) ;; C-k kill whole line including lind end
 (require 'tramp)
 (setq tramp-default-method "ssh")
-(setq initial-major-mode 'org-mode)
+(setq initial-major-mode 'text-mode)
 (setq initial-scratch-message nil)
 (setq column-number-mode t)   ;; Display Cursor Location
 (setq line-number-mode t)
@@ -99,8 +100,8 @@
 (setq frame-title-format (list "%b %p  [%f] " (getenv "USERNAME") " %s %Z   " emacs-version))
 (setq standard-indent 2)
 
-(setq-default indent-tabs-mode 1)
-(setq-default tab-always-indent 'complete)
+(setq-default indent-tabs-mode -1)
+(setq-default tab-always-indent -1)
 (setq message-log-max 512)
 (setq c-auto-newline 1)
 (remove-hook 'coding-hook 'turn-on-hl-line-mode)
@@ -108,10 +109,11 @@
 (setq font-lock-maximum-decoration t)
 
 ;;================================================================================
-(add-to-list 'load-path "~/.emacs.d/plugins/yasnippet")
-(require 'yas-jit)
-(setq yas/root-directory "~/.emacs.d/plugins/yasnippet")
-(yas/jit-load)
+;; (add-to-list 'load-path "~/.emacs.d/plugins/yasnippet")
+;; (require 'yas-jit)
+;; (setq yas/root-directory "~/.emacs.d/plugins/yasnippet")
+;; (yas/jit-load)
+(require 'yasnippet-bundle)(yas/minor-mode t)(yas/global-mode t)
 ;;================================================================================
 (add-to-list 'load-path "~/.emacs.d/plugins/auto-complete-131")
 (require 'auto-complete-config)
@@ -172,16 +174,14 @@
 (require 'browse-kill-ring+)
 (require 'auto-show)(auto-show-mode 1)(setq-default auto-show-mode t)
 (require 'backup-each-save) (add-hook 'after-save-hook 'backup-each-save)
-;; (require 'saveplace) (setq save-place-file "~/.emacs.d/desktop-save/saveplace.txt")(setq-default save-place t)
+(require 'saveplace) (setq save-place-file "~/.emacs.d/desktop-save/saveplace.txt")(setq-default save-place t)
 (load-file "~/.emacs.d/my_key_settings.el")
-;; ========================= ErgoEmacs ===============================
-;(add-to-list 'load-path "~/.emacs.d/plugins/ErgoEmacs")
-;(load "~/.emacs.d/plugins/ErgoEmacs/ergoemacs-mode")
-;(setenv "ERGOEMACS_KEYBOARD_LAYOUT" "us")
-;(ergoemacs-mode 1)
-;; ==================================================================
-
 (require 'maxframe) (maximize-frame)
 
+;; (define-key 'c-mode-map  "\C-c \C-c" 'Compile)
 ;; (if (eq window-system 'w32) (emacs-maximize) )
+(global-unset-key "\C-c \C-c")
+(global-set-key "\C-c \C-c" 'compile)
+
+(local-set-key "\C-c \C-c" 'compile)
 (message " Loading Acommplished ")

@@ -191,6 +191,8 @@ With argument, do this that many times."
 (global-set-key (kbd "C-S-k") 'forward-word)
 (add-hook 'org-mode-hook (lambda () (define-key org-mode-map "\C-k" 'forward-char)))
 (add-hook 'org-mode-hook (lambda () (define-key org-mode-map (kbd "C-S-k") 'forward-word)))
+(add-hook 'c-mode-hook (lambda () (define-key c-mode-map "\C-j" 'backward-char)))
+(add-hook 'c-mode-hook (lambda () (define-key c-mode-map (kbd "C-S-j") 'backward-word)))
 
 (global-set-key (kbd "C-\.")     ; page down
   (lambda () (interactive)
@@ -216,7 +218,7 @@ With argument, do this that many times."
 (global-unset-key [insert])
 (global-unset-key [delete] )
 
-(global-set-key [(f1)] 'recompile)
+(global-set-key [(f1)] (lambda() (interactive)  (save-some-buffers (buffer-file-name)) (recompile)))
 (global-set-key [(f2)] 'set-mark-command)    ;set F2 as set mark
 (global-set-key [(f8)] 'open-eshell-other-buffer)
 (global-set-key [(f9)]	(lambda()(interactive) (switch-to-buffer "*scratch*")))
