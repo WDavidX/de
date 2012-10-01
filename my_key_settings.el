@@ -204,6 +204,16 @@ With argument, do this that many times."
     (condition-case nil (scroll-down)
       (beginning-of-buffer (goto-char (point-min))))))
 
+(global-set-key (kbd "M-n")     ; page down
+  (lambda () (interactive)
+    (condition-case nil (scroll-up)
+      (end-of-buffer (goto-char (point-max))))))
+
+(global-set-key (kbd "M-p")
+  (lambda () (interactive) ; page up
+    (condition-case nil (scroll-down)
+      (beginning-of-buffer (goto-char (point-min))))))
+
 ;; (global-set-key "\C-i" '(lambda() (interactive)(forward-line -1)))
 ;; (global-set-key "\C-j" '(lambda() (interactive)(forward-line 1)))
 ;; ========================= Function Keys ========================
@@ -248,6 +258,7 @@ With argument, do this that many times."
 ;; (if (eq window-system 'w32) (set-frame-font "Consolas 11") ) ;good
 
 (if (eq window-system 'x) (set-frame-font "Monospace 14") )  ;good
+
 
 
 ;; End of my keyboard and function settings

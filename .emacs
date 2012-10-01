@@ -36,10 +36,12 @@
 ;; (shift-select-mode t)
 ;; ==================== Varibles ====================
 (setq compilation-ask-about-save -1)
+(setq after-find-file-from-revert-buffer)
 (setq c-default-style "linux" c-basic-offset 4)
 (setq vc-handled-backends nil)
 (setq ido-save-directory-list-file "~/.emacs.d/desktop-save/ido-last.txt")
 (setq ido-save-history nil )
+(setq ido-enable-flex-matching t)
 (custom-set-variables
  '(ido-enable-last-directory-history -1)
  '(ido-record-commands nil)
@@ -103,17 +105,21 @@
 (setq-default indent-tabs-mode -1)
 (setq-default tab-always-indent -1)
 (setq message-log-max 512)
-(setq c-auto-newline 1)
+;; (setq c-auto-newline 1)
 (remove-hook 'coding-hook 'turn-on-hl-line-mode)
 (setq comint-buffer-maximum-size 10240)
 (setq font-lock-maximum-decoration t)
-
 ;;================================================================================
-;; (add-to-list 'load-path "~/.emacs.d/plugins/yasnippet")
-;; (require 'yas-jit)
-;; (setq yas/root-directory "~/.emacs.d/plugins/yasnippet")
-;; (yas/jit-load)
-(require 'yasnippet-bundle)(yas/minor-mode t)(yas/global-mode t)
+(add-to-list 'load-path "~/.emacs.d/plugins/yasnippet")
+(setq yas-snippet-dirs '("~/.emacs.d/plugins/yasnippet" "~/.emacs.d/plugins/yasnippet/snippets"))
+(require 'yasnippet)
+(setq yas-snippet-dirs '("~/.emacs.d/plugins/yasnippet" "~/.emacs.d/plugins/yasnippet/snippets"))
+(yas-global-mode 1)
+(setq yas/prompt-functions '(yas/x-prompt yas/dropdown-prompt))
+(require 'dropdown-list)
+(setq yas/prompt-functions '(yas/dropdown-prompt
+                             yas/ido-prompt
+                             yas/completing-prompt))
 ;;================================================================================
 (add-to-list 'load-path "~/.emacs.d/plugins/auto-complete-131")
 (require 'auto-complete-config)
@@ -122,6 +128,41 @@
 (require 'auto-complete-extension)
 (define-key ac-complete-mode-map "\C-n" 'ac-next)
 (define-key ac-complete-mode-map "\C-p" 'ac-previous)
+(defadvice ac-common-setup (after give-yasnippet-highest-priority activate)
+  (setq ac-sources (delq 'ac-source-yasnippet ac-sources))
+  (add-to-list 'ac-sources 'ac-source-yasnippet))
+;; (require 'auto-complete)
+;; (require 'yasnippet)
+
+;; (defun ac-yasnippet-candidate ()
+;;   (let ((table (yas/get-snippet-tables major-mode)))
+;;     (if table
+;;       (let (candidates (list))
+;;             (mapcar (lambda (mode)
+;;               (maphash (lambda (key value)
+;;                 (push key candidates))
+;;               (yas/snippet-table-hash mode)))
+;;             table)
+;;         (all-completions ac-prefix candidates)))))
+
+;; (defface ac-yasnippet-candidate-face
+;;   '((t (:background "sandybrown" :foreground "black")))
+;;   "Face for yasnippet candidate.")
+
+;; (defface ac-yasnippet-selection-face
+;;   '((t (:background "coral3" :foreground "white")))
+;;   "Face for the yasnippet selected candidate.")
+
+;; (defvar ac-source-yasnippet
+;;   '((candidates . ac-yasnippet-candidate)
+;;     (action . yas/expand)
+;;     (limit . 3)
+;;     (candidate-face . ac-yasnippet-candidate-face)
+;;     (selection-face . ac-yasnippet-selection-face))
+;;   "Source for Yasnippet.")
+;; (provide 'auto-complete-yasnippet)
+;; (require 'auto-complete-yasnippet)
+
 ;;================================================================================
 ;; (add-to-list 'load-path "~/.emacs.d/plugins/color-theme-660")
 ;; (add-to-list 'load-path "~/.emacs.d/plugins/color-theme-660/themes")
@@ -181,7 +222,9 @@
 ;; (define-key 'c-mode-map  "\C-c \C-c" 'Compile)
 ;; (if (eq window-system 'w32) (emacs-maximize) )
 (global-unset-key "\C-c \C-c")
-(global-set-key "\C-c \C-c" 'compile)
-
+(custom-set-variables
+ '(ac-trigger-key "TAB")
+ '(ac-auto-start nil)
+ '(ac-use-menu-map t))
 (local-set-key "\C-c \C-c" 'compile)
 (message " Loading Acommplished ")
