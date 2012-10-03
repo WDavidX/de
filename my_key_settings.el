@@ -8,7 +8,16 @@ point."
        (or (eobp) (not (= ?w (char-syntax (char-after))))))
       (dabbrev-expand arg)
     (indent-according-to-mode)))
-
+(defun quote-word ()
+  "add double quotes to the current word"
+  (interactive)
+  (let (p1 p2 bds)
+    (setq bds (bounds-of-thing-at-point 'word))
+    (setq p1 (car bds) p2 (cdr bds))
+    (goto-char p1)
+    (insert "\"")
+    (goto-char (+ 1 p2))
+    (insert "\"")))
 ;; set new method of kill a whole line
 (defadvice kill-ring-save (before slickcopy activate compile)
   "When called interactively with no active region, copy a single line instead."
