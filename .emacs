@@ -1,5 +1,7 @@
 (add-to-list 'load-path "~/.emacs.d/plugins/single-files")
 (require 'eval-after-load)
+(setq initial-major-mode 'text-mode)
+(setq initial-scratch-message nil)
 ;; (load-file "~/.emacs.d/plugins/cedet-1.1/common/cedet.el")
 ;; (global-ede-mode 1)                      ; Enable the Project management system
 ;; (semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion
@@ -68,8 +70,7 @@
 (setq kill-whole-line t) ;; C-k kill whole line including lind end
 (require 'tramp)
 (setq tramp-default-method "ssh")
-(setq initial-major-mode 'text-mode)
-(setq initial-scratch-message nil)
+;; (setq initial-major-mode 'text-mode)
 (setq column-number-mode t)   ;; Display Cursor Location
 (setq line-number-mode t)
 (setq display-time-12hr-format t);;;; Display Time
@@ -113,8 +114,9 @@
 (add-to-list 'load-path "~/.emacs.d/plugins/yasnippet")
 (setq yas-snippet-dirs '("~/.emacs.d/plugins/yasnippet" "~/.emacs.d/plugins/yasnippet/snippets"))
 (require 'yasnippet)
-(setq yas-snippet-dirs '("~/.emacs.d/plugins/yasnippet" "~/.emacs.d/plugins/yasnippet/snippets"))
+;; (setq yas-snippet-dirs '("~/.emacs.d/plugins/yasnippet" "~/.emacs.d/plugins/yasnippet/snippets"))
 (yas-global-mode 1)
+
 (setq yas/prompt-functions '(yas/x-prompt yas/dropdown-prompt))
 (require 'dropdown-list)
 (setq yas/prompt-functions '(yas/dropdown-prompt
@@ -128,40 +130,10 @@
 (require 'auto-complete-extension)
 (define-key ac-complete-mode-map "\C-n" 'ac-next)
 (define-key ac-complete-mode-map "\C-p" 'ac-previous)
-(defadvice ac-common-setup (after give-yasnippet-highest-priority activate)
-  (setq ac-sources (delq 'ac-source-yasnippet ac-sources))
-  (add-to-list 'ac-sources 'ac-source-yasnippet))
-;; (require 'auto-complete)
-;; (require 'yasnippet)
 
-;; (defun ac-yasnippet-candidate ()
-;;   (let ((table (yas/get-snippet-tables major-mode)))
-;;     (if table
-;;       (let (candidates (list))
-;;             (mapcar (lambda (mode)
-;;               (maphash (lambda (key value)
-;;                 (push key candidates))
-;;               (yas/snippet-table-hash mode)))
-;;             table)
-;;         (all-completions ac-prefix candidates)))))
-
-;; (defface ac-yasnippet-candidate-face
-;;   '((t (:background "sandybrown" :foreground "black")))
-;;   "Face for yasnippet candidate.")
-
-;; (defface ac-yasnippet-selection-face
-;;   '((t (:background "coral3" :foreground "white")))
-;;   "Face for the yasnippet selected candidate.")
-
-;; (defvar ac-source-yasnippet
-;;   '((candidates . ac-yasnippet-candidate)
-;;     (action . yas/expand)
-;;     (limit . 3)
-;;     (candidate-face . ac-yasnippet-candidate-face)
-;;     (selection-face . ac-yasnippet-selection-face))
-;;   "Source for Yasnippet.")
-;; (provide 'auto-complete-yasnippet)
-;; (require 'auto-complete-yasnippet)
+;; (defadvice ac-common-setup (after give-yasnippet-highest-priority activate)
+;;   (setq ac-sources (delq 'ac-source-yasnippet ac-sources))
+;;   (add-to-list 'ac-sources 'ac-source-yasnippet))
 
 ;;================================================================================
 ;; (add-to-list 'load-path "~/.emacs.d/plugins/color-theme-660")
@@ -194,11 +166,19 @@
 ;; (global-set-key "\C-cc" 'org-capture)
 ;; (global-set-key "\C-ca" 'org-agenda)
 (setq org-support-shift-select t)
-(global-set-key "\C-cb" 'org-export-as-html-and-open)
+(global-set-key "\C-c \C-b" 'org-export-as-html-and-open)
 (add-hook 'org-mode-hook  (lambda () (setq truncate-lines t)))
+;; ==================== Circuits ====================
+(add-to-list 'load-path "~/.emacs.d/plugins/netlist-modes")
+(require 'spectre-mode)
+(add-to-list 'auto-mode-alist '("\\.scs$" . spectre-mode))
+(require 'spice-mode)
+(add-to-list 'auto-mode-alist '("\\.sp$" . spice-mode))
+(add-to-list 'auto-mode-alist '("\\.cir$" . spice-mode))
 ;; ==================== icicles ====================
 ;; (add-to-list 'load-path "~/.emacs.d/plugins/icicles")(require 'icicles)
 ;; ==================================================================
+(require 'auto-complete-yasnippet)
 (require 'hungry-delete) (turn-on-hungry-delete-mode)
 (require 'dired-lis)
 (require 'smart-compile)

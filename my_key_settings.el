@@ -189,20 +189,30 @@ With argument, do this that many times."
 (global-set-key "\C-k" 'forward-char)
 (global-set-key (kbd "C-S-j") 'backward-word)
 (global-set-key (kbd "C-S-k") 'forward-word)
-(add-hook 'org-mode-hook (lambda () (define-key org-mode-map "\C-k" 'forward-char)))
-(add-hook 'org-mode-hook (lambda () (define-key org-mode-map (kbd "C-S-k") 'forward-word)))
-(add-hook 'c-mode-hook (lambda () (define-key c-mode-map "\C-j" 'backward-char)))
-(add-hook 'c-mode-hook (lambda () (define-key c-mode-map (kbd "C-S-j") 'backward-word)))
 
-(global-set-key (kbd "C-\.")     ; page down
-  (lambda () (interactive)
-    (condition-case nil (scroll-up)
-      (end-of-buffer (goto-char (point-max))))))
+;; (add-hook 'org-mode-hook (lambda () (define-key org-mode-map "\C-k" 'forward-char)))
 
-(global-set-key (kbd "C-\,")
-  (lambda () (interactive) ; page up
-    (condition-case nil (scroll-down)
-      (beginning-of-buffer (goto-char (point-min))))))
+(add-hook 'org-mode-hook
+          (lambda ()
+            (local-set-key "\C-k" 'forward-char)
+						(local-set-key (kbd "C-S-k") 'forward-word)
+						(local-set-key "\C-j" 'backward-char)
+						(local-set-key (kbd "C-S-j") 'backward-word)
+            ;; yasnippet (allow yasnippet to do its thing in org files)
+            ;; (org-set-local 'yas/trigger-key [tab])
+            ;; (define-key yas/keymap [tab] 'yas/next-field-group)
+						))
+
+(add-hook 'c-mode-hook
+          (lambda ()
+            (local-set-key "\C-k" 'forward-char)
+						(local-set-key (kbd "C-S-k") 'forward-word)
+						(local-set-key "\C-j" 'backward-char)
+						(local-set-key (kbd "C-S-j") 'backward-word)
+            ;; yasnippet (allow yasnippet to do its thing in org files)
+            ;; (org-set-local 'yas/trigger-key [tab])
+            ;; (define-key yas/keymap [tab] 'yas/next-field-group)
+						))
 
 (global-set-key (kbd "M-n")     ; page down
   (lambda () (interactive)
@@ -214,8 +224,8 @@ With argument, do this that many times."
     (condition-case nil (scroll-down)
       (beginning-of-buffer (goto-char (point-min))))))
 
-;; (global-set-key "\C-i" '(lambda() (interactive)(forward-line -1)))
-;; (global-set-key "\C-j" '(lambda() (interactive)(forward-line 1)))
+(global-set-key (kbd "C-,")  '(lambda() (interactive)(forward-line -1)))
+(global-set-key  (kbd "C-.") '(lambda() (interactive)(forward-line 1)))
 ;; ========================= Function Keys ========================
 (global-unset-key [(f1)])
 (global-unset-key [(f2)])
