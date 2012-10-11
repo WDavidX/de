@@ -206,5 +206,4 @@
  '(ac-trigger-key "TAB")
  '(ac-auto-start nil)
  '(ac-use-menu-map t))
-(local-set-key "\C-c \C-c" 'compile)
 (message " Loading Acommplished ")
