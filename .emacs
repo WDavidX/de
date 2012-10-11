@@ -170,11 +170,11 @@
 (add-hook 'org-mode-hook  (lambda () (setq truncate-lines t)))
 ;; ==================== Circuits ====================
 (add-to-list 'load-path "~/.emacs.d/plugins/netlist-modes")
-(require 'spectre-mode)
-(add-to-list 'auto-mode-alist '("\\.scs$" . spectre-mode))
-(require 'spice-mode)
-(add-to-list 'auto-mode-alist '("\\.sp$" . spice-mode))
-(add-to-list 'auto-mode-alist '("\\.cir$" . spice-mode))
+;; (require 'spectre-mode)
+;; (add-to-list 'auto-mode-alist '("\\.scs$" . spectre-mode))
+;; (require 'spice-mode)
+;; (add-to-list 'auto-mode-alist '("\\.sp$" . spice-mode))
+;; (add-to-list 'auto-mode-alist '("\\.cir$" . spice-mode))
 ;; ==================== icicles ====================
 ;; (add-to-list 'load-path "~/.emacs.d/plugins/icicles")(require 'icicles)
 ;; ==================================================================

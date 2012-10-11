@@ -201,6 +201,7 @@ With argument, do this that many times."
             ;; yasnippet (allow yasnippet to do its thing in org files)
             ;; (org-set-local 'yas/trigger-key [tab])
             ;; (define-key yas/keymap [tab] 'yas/next-field-group)
+						(global-visual-line-mode t)
 						))
 
 (add-hook 'c-mode-hook
