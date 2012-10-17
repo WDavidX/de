@@ -49,8 +49,8 @@
  '(ido-record-commands nil)
  '(ido-max-work-directory-list 0)
  '(ido-max-work-file-list 0))
-(setq split-height-threshold nil)
-(setq split-width-threshold 0)
+(setq split-height-threshold nil)(setq split-width-threshold 0)
+(setq split-height-threshold 0)(setq split-width-threshold nil)
 (setq search-highlight t)
 (setq require-final-newline t)
 (setq kill-ring-max 2000);; Set delete record
@@ -111,17 +111,17 @@
 (setq comint-buffer-maximum-size 10240)
 (setq font-lock-maximum-decoration t)
 ;;================================================================================
-(add-to-list 'load-path "~/.emacs.d/plugins/yasnippet")
-(setq yas-snippet-dirs '("~/.emacs.d/plugins/yasnippet" "~/.emacs.d/plugins/yasnippet/snippets"))
-(require 'yasnippet)
+;; (add-to-list 'load-path "~/.emacs.d/plugins/yasnippet")
 ;; (setq yas-snippet-dirs '("~/.emacs.d/plugins/yasnippet" "~/.emacs.d/plugins/yasnippet/snippets"))
-(yas-global-mode 1)
+;; (require 'yasnippet)
+;; ;; (setq yas-snippet-dirs '("~/.emacs.d/plugins/yasnippet" "~/.emacs.d/plugins/yasnippet/snippets"))
+;; (yas-global-mode 1)
 
-(setq yas/prompt-functions '(yas/x-prompt yas/dropdown-prompt))
-(require 'dropdown-list)
-(setq yas/prompt-functions '(yas/dropdown-prompt
-                             yas/ido-prompt
-                             yas/completing-prompt))
+;; (setq yas/prompt-functions '(yas/x-prompt yas/dropdown-prompt))
+;; (require 'dropdown-list)
+;; (setq yas/prompt-functions '(yas/dropdown-prompt
+;;                              yas/ido-prompt
+;;                              yas/completing-prompt))
 ;;================================================================================
 (add-to-list 'load-path "~/.emacs.d/plugins/auto-complete-131")
 (require 'auto-complete-config)
@@ -178,7 +178,7 @@
 ;; ==================== icicles ====================
 ;; (add-to-list 'load-path "~/.emacs.d/plugins/icicles")(require 'icicles)
 ;; ==================================================================
-(require 'auto-complete-yasnippet)
+;; (require 'auto-complete-yasnippet)
 (require 'hungry-delete) (turn-on-hungry-delete-mode)
 (require 'dired-lis)
 (require 'smart-compile)

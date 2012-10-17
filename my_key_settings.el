@@ -188,7 +188,7 @@ With argument, do this that many times."
 (global-set-key (kbd "C-v") 'yank)
 (global-set-key (kbd "C-S-v") 'yank-pop)
 (global-set-key (kbd "M-d") 'kill-whitespace)
-(global-set-key (kbd "C-f") 'kill-ring-save)
+;; (global-set-key (kbd "C-f") 'kill-ring-save)
 (global-set-key (kbd "C-b") 'backward-delete-char)
 (global-set-key (kbd "M-q") 'compile)
 (global-set-key (kbd "C-S-q") 'delete-backward-word)
@@ -223,6 +223,9 @@ With argument, do this that many times."
             ;; (org-set-local 'yas/trigger-key [tab])
             ;; (define-key yas/keymap [tab] 'yas/next-field-group)
 						))
+
+(global-set-key (kbd "C-f") 'delete-backward-char)
+(global-set-key (kbd "C-S-f") 'delete-backward-word)
 
 (global-set-key (kbd "M-n")     ; page down
   (lambda () (interactive)
