@@ -2,10 +2,12 @@
 (require 'eval-after-load)
 (setq initial-major-mode 'text-mode)
 (setq initial-scratch-message nil)
+
 ;; (load-file "~/.emacs.d/plugins/cedet-1.1/common/cedet.el")
 ;; (global-ede-mode 1)                      ; Enable the Project management system
 ;; (semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion
 ;; (global-srecode-minor-mode 1)            ; Enable template insertion menu
+
 (global-unset-key [(f10)])
 (global-set-key [(f10)]
 		(lambda() (interactive) (find-file "~/.emacs.d/my_key_settings.el")))
@@ -37,6 +39,7 @@
 ;; (pc-selection-mode t)
 ;; (shift-select-mode t)
 ;; ==================== Varibles ====================
+(setq resize-mini-windows nil)
 (setq compilation-ask-about-save -1)
 (setq after-find-file-from-revert-buffer)
 (setq c-default-style "linux" c-basic-offset 4)

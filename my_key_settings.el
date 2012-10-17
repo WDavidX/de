@@ -78,8 +78,20 @@ point."
 					;; (if (and (not (region-active-p)) (not (looking-at "[ \t]*$")))
           ;;     (comment-or-uncomment-region (line-beginning-position) (line-end-position))
           ;;   (comment-dwim arg))
-         (comment-or-uncomment-region (line-beginning-position) (line-end-position))
+					(if (and (not (region-active-p)) (not (looking-at "[ \t]*$")))
+              (comment-or-uncomment-region (line-beginning-position) (line-end-position))
+            (comment-dwim arg))
+         ;; (comment-or-uncomment-region (line-beginning-position) (line-end-position))
 					)
+
+(defun comment-or-uncomment-region-or-line ()
+    "Comments or uncomments the region or the current line if there's no active region."
+    (interactive)
+    (let (beg end)
+        (if (region-active-p)
+            (setq beg (region-beginning) end (region-end))
+            (setq beg (line-beginning-position) end (line-end-position)))
+        (comment-or-uncomment-region beg end)))
 
 (defadvice show-paren-function
       (after show-matching-paren-offscreen activate)
@@ -187,7 +199,8 @@ With argument, do this that many times."
 (require 'buffcycle) (global-set-key "\C-x\C-k" 'kill-this-buffer-if-not-scratch)
 (global-set-key "\C-q" '(lambda() (interactive) (switch-to-buffer (other-buffer))))
 (global-set-key (kbd "C-S-b") 'kill-line)
-(global-set-key "\C-t" 'comment-dwim-line)
+;; (global-set-key "\C-t" 'comment-dwim-line)
+(global-set-key "\C-t" 'comment-or-uncomment-region-or-line)
 (global-set-key "\M-b" 'delete-blank-lines)
 (global-set-key (kbd "C-v") 'yank)
 (global-set-key (kbd "C-S-v") 'yank-pop)
@@ -280,11 +293,13 @@ With argument, do this that many times."
 (defvar font-list '("Microsoft Yahei" "文泉驿等宽微米黑" "黑体" "新宋体" "宋体"))
 (require 'cl) ;; find-if is in common list package
 (find-if #'qiang-font-existsp font-list)
+
 (defun qiang-make-font-string (font-name font-size)
   (if (and (stringp font-size)
            (equal ":" (string (elt font-size 0))))
       (format "%s%s" font-name font-size)
     (format "%s %s" font-name font-size)))
+
 (defun qiang-set-font (english-fonts
                        english-font-size
                        chinese-fonts
