@@ -99,7 +99,7 @@
 (setq auto-save-list-file-name  nil) ; Don't want any .saves files
 (setq auto-save-default         nil) ; Don't want any auto saving
 
-(setq temporary-file-directory  "~/.emacs.d/temp-list/")
+(setq temporary-file-directory  "~/.emacs.d/auto-save-list/")
 (setq-default fill-column 72)    ;; Set Fill Column and auto fill
 (setq scroll-margin 3  scroll-conservatively 10000)
 (fset 'yes-or-no-p 'y-or-n-p)  ;; ask by y or n
