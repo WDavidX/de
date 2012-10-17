@@ -64,6 +64,8 @@ point."
     (if (string= suffix "py") (setq compiler "python "))
     (compile (concat compiler filename))))
 
+
+;; my modified dwim, comment current line no matter where the cursor is; the commented part is original
 (defun comment-dwim-line (&optional arg)
         "Replacement for the comment-dwim command.
         If no region is selected and current line is not blank
@@ -73,9 +75,11 @@ point."
         when it inserts comment at the end of the line."
           (interactive "*P")
           (comment-normalize-vars)
-          (if (and (not (region-active-p)) (not (looking-at "[ \t]*$")))
-              (comment-or-uncomment-region (line-beginning-position) (line-end-position))
-            (comment-dwim arg)))
+					;; (if (and (not (region-active-p)) (not (looking-at "[ \t]*$")))
+          ;;     (comment-or-uncomment-region (line-beginning-position) (line-end-position))
+          ;;   (comment-dwim arg))
+         (comment-or-uncomment-region (line-beginning-position) (line-end-position))
+					)
 
 (defadvice show-paren-function
       (after show-matching-paren-offscreen activate)
@@ -270,18 +274,72 @@ With argument, do this that many times."
 (define-key global-map (kbd "RET") 'newline-and-indent)
 
 ;; ======================= Windows Fonts =======================
+(defun qiang-font-existsp (font)
+  (if (null (x-list-fonts font))
+      nil t))
+(defvar font-list '("Microsoft Yahei" "文泉驿等宽微米黑" "黑体" "新宋体" "宋体"))
+(require 'cl) ;; find-if is in common list package
+(find-if #'qiang-font-existsp font-list)
+(defun qiang-make-font-string (font-name font-size)
+  (if (and (stringp font-size)
+           (equal ":" (string (elt font-size 0))))
+      (format "%s%s" font-name font-size)
+    (format "%s %s" font-name font-size)))
+(defun qiang-set-font (english-fonts
+                       english-font-size
+                       chinese-fonts
+                       &optional chinese-font-size)
+  "english-font-size could be set to \":pixelsize=18\" or a integer.
+If set/leave chinese-font-size to nil, it will follow english-font-size"
+  (require 'cl)                         ; for find if
+  (let ((en-font (qiang-make-font-string
+                  (find-if #'qiang-font-existsp english-fonts)
+                  english-font-size))
+        (zh-font (font-spec :family (find-if #'qiang-font-existsp chinese-fonts)
+                            :size chinese-font-size)))
+
+    ;; Set the default English font
+    ;;
+    ;; The following 2 method cannot make the font settig work in new frames.
+    ;; (set-default-font "Consolas:pixelsize=18")
+    ;; (add-to-list 'default-frame-alist '(font . "Consolas:pixelsize=18"))
+    ;; We have to use set-face-attribute
+    (message "Set English Font to %s" en-font)
+    (set-face-attribute
+     'default nil :font en-font)
+
+    ;; Set Chinese font
+    ;; Do not use 'unicode charset, it will cause the english font setting invalid
+    (message "Set Chinese Font to %s" zh-font)
+    (dolist (charset '(kana han symbol cjk-misc bopomofo))
+      (set-fontset-font (frame-parameter nil 'font)
+                        charset
+                        zh-font))))
+;; (qiang-set-font
+;;  '( "Monaco" "Consolas" "DejaVu Sans Mono" "Monospace" "Courier New") ":pixelsize=18"
+;;  '("Microsoft Yahei" "文泉驿等宽微米黑" "黑体" "新宋体" "宋体"))
+
+(if (eq window-system 'w32)
+		(set-frame-font "Monaco 12")
+	(global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
+  (global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
+	)  ;good
+
+
+;; ======================= Windows Fonts =======================
 ;; (if (eq window-system 'w32) (set-frame-font "Bitstream Vera Sans 14") )
 ;; (if (eq window-system 'w32) (set-frame-font "Inconsolata 14") )
 ;; (if (eq window-system 'w32) (set-frame-font "Lucida Sans Typewriter 14") )
 ;; (if (eq window-system 'w32) (set-frame-font "Lucida Console 14") )
 ;; (if (eq window-system 'w32) (set-frame-font "Monaco 14") )  ;good
-(if (eq window-system 'w32) (set-frame-font "Monaco 12") )  ;good
 ;; (if (eq window-system 'w32) (set-frame-font "Anonymous 12") ) ;good
 ;; (if (eq window-system 'w32) (set-frame-font "DejaVu Sans Mono 14") )
 ;; (if (eq window-system 'w32) (set-frame-font "Consolas 11") ) ;good
 
+;; Font in linux
 (if (eq window-system 'x) (set-frame-font "Monospace 14") )  ;good
 
+;; Font in window
 
 
 ;; End of my keyboard and function settings

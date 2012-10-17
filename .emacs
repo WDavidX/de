@@ -179,6 +179,7 @@
 ;; (add-to-list 'load-path "~/.emacs.d/plugins/icicles")(require 'icicles)
 ;; ==================================================================
 ;; (require 'auto-complete-yasnippet)
+(require 'unicad)
 (require 'hungry-delete) (turn-on-hungry-delete-mode)
 (require 'dired-lis)
 (require 'smart-compile)
