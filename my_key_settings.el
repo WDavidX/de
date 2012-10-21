@@ -259,6 +259,7 @@ With argument, do this that many times."
 
 (global-set-key (kbd "C-,")  '(lambda() (interactive)(forward-line -1)))
 (global-set-key  (kbd "C-.") '(lambda() (interactive)(forward-line 1)))
+
 ;; ========================= Function Keys ========================
 (global-unset-key [(f1)])
 (global-unset-key [(f2)])
@@ -271,6 +272,7 @@ With argument, do this that many times."
 (global-unset-key [insert])
 (global-unset-key [delete] )
 
+;; (global-set-key "C+[(f1)]" (lambda() (interactive)  (save-some-buffers (buffer-file-name)) (recompile)))
 (global-set-key [(f1)] (lambda() (interactive)  (save-some-buffers (buffer-file-name)) (recompile)))
 (global-set-key [(f2)] 'set-mark-command)    ;set F2 as set mark
 (global-set-key [(f8)] 'open-eshell-other-buffer)
@@ -278,6 +280,8 @@ With argument, do this that many times."
 (global-set-key [(f10)]	(lambda() (interactive) (find-file "~/.emacs.d/my_key_settings.el")))
 (global-set-key [(f11)] 	(lambda() (interactive) (find-file "~/.emacs.d/.emacs")))
 (global-set-key [(f12)] 	(lambda() (interactive)(save-some-buffers (buffer-file-name))(eval-buffer)))
+(global-set-key [(control f1)] 'repeat-complex-command)
+
 
 (global-set-key [backspace] 'delete-backward-char)
 (global-set-key [delete] 'delete-char)
