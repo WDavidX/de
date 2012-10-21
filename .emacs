@@ -154,8 +154,8 @@
 (curchg-change-cursor-when-idle-interval 10) ; change the idle timer
 ;; ==================== org mode ====================
 (when (< emacs-major-version 24)
-	(setq load-path (cons "~/.emacs.d/plugins/org-7.9.1/lisp" load-path))
-	(setq load-path (cons "~/.emacs.d/plugins/org-7.9.1/contrib/lisp" load-path))
+	(setq load-path (cons "~/.emacs.d/plugins/org-7.9.2/lisp" load-path))
+	(setq load-path (cons "~/.emacs.d/plugins/org-7.9.2/contrib/lisp" load-path))
 	(require 'org-install)
 	(require 'org-special-blocks)
 	;set  initial langauges we want org-babel to support
