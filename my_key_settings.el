@@ -293,6 +293,7 @@ With argument, do this that many times."
 (require 'ebs)(ebs-initialize)(global-set-key [(control tab)] 'ebs-switch-buffer)
 (define-key global-map (kbd "RET") 'newline-and-indent)
 
+
 ;; ======================= Windows Fonts =======================
 (defun qiang-font-existsp (font)
   (if (null (x-list-fonts font))
