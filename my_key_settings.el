@@ -181,10 +181,13 @@ With argument, do this that many times."
 ;; ==================== Add hooks ====================
 (add-hook 'emacs-lisp-mode-hook (lambda () (define-key emacs-lisp-mode-map "\C-\\" 'eval-last-sexp)))
 ;; ==================== Keyboard Definition ====================
+(global-set-key "\C-g" 'keyboard-escape-quit)
 (global-set-key "\C-x\C-b" 'ibuffer)
 (global-set-key "\C-xk" 'kill-this-buffer)
 (global-set-key (kbd "C-S-k") 'kill-line)
 (global-set-key (kbd "M-\'") 'split-window-horizontally)
+(global-set-key (kbd "C-\"") 'delete-windows-on)
+
 (global-set-key (kbd "C-\'") 'delete-other-windows)
 (global-set-key "\M-p" 'scroll-down-line)
 (global-set-key "\M-n" 'scroll-up-line)
