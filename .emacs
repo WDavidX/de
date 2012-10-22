@@ -139,14 +139,13 @@
 ;;   (add-to-list 'ac-sources 'ac-source-yasnippet))
 
 ;;================================================================================
-;; (add-to-list 'load-path "~/.emacs.d/plugins/color-theme-660")
-;; (add-to-list 'load-path "~/.emacs.d/plugins/color-theme-660/themes")
-;; (require 'color-theme)
-;; (eval-after-load "color-theme"
-;;   '(progn
-;;      (color-theme-initialize)
-;;      (color-theme-arjen)))
-;; (color-theme-sons-of-obsidian)
+(add-to-list 'load-path "~/.emacs.d/plugins/color-theme-660")
+(add-to-list 'load-path "~/.emacs.d/plugins/color-theme-660/themes")
+(require 'color-theme)
+(eval-after-load "color-theme"
+  '(progn
+     (color-theme-initialize)
+     (color-theme-arjen)))
 ;;================================================================================
 
 ;; (require 'cursor-chg)  ; Load the library
@@ -185,23 +184,22 @@
 ;; ==================================================================
 ;; (require 'auto-complete-yasnippet)
 (require 'unicad)
-(require 'hungry-delete) (turn-on-hungry-delete-mode)
-(require 'dired-lis)
-(require 'smart-compile)
-(require 'compile-dwim)
-(require 'smart-operator)
+;; (require 'hungry-delete) (turn-on-hungry-delete-mode)
+;; (require 'dired-lis)
+;; (require 'smart-compile)
+;; (require 'compile-dwim)
+;; (require 'smart-operator)
 (require 'autopair) (autopair-global-mode t) ;; to enable in all buffers
 (require 'auto-pair+) (global-unset-key "\C-m")
 (require 'highlight-sexp)
 (require 'icomplete+)
 (require 'iswitchb-fc)
-(require 'ebs)(ebs-initialize)(global-set-key [(control tab)] 'ebs-switch-buffer)
-(require 'color-theme-single) (color-theme-arjen)
+;; (require 'color-theme-single) (color-theme-arjen)
 ;(require 'kill-ring-ido)
 (require 'browse-kill-ring+)
 (require 'auto-show)(auto-show-mode 1)(setq-default auto-show-mode t)
-(require 'backup-each-save) (add-hook 'after-save-hook 'backup-each-save)
-(require 'saveplace) (setq save-place-file "~/.emacs.d/desktop-save/saveplace.txt")(setq-default save-place t)
+;; (require 'backup-each-save) (add-hook 'after-save-hook 'backup-each-save)
+;; (require 'saveplace) (setq save-place-file "~/.emacs.d/desktop-save/saveplace.txt")(setq-default save-place t)
 (load-file "~/.emacs.d/my_key_settings.el")
 (require 'maxframe) (maximize-frame)
 

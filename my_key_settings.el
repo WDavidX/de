@@ -360,7 +360,9 @@ With argument, do this that many times."
 ;; (if (eq window-system 'w32) (set-frame-font "Consolas 11") ) ;good
 
 ;; Font in linux
-(if (eq window-system 'x) (set-frame-font "Monospace 14") )  ;good
+(if (eq window-system 'x)
+		(set-frame-font "Monospace 14")
+	)  ;good
 
 ;; Font in window
 
