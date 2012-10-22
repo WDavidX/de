@@ -148,10 +148,12 @@
 ;;      (color-theme-arjen)))
 ;; (color-theme-sons-of-obsidian)
 ;;================================================================================
-(require 'cursor-chg)  ; Load the library
-(toggle-cursor-type-when-idle 1) ; Turn on cursor change when Emacs is idle
-(change-cursor-mode 1) ; Turn on change for overwrite, read-only, and input mode
-(curchg-change-cursor-when-idle-interval 10) ; change the idle timer
+
+;; (require 'cursor-chg)  ; Load the library
+;; (toggle-cursor-type-when-idle 1) ; Turn on cursor change when Emacs is idle
+;; (change-cursor-mode 1) ; Turn on change for overwrite, read-only, and input mode
+;; (curchg-change-cursor-when-idle-interval 10) ; change the idle timer
+
 ;; ==================== org mode ====================
 (when (< emacs-major-version 24)
 	(setq load-path (cons "~/.emacs.d/plugins/org-7.9.2/lisp" load-path))
