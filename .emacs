@@ -18,6 +18,7 @@
 		(interactive)(save-some-buffers (buffer-file-name)) (eval-buffer))) ;; evaluate buffer
 ;; (setq initial-frame-alist '((top . 0) (left . 0) (width . 80) (height . 20)))
 ;; ==================== Modes ====================
+(global-visual-line-mode t)
 (global-linum-mode t)
 (ido-mode t)
 (delete-selection-mode t)
@@ -148,10 +149,10 @@
      (color-theme-arjen)))
 ;;================================================================================
 
-;; (require 'cursor-chg)  ; Load the library
-;; (toggle-cursor-type-when-idle 1) ; Turn on cursor change when Emacs is idle
-;; (change-cursor-mode 1) ; Turn on change for overwrite, read-only, and input mode
-;; (curchg-change-cursor-when-idle-interval 10) ; change the idle timer
+(require 'cursor-chg)  ; Load the library
+(toggle-cursor-type-when-idle 1) ; Turn on cursor change when Emacs is idle
+(change-cursor-mode 1) ; Turn on change for overwrite, read-only, and input mode
+(curchg-change-cursor-when-idle-interval 5) ; change the idle timer
 
 ;; ==================== org mode ====================
 (when (< emacs-major-version 24)
@@ -170,7 +171,7 @@
 ;; (global-set-key "\C-cc" 'org-capture)
 ;; (global-set-key "\C-ca" 'org-agenda)
 (setq org-support-shift-select t)
-(global-set-key "\C-c \C-b" 'org-export-as-html-and-open)
+(global-set-key "\C-c b" 'org-export-as-html-and-open)
 (add-hook 'org-mode-hook  (lambda () (setq truncate-lines t)))
 ;; ==================== Circuits ====================
 (add-to-list 'load-path "~/.emacs.d/plugins/netlist-modes")
@@ -203,7 +204,6 @@
 (load-file "~/.emacs.d/my_key_settings.el")
 (require 'maxframe) (maximize-frame)
 
-;; (define-key 'c-mode-map  "\C-c \C-c" 'Compile)
 ;; (if (eq window-system 'w32) (emacs-maximize) )
 (global-unset-key "\C-c \C-c")
 (custom-set-variables
