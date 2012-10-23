@@ -334,7 +334,7 @@ With argument, do this that many times."
 
 ;; ======================= Windows Fonts =======================
 
-;; Font in linux
+;; Fonts in linux
 (if (eq window-system 'x)
 		(set-frame-font "Monospace 14")
 	)  ;good
