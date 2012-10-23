@@ -3,11 +3,6 @@
 (setq initial-major-mode 'text-mode)
 (setq initial-scratch-message nil)
 
-;; (load-file "~/.emacs.d/plugins/cedet-1.1/common/cedet.el")
-;; (global-ede-mode 1)                      ; Enable the Project management system
-;; (semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion
-;; (global-srecode-minor-mode 1)            ; Enable template insertion menu
-
 (global-unset-key [(f10)])
 (global-set-key [(f10)]
 		(lambda() (interactive) (find-file "~/.emacs.d/my_key_settings.el")))
@@ -17,6 +12,10 @@
 (global-set-key [(f12)] (lambda()
 		(interactive)(save-some-buffers (buffer-file-name)) (eval-buffer))) ;; evaluate buffer
 ;; (setq initial-frame-alist '((top . 0) (left . 0) (width . 80) (height . 20)))
+(setq initial-frame-alist '((top . 0) (left . 0) (width . 80) (height . 25)))
+
+;; (setq initial-frame-alist '((top . 0) (left . 0) ))
+
 ;; ==================== Modes ====================
 (global-visual-line-mode t)
 (global-linum-mode t)
@@ -40,6 +39,7 @@
 ;; (pc-selection-mode t)
 ;; (shift-select-mode t)
 ;; ==================== Varibles ====================
+(setq x-select-enable-clipboard t)
 (setq resize-mini-windows nil)
 (setq compilation-ask-about-save -1)
 (setq after-find-file-from-revert-buffer)
@@ -85,7 +85,7 @@
 (setq-default make-backup-files t)
 (setq-default make-temp-files t)
 (setq mouse-sel-retain-highlight t) ; Keep mouse high-lightening
-(setq auto-save-default t)  ; disable # files%p
+(setq auto-save-default nil)  ; disable # files%p
 (setq make-backup-files nil) ;; do not make backup files
 (auto-save-mode t)
 (setq kept-new-versions 10 ;; Enable versioning with modified values
@@ -160,19 +160,16 @@
 	(setq load-path (cons "~/.emacs.d/plugins/org-7.9.2/contrib/lisp" load-path))
 	(require 'org-install)
 	(require 'org-special-blocks)
-	;set  initial langauges we want org-babel to support
 	(org-babel-do-load-languages
 	 'org-babel-load-languages
 	 '((sh . t)  (python . t)   (R . t)   (ruby . t)   (ditaa . t)   (dot . t)
 		 (octave . t)   (sqlite . t)   (perl . t)   ))
+
 	)
+																				;set  initial langauges we want org-babel to support
 ;; ; Add short cut keys for the org-agenda
-;; (global-set-key "\C-cl" 'org-store-link)
-;; (global-set-key "\C-cc" 'org-capture)
-;; (global-set-key "\C-ca" 'org-agenda)
-(setq org-support-shift-select t)
-(global-set-key "\C-c b" 'org-export-as-html-and-open)
-(add-hook 'org-mode-hook  (lambda () (setq truncate-lines t)))
+;; (global-set-key "\C-cb" 'org-export-as-html-and-open)
+
 ;; ==================== Circuits ====================
 (add-to-list 'load-path "~/.emacs.d/plugins/netlist-modes")
 ;; (require 'spectre-mode)
@@ -195,6 +192,7 @@
 (require 'highlight-sexp)
 (require 'icomplete+)
 (require 'iswitchb-fc)
+(require 'isearch+)
 ;; (require 'color-theme-single) (color-theme-arjen)
 ;(require 'kill-ring-ido)
 (require 'browse-kill-ring+)
@@ -202,7 +200,7 @@
 ;; (require 'backup-each-save) (add-hook 'after-save-hook 'backup-each-save)
 ;; (require 'saveplace) (setq save-place-file "~/.emacs.d/desktop-save/saveplace.txt")(setq-default save-place t)
 (load-file "~/.emacs.d/my_key_settings.el")
-(require 'maxframe) (maximize-frame)
+;; (require 'maxframe) (maximize-frame)
 
 ;; (if (eq window-system 'w32) (emacs-maximize) )
 (global-unset-key "\C-c \C-c")
@@ -210,4 +208,4 @@
  '(ac-trigger-key "TAB")
  '(ac-auto-start nil)
  '(ac-use-menu-map t))
-(message " Loading Acommplished ")
+(message " Loading Acommplished")

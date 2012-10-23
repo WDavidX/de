@@ -1,4 +1,29 @@
 ;; ================== Some functions==============
+(defun search-selection (beg end)
+	"search for selected text"
+	(interactive "r")
+	(let ((selection (buffer-substring-no-properties beg end)))
+		(deactivate-mark)
+		(isearch-mode t nil nil nil)
+		(isearch-yank-string selection)
+		)
+	)
+(define-key global-map (kbd "C-S-s") 'search-selection)
+
+;; (defun search-selection-dwim (beg end)
+;; 	"search for selected text"
+;; 	(interactive "r")
+;; 	( if (region-active-p)
+;; 	(let ((selection (buffer-substring-no-properties beg end)))
+;; 		(deactivate-mark)
+;; 		(isearch-mode t nil nil nil)
+;; 		(isearch-yank-string selection)
+;; 		)
+;; 	(
+;; ;; TODO
+;; 	 )
+;; 	))
+
 (defun indent-or-expand (arg)
   "Either indent according to mode, or expand the word preceding
 point."
@@ -18,6 +43,7 @@ point."
     (insert "\"")
     (goto-char (+ 1 p2))
     (insert "\"")))
+
 ;; set new method of kill a whole line
 (defadvice kill-ring-save (before slickcopy activate compile)
   "When called interactively with no active region, copy a single line instead."
@@ -213,37 +239,10 @@ With argument, do this that many times."
 (global-set-key (kbd "M-q") 'compile)
 (global-set-key (kbd "C-S-q") 'delete-backward-word)
 (global-set-key (kbd "C-S-d") 'kill-word)
-
 (global-set-key "\C-j" 'backward-char)
 (global-set-key "\C-k" 'forward-char)
 (global-set-key (kbd "C-S-j") 'backward-word)
 (global-set-key (kbd "C-S-k") 'forward-word)
-
-;; (add-hook 'org-mode-hook (lambda () (define-key org-mode-map "\C-k" 'forward-char)))
-
-(add-hook 'org-mode-hook
-          (lambda ()
-            (local-set-key "\C-k" 'forward-char)
-						(local-set-key (kbd "C-S-k") 'forward-word)
-						(local-set-key "\C-j" 'backward-char)
-						(local-set-key (kbd "C-S-j") 'backward-word)
-            ;; yasnippet (allow yasnippet to do its thing in org files)
-            ;; (org-set-local 'yas/trigger-key [tab])
-            ;; (define-key yas/keymap [tab] 'yas/next-field-group)
-						(global-visual-line-mode t)
-						))
-
-(add-hook 'c-mode-hook
-          (lambda ()
-            (local-set-key "\C-k" 'forward-char)
-						(local-set-key (kbd "C-S-k") 'forward-word)
-						(local-set-key "\C-j" 'backward-char)
-						(local-set-key (kbd "C-S-j") 'backward-word)
-            ;; yasnippet (allow yasnippet to do its thing in org files)
-            ;; (org-set-local 'yas/trigger-key [tab])
-            ;; (define-key yas/keymap [tab] 'yas/next-field-group)
-						))
-
 (global-set-key (kbd "C-f") 'delete-backward-char)
 (global-set-key (kbd "C-S-f") 'delete-backward-word)
 
@@ -260,6 +259,39 @@ With argument, do this that many times."
 (global-set-key (kbd "C-,")  '(lambda() (interactive)(forward-line -1)))
 (global-set-key  (kbd "C-.") '(lambda() (interactive)(forward-line 1)))
 
+;; ==================== hook settings ====================
+(add-hook 'org-mode-hook
+          (lambda ()
+
+            (local-set-key "\C-k" 'forward-char)
+						(local-set-key (kbd "C-S-k") 'forward-word)
+						(local-set-key "\C-j" 'backward-char)
+						(local-set-key (kbd "C-S-j") 'backward-word)
+            ;; yasnippet (allow yasnippet to do its thing in org files)
+            ;; (org-set-local 'yas/trigger-key [tab])
+            ;; (define-key yas/keymap [tab] 'yas/next-field-group)
+						(local-set-key "\C-cl" 'org-store-link)
+						(local-set-key "\C-cc" 'org-capture)
+						(local-set-key "\C-ca" 'org-agenda)
+						(setq truncate-lines t)
+						(local-set-key "\C-cb" 'org-export-as-html-and-open)
+						(global-visual-line-mode t)
+						(setq org-support-shift-select t)
+						))
+(add-hook 'c-mode-hook
+          (lambda ()
+            (local-set-key "\C-k" 'forward-char)
+						(local-set-key (kbd "C-S-k") 'forward-word)
+						(local-set-key "\C-j" 'backward-char)
+						(local-set-key (kbd "C-S-j") 'backward-word)
+						(load-file "~/.emacs.d/plugins/cedet-1.1/common/cedet.el")
+						(global-ede-mode 1)		; Enable the Project management system
+						(semantic-load-enable-code-helpers)	; Enable prototype help and smart completion
+						(global-srecode-minor-mode 1)	; Enable template insertion menu
+            ;; yasnippet (allow yasnippet to do its thing in org files)
+            ;; (org-set-local 'yas/trigger-key [tab])
+            ;; (define-key yas/keymap [tab] 'yas/next-field-group)
+						))
 ;; ========================= Function Keys ========================
 (global-unset-key [(f1)])
 (global-unset-key [(f2)])
