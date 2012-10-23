@@ -1,4 +1,29 @@
 ;; ================== Some functions==============
+(defun search-selection (beg end)
+	"search for selected text"
+	(interactive "r")
+	(let ((selection (buffer-substring-no-properties beg end)))
+		(deactivate-mark)
+		(isearch-mode t nil nil nil)
+		(isearch-yank-string selection)
+		)
+	)
+(define-key global-map (kbd "C-S-s") 'search-selection)
+
+;; (defun search-selection-dwim (beg end)
+;; 	"search for selected text"
+;; 	(interactive "r")
+;; 	( if (region-active-p)
+;; 	(let ((selection (buffer-substring-no-properties beg end)))
+;; 		(deactivate-mark)
+;; 		(isearch-mode t nil nil nil)
+;; 		(isearch-yank-string selection)
+;; 		)
+;; 	(
+;; ;; TODO
+;; 	 )
+;; 	))
+
 (defun indent-or-expand (arg)
   "Either indent according to mode, or expand the word preceding
 point."
@@ -18,6 +43,7 @@ point."
     (insert "\"")
     (goto-char (+ 1 p2))
     (insert "\"")))
+
 ;; set new method of kill a whole line
 (defadvice kill-ring-save (before slickcopy activate compile)
   "When called interactively with no active region, copy a single line instead."
@@ -213,37 +239,10 @@ With argument, do this that many times."
 (global-set-key (kbd "M-q") 'compile)
 (global-set-key (kbd "C-S-q") 'delete-backward-word)
 (global-set-key (kbd "C-S-d") 'kill-word)
-
 (global-set-key "\C-j" 'backward-char)
 (global-set-key "\C-k" 'forward-char)
 (global-set-key (kbd "C-S-j") 'backward-word)
 (global-set-key (kbd "C-S-k") 'forward-word)
-
-;; (add-hook 'org-mode-hook (lambda () (define-key org-mode-map "\C-k" 'forward-char)))
-
-(add-hook 'org-mode-hook
-          (lambda ()
-            (local-set-key "\C-k" 'forward-char)
-						(local-set-key (kbd "C-S-k") 'forward-word)
-						(local-set-key "\C-j" 'backward-char)
-						(local-set-key (kbd "C-S-j") 'backward-word)
-            ;; yasnippet (allow yasnippet to do its thing in org files)
-            ;; (org-set-local 'yas/trigger-key [tab])
-            ;; (define-key yas/keymap [tab] 'yas/next-field-group)
-						(global-visual-line-mode t)
-						))
-
-(add-hook 'c-mode-hook
-          (lambda ()
-            (local-set-key "\C-k" 'forward-char)
-						(local-set-key (kbd "C-S-k") 'forward-word)
-						(local-set-key "\C-j" 'backward-char)
-						(local-set-key (kbd "C-S-j") 'backward-word)
-            ;; yasnippet (allow yasnippet to do its thing in org files)
-            ;; (org-set-local 'yas/trigger-key [tab])
-            ;; (define-key yas/keymap [tab] 'yas/next-field-group)
-						))
-
 (global-set-key (kbd "C-f") 'delete-backward-char)
 (global-set-key (kbd "C-S-f") 'delete-backward-word)
 
@@ -260,6 +259,39 @@ With argument, do this that many times."
 (global-set-key (kbd "C-,")  '(lambda() (interactive)(forward-line -1)))
 (global-set-key  (kbd "C-.") '(lambda() (interactive)(forward-line 1)))
 
+;; ==================== hook settings ====================
+(add-hook 'org-mode-hook
+          (lambda ()
+
+            (local-set-key "\C-k" 'forward-char)
+						(local-set-key (kbd "C-S-k") 'forward-word)
+						(local-set-key "\C-j" 'backward-char)
+						(local-set-key (kbd "C-S-j") 'backward-word)
+            ;; yasnippet (allow yasnippet to do its thing in org files)
+            ;; (org-set-local 'yas/trigger-key [tab])
+            ;; (define-key yas/keymap [tab] 'yas/next-field-group)
+						(local-set-key "\C-cl" 'org-store-link)
+						(local-set-key "\C-cc" 'org-capture)
+						(local-set-key "\C-ca" 'org-agenda)
+						(setq truncate-lines t)
+						(local-set-key "\C-cb" 'org-export-as-html-and-open)
+						(global-visual-line-mode t)
+						(setq org-support-shift-select t)
+						))
+(add-hook 'c-mode-hook
+          (lambda ()
+            (local-set-key "\C-k" 'forward-char)
+						(local-set-key (kbd "C-S-k") 'forward-word)
+						(local-set-key "\C-j" 'backward-char)
+						(local-set-key (kbd "C-S-j") 'backward-word)
+						(load-file "~/.emacs.d/plugins/cedet-1.1/common/cedet.el")
+						(global-ede-mode 1)		; Enable the Project management system
+						(semantic-load-enable-code-helpers)	; Enable prototype help and smart completion
+						(global-srecode-minor-mode 1)	; Enable template insertion menu
+            ;; yasnippet (allow yasnippet to do its thing in org files)
+            ;; (org-set-local 'yas/trigger-key [tab])
+            ;; (define-key yas/keymap [tab] 'yas/next-field-group)
+						))
 ;; ========================= Function Keys ========================
 (global-unset-key [(f1)])
 (global-unset-key [(f2)])
@@ -293,71 +325,14 @@ With argument, do this that many times."
 (require 'ebs)(ebs-initialize)(global-set-key [(control tab)] 'ebs-switch-buffer)
 (define-key global-map (kbd "RET") 'newline-and-indent)
 
-
 ;; ======================= Windows Fonts =======================
-;; (defun qiang-font-existsp (font)
-;;   (if (null (x-list-fonts font))
-;;       nil t))
-;; (defvar font-list '("Microsoft Yahei" "文泉驿等宽微米黑" "黑体" "新宋体" "宋体"))
-;; (require 'cl) ;; find-if is in common list package
-;; (find-if #'qiang-font-existsp font-list)
-
-;; (defun qiang-make-font-string (font-name font-size)
-;;   (if (and (stringp font-size)
-;;            (equal ":" (string (elt font-size 0))))
-;;       (format "%s%s" font-name font-size)
-;;     (format "%s %s" font-name font-size)))
-
-;; (defun qiang-set-font (english-fonts
-;;                        english-font-size
-;;                        chinese-fonts
-;;                        &optional chinese-font-size)
-;;   "english-font-size could be set to \":pixelsize=18\" or a integer.
-;; If set/leave chinese-font-size to nil, it will follow english-font-size"
-;;   (require 'cl)                         ; for find if
-;;   (let ((en-font (qiang-make-font-string
-;;                   (find-if #'qiang-font-existsp english-fonts)
-;;                   english-font-size))
-;;         (zh-font (font-spec :family (find-if #'qiang-font-existsp chinese-fonts)
-;;                             :size chinese-font-size)))
-
-;;     ;; Set the default English font
-;;     ;;
-;;     ;; The following 2 method cannot make the font settig work in new frames.
-;;     ;; (set-default-font "Consolas:pixelsize=18")
-;;     ;; (add-to-list 'default-frame-alist '(font . "Consolas:pixelsize=18"))
-;;     ;; We have to use set-face-attribute
-;;     (message "Set English Font to %s" en-font)
-;;     (set-face-attribute
-;;      'default nil :font en-font)
-
-;;     ;; Set Chinese font
-;;     ;; Do not use 'unicode charset, it will cause the english font setting invalid
-;;     (message "Set Chinese Font to %s" zh-font)
-;;     (dolist (charset '(kana han symbol cjk-misc bopomofo))
-;;       (set-fontset-font (frame-parameter nil 'font)
-;;                         charset
-;;                         zh-font))))
-;; (qiang-set-font
-;;  '( "Monaco" "Consolas" "DejaVu Sans Mono" "Monospace" "Courier New") ":pixelsize=18"
-;;  '("Microsoft Yahei" "文泉驿等宽微米黑" "黑体" "新宋体" "宋体"))
-
 (if (eq window-system 'w32)
 		(set-frame-font "Monaco 12")
-	(global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
-  (global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
-	)  ;good
-
+	(global-set-key (vector (list 'control mouse-wheel-down-event)) (lambda () (interactive) (text-scale-decrease 1)))
+  (global-set-key (vector (list 'control mouse-wheel-up-event)) (lambda () (interactive) (text-scale-increase 1)))
+	)																			;good
 
 ;; ======================= Windows Fonts =======================
-;; (if (eq window-system 'w32) (set-frame-font "Bitstream Vera Sans 14") )
-;; (if (eq window-system 'w32) (set-frame-font "Inconsolata 14") )
-;; (if (eq window-system 'w32) (set-frame-font "Lucida Sans Typewriter 14") )
-;; (if (eq window-system 'w32) (set-frame-font "Lucida Console 14") )
-;; (if (eq window-system 'w32) (set-frame-font "Monaco 14") )  ;good
-;; (if (eq window-system 'w32) (set-frame-font "Anonymous 12") ) ;good
-;; (if (eq window-system 'w32) (set-frame-font "DejaVu Sans Mono 14") )
-;; (if (eq window-system 'w32) (set-frame-font "Consolas 11") ) ;good
 
 ;; Font in linux
 (if (eq window-system 'x)
