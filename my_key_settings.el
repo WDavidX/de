@@ -250,6 +250,7 @@ With argument, do this that many times."
   (lambda () (interactive)
     (condition-case nil (scroll-up)
       (end-of-buffer (goto-char (point-max))))))
+<<<<<<< HEAD
 
 (global-set-key (kbd "M-p")
   (lambda () (interactive) ; page up
@@ -259,6 +260,17 @@ With argument, do this that many times."
 (global-set-key (kbd "C-,")  '(lambda() (interactive)(forward-line -1)))
 (global-set-key  (kbd "C-.") '(lambda() (interactive)(forward-line 1)))
 
+=======
+
+(global-set-key (kbd "M-p")
+  (lambda () (interactive) ; page up
+    (condition-case nil (scroll-down)
+      (beginning-of-buffer (goto-char (point-min))))))
+
+(global-set-key (kbd "C-,")  '(lambda() (interactive)(forward-line -1)))
+(global-set-key  (kbd "C-.") '(lambda() (interactive)(forward-line 1)))
+
+>>>>>>> 9907dad8eb34d7ec4c5098cd515b18194713ab34
 ;; ==================== hook settings ====================
 (add-hook 'org-mode-hook
           (lambda ()
