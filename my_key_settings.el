@@ -350,6 +350,11 @@ With argument, do this that many times."
 ;; Font in window
 
 
-;; End of my keyboard and function settings
+;; ======================= File Association =======================
+
+(setq auto-mode-alist
+      (cons
+       '("\\.m$" . octave-mode)
+       auto-mode-alist))
 
 (message "End of key settings")
