@@ -356,5 +356,6 @@ With argument, do this that many times."
       (cons
        '("\\.m$" . octave-mode)
        auto-mode-alist))
+(add-to-list 'auto-mode-alist '("\\.md$" . org-mode))
 
 (message "End of key settings")
