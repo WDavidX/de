@@ -281,6 +281,7 @@ With argument, do this that many times."
 (add-to-list 'auto-mode-alist '("\\.md$" . org-mode))
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 
+
 (add-hook 'org-mode-hook
           (lambda ()
             ;; yasnippet (allow yasnippet to do its thing in org files)
@@ -356,13 +357,10 @@ With argument, do this that many times."
 
 ;; ======================= Windows Fonts =======================
 (if (eq window-system 'w32)
-	  (progn
 		(set-frame-font "Monaco 12")
-		(setq initial-frame-alist '((top . 0) (left . 0) ))
-		(require 'maxframe) (maximize-frame)
 	(global-set-key (vector (list 'control mouse-wheel-down-event)) (lambda () (interactive) (text-scale-decrease 1)))
   (global-set-key (vector (list 'control mouse-wheel-up-event)) (lambda () (interactive) (text-scale-increase 1)))
-	))																			;good
+	)																			;good
 
 ;; ======================= Windows Fonts =======================
 
