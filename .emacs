@@ -12,7 +12,6 @@
 (global-set-key [(f12)] (lambda()
 		(interactive)(save-some-buffers (buffer-file-name)) (eval-buffer))) ;; evaluate buffer
 ;; (setq initial-frame-alist '((top . 0) (left . 0) (width . 80) (height . 20)))
-;; (setq initial-frame-alist '((top . 0) (left . 0) (width . 80) (height . 25)))
 
 ;; ==================== Modes ====================
 (global-visual-line-mode t)
