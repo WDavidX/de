@@ -268,7 +268,7 @@ With argument, do this that many times."
 (global-set-key  (kbd "C-.") '(lambda() (interactive)(forward-line 1)))
 
 ;; ==================== hook settings ====================
-(when (< emacs-major-version 24)
+(when (< emacs-major-version 25)
 	(setq load-path (cons "~/.emacs.d/plugins/org-7.9.2/lisp" load-path))
 	(setq load-path (cons "~/.emacs.d/plugins/org-7.9.2/contrib/lisp" load-path))
 	(require 'org-install)
