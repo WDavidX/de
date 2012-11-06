@@ -19,7 +19,7 @@
 (global-linum-mode t)
 ;; (desktop-save-mode nil)
 ;; (desktop-read "~/.emacs.d/auto-save-list")
-;; (ido-mode t)
+(ido-mode t)
 (delete-selection-mode t)
 (visual-line-mode 1)
 (setq transient-mark-mode t)
@@ -111,7 +111,7 @@
 (setq-default tab-always-indent -1)
 (setq message-log-max 512)
 ;; (setq c-auto-newline 1)
-(remove-hook 'coding-hook 'turn-on-hl-line-mode)
+(remove-hook 'codinnnnnnnnnng-hook 'turn-on-hl-line-mode)
 (setq comint-buffer-maximum-size 10240)
 (setq font-lock-maximum-decoration t)
 ;;================================================================================

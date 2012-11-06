@@ -235,7 +235,7 @@ With argument, do this that many times."
 (global-set-key (kbd "C-S-v") 'yank-pop)
 (global-set-key (kbd "M-d") 'kill-whitespace)
 ;; (global-set-key (kbd "C-f") 'kill-ring-save)
-(global-set-key (kbd "C-b") 'backward-delete-char)
+(global-set-key (kbd "C-b") 'iswitchb-buffer)
 (global-set-key (kbd "M-q") 'compile)
 ;; (global-set-key (kbd "C-S-q") 'delete-backward-word)
 ;; (global-set-key (kbd "C-S-d") 'kill-word)
@@ -268,8 +268,6 @@ With argument, do this that many times."
 (global-set-key  (kbd "C-.") '(lambda() (interactive)(forward-line 1)))
 
 ;; ==================== hook settings ====================
-(add-hook 'org-mode-hook
-          (lambda ()
 (when (< emacs-major-version 24)
 	(setq load-path (cons "~/.emacs.d/plugins/org-7.9.2/lisp" load-path))
 	(setq load-path (cons "~/.emacs.d/plugins/org-7.9.2/contrib/lisp" load-path))
@@ -278,13 +276,13 @@ With argument, do this that many times."
 	(org-babel-do-load-languages
 	 'org-babel-load-languages
 	 '((sh . t)  (python . t)   (R . t)   (ruby . t)   (ditaa . t)   (dot . t)
-		 (octave . t)   (sqlite . t)   (perl . t)   ))
-
+		 (octave . t)   (sqlite . t)   (perl . t)  ( C . t) ))
 	)
-            (local-set-key "\C-k" 'forward-char)
-						(local-set-key (kbd "C-S-k") 'forward-word)
-						(local-set-key "\C-j" 'backward-char)
-						(local-set-key (kbd "C-S-j") 'backward-word)
+(add-to-list 'auto-mode-alist '("\\.md$" . org-mode))
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+
+(add-hook 'org-mode-hook
+          (lambda ()
             ;; yasnippet (allow yasnippet to do its thing in org files)
             ;; (org-set-local 'yas/trigger-key [tab])
             ;; (define-key yas/keymap [tab] 'yas/next-field-group)
@@ -292,10 +290,19 @@ With argument, do this that many times."
 						(local-set-key "\C-cc" 'org-capture)
 						(local-set-key "\C-ca" 'org-agenda)
 						(setq truncate-lines t)
-						(local-set-key "\C-cb" 'org-export-as-html-and-open)
 						(global-visual-line-mode t)
 						(setq org-support-shift-select t)
+            (local-unset-key "\C-j")
+            (local-unset-key "\C-k")
+						(local-set-key (kbd "C-S-k") 'forward-word)
+						(local-set-key (kbd "C-S-j") 'backward-word)
+            (local-set-key "\C-k" 'forward-char)
+						(local-set-key "\C-j" 'backward-char)
+            (global-set-key "\C-k" 'forward-char)
+						(global-set-key "\C-j" 'backward-char)
+						(local-set-key "\C-cb" 'org-export-as-html-and-open)
 						))
+
 (add-hook 'c-mode-hook
           (lambda ()
             (local-set-key "\C-k" 'forward-char)
@@ -309,6 +316,10 @@ With argument, do this that many times."
             ;; yasnippet (allow yasnippet to do its thing in org files)
             ;; (org-set-local 'yas/trigger-key [tab])
             ;; (define-key yas/keymap [tab] 'yas/next-field-group)
+            (local-set-key "\C-k" 'forward-char)
+						(local-set-key (kbd "C-S-k") 'forward-word)
+						(local-set-key "\C-j" 'backward-char)
+						(local-set-key (kbd "C-S-j") 'backward-word)
 						))
 ;; ========================= Function Keys ========================
 (global-unset-key [(f1)])
@@ -362,10 +373,6 @@ With argument, do this that many times."
 
 ;; ======================= File Association =======================
 
-(setq auto-mode-alist
-      (cons
-       '("\\.m$" . octave-mode)
-       auto-mode-alist))
-(add-to-list 'auto-mode-alist '("\\.md$" . org-mode))
+(add-to-list 'auto-mode-alist '("\\.m$" . octave-mode))
 
 (message "End of key settings")
