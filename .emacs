@@ -12,14 +12,14 @@
 (global-set-key [(f12)] (lambda()
 		(interactive)(save-some-buffers (buffer-file-name)) (eval-buffer))) ;; evaluate buffer
 ;; (setq initial-frame-alist '((top . 0) (left . 0) (width . 80) (height . 20)))
-(setq initial-frame-alist '((top . 0) (left . 0) (width . 80) (height . 25)))
-
-;; (setq initial-frame-alist '((top . 0) (left . 0) ))
+;; (setq initial-frame-alist '((top . 0) (left . 0) (width . 80) (height . 25)))
 
 ;; ==================== Modes ====================
 (global-visual-line-mode t)
 (global-linum-mode t)
-(ido-mode t)
+;; (desktop-save-mode nil)
+;; (desktop-read "~/.emacs.d/auto-save-list")
+;; (ido-mode t)
 (delete-selection-mode t)
 (visual-line-mode 1)
 (setq transient-mark-mode t)
@@ -149,26 +149,8 @@
      (color-theme-arjen)))
 ;;================================================================================
 
-(require 'cursor-chg)  ; Load the library
-(toggle-cursor-type-when-idle 1) ; Turn on cursor change when Emacs is idle
-(change-cursor-mode 1) ; Turn on change for overwrite, read-only, and input mode
-(curchg-change-cursor-when-idle-interval 5) ; change the idle timer
 
-;; ==================== org mode ====================
-(when (< emacs-major-version 24)
-	(setq load-path (cons "~/.emacs.d/plugins/org-7.9.2/lisp" load-path))
-	(setq load-path (cons "~/.emacs.d/plugins/org-7.9.2/contrib/lisp" load-path))
-	(require 'org-install)
-	(require 'org-special-blocks)
-	(org-babel-do-load-languages
-	 'org-babel-load-languages
-	 '((sh . t)  (python . t)   (R . t)   (ruby . t)   (ditaa . t)   (dot . t)
-		 (octave . t)   (sqlite . t)   (perl . t)   ))
 
-	)
-																				;set  initial langauges we want org-babel to support
-;; ; Add short cut keys for the org-agenda
-;; (global-set-key "\C-cb" 'org-export-as-html-and-open)
 
 ;; ==================== Circuits ====================
 (add-to-list 'load-path "~/.emacs.d/plugins/netlist-modes")
@@ -208,4 +190,10 @@
  '(ac-trigger-key "TAB")
  '(ac-auto-start nil)
  '(ac-use-menu-map t))
-(message " Loading Acommplished")
+
+(require 'cursor-chg)  ; Load the library
+(toggle-cursor-type-when-idle 1) ; Turn on cursor change when Emacs is idle
+(change-cursor-mode 1) ; Turn on change for overwrite, read-only, and input mode
+(curchg-change-cursor-when-idle-interval 5) ; change the idle timer
+
+(message "Loading Acommplished")

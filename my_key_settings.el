@@ -270,7 +270,17 @@ With argument, do this that many times."
 ;; ==================== hook settings ====================
 (add-hook 'org-mode-hook
           (lambda ()
+(when (< emacs-major-version 24)
+	(setq load-path (cons "~/.emacs.d/plugins/org-7.9.2/lisp" load-path))
+	(setq load-path (cons "~/.emacs.d/plugins/org-7.9.2/contrib/lisp" load-path))
+	(require 'org-install)
+	(require 'org-special-blocks)
+	(org-babel-do-load-languages
+	 'org-babel-load-languages
+	 '((sh . t)  (python . t)   (R . t)   (ruby . t)   (ditaa . t)   (dot . t)
+		 (octave . t)   (sqlite . t)   (perl . t)   ))
 
+	)
             (local-set-key "\C-k" 'forward-char)
 						(local-set-key (kbd "C-S-k") 'forward-word)
 						(local-set-key "\C-j" 'backward-char)
@@ -295,7 +305,7 @@ With argument, do this that many times."
 						(load-file "~/.emacs.d/plugins/cedet-1.1/common/cedet.el")
 						(global-ede-mode 1)		; Enable the Project management system
 						(semantic-load-enable-code-helpers)	; Enable prototype help and smart completion
-						(global-srecode-minor-mode 1)	; Enable template insertion menu
+						;; (global-srecode-minor-mode 1)	; Enable template insertion menu
             ;; yasnippet (allow yasnippet to do its thing in org files)
             ;; (org-set-local 'yas/trigger-key [tab])
             ;; (define-key yas/keymap [tab] 'yas/next-field-group)
@@ -344,7 +354,7 @@ With argument, do this that many times."
 
 ;; Fonts in linux
 (if (eq window-system 'x)
-		(set-frame-font "Monospace 14")
+		(set-frame-font "Monospace 12")
 	)  ;good
 
 ;; Font in window
