@@ -267,23 +267,24 @@ With argument, do this that many times."
 (global-set-key (kbd "C-,")  '(lambda() (interactive)(forward-line -1)))
 (global-set-key  (kbd "C-.") '(lambda() (interactive)(forward-line 1)))
 
-;; ==================== hook settings ====================
-(when (< emacs-major-version 25)
-	(setq load-path (cons "~/.emacs.d/plugins/org-7.9.2/lisp" load-path))
-	(setq load-path (cons "~/.emacs.d/plugins/org-7.9.2/contrib/lisp" load-path))
-	(require 'org-install)
+;; ==================== org mode  ====================
+ (setq load-path (cons "~/.emacs.d/plugins/org-7.9.2/lisp" load-path))
+ (when (< emacs-major-version 25)
+	 (require 'org-install))
+ (add-to-list 'auto-mode-alist '("\\.md$" . org-mode))
+ (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(defun my-tab-fix ()
+  (local-set-key [tab] 'indent-or-expand))
+(add-hook 'org-mode-hook 'my-tab-fix)
+ ;; ==================== hook settings ====================
+(add-hook 'org-mode-hook
+          (lambda ()
+						(setq load-path (cons "~/.emacs.d/plugins/org-7.9.2/contrib/lisp" load-path))
 	(require 'org-special-blocks)
 	(org-babel-do-load-languages
 	 'org-babel-load-languages
 	 '((sh . t)  (python . t)   (R . t)   (ruby . t)   (ditaa . t)   (dot . t)
 		 (octave . t)   (sqlite . t)   (perl . t)  ( C . t) ))
-	)
-(add-to-list 'auto-mode-alist '("\\.md$" . org-mode))
-(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-
-
-(add-hook 'org-mode-hook
-          (lambda ()
             ;; yasnippet (allow yasnippet to do its thing in org files)
             ;; (org-set-local 'yas/trigger-key [tab])
             ;; (define-key yas/keymap [tab] 'yas/next-field-group)
@@ -368,6 +369,14 @@ With argument, do this that many times."
 (if (eq window-system 'x)
 		(set-frame-font "Monospace 12")
 	)  ;good
+
+(if (> emacs-major-version 23)
+		(progn
+(require 'maxframe) (maximize-frame))
+(progn
+(setq initial-frame-alist '((top . 0) (left . 0) (width . 80) (height . 25)))
+	)
+		)
 
 ;; Font in window
 
