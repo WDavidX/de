@@ -267,7 +267,7 @@ With argument, do this that many times."
 (global-set-key (kbd "C-,")  '(lambda() (interactive)(forward-line -1)))
 (global-set-key  (kbd "C-.") '(lambda() (interactive)(forward-line 1)))
 
-;; ==================== org mode  ====================
+;; ==================== org mode org-mode ====================
  (setq load-path (cons "~/.emacs.d/plugins/org-7.9.2/lisp" load-path))
  (when (< emacs-major-version 25)
 	 (require 'org-install))
@@ -303,6 +303,7 @@ With argument, do this that many times."
             (global-set-key "\C-k" 'forward-char)
 						(global-set-key "\C-j" 'backward-char)
 						(local-set-key "\C-cb" 'org-export-as-html-and-open)
+						(setq org-export-html-postamble nil)
 						))
 
 (add-hook 'c-mode-hook
