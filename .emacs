@@ -2,6 +2,7 @@
 (require 'eval-after-load)
 (setq initial-major-mode 'text-mode)
 (setq initial-scratch-message nil)
+;; (load-file "~/.emacs.d/plugins/cedet-1.1/common/cedet.el")
 
 (global-unset-key [(f10)])
 (global-set-key [(f10)]
@@ -196,5 +197,3 @@
 (curchg-change-cursor-when-idle-interval 5) ; change the idle timer
 
 (message "Loading Acommplished")
-
-

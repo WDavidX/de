@@ -312,10 +312,13 @@ With argument, do this that many times."
 						(local-set-key (kbd "C-S-k") 'forward-word)
 						(local-set-key "\C-j" 'backward-char)
 						(local-set-key (kbd "C-S-j") 'backward-word)
-						(load-file "~/.emacs.d/plugins/cedet-1.1/common/cedet.el")
-						(global-ede-mode 1)		; Enable the Project management system
-						(semantic-load-enable-code-helpers)	; Enable prototype help and smart completion
-						;; (global-srecode-minor-mode 1)	; Enable template insertion menu
+						;; (load-file "~/.emacs.d/plugins/cedet-1.1/common/cedet.el")
+						;; (global-ede-mode 1)		; Enable the Project management system
+						(global-ede-mode 1)
+						(require 'semantic/sb)
+						(semantic-mode 1)
+   					;; (global-srecode-minor-mode 1)	; Enable template insertion menu
+						;; (semantic-load-enable-code-helpers)	; Enable prototype help and smart completion
             ;; yasnippet (allow yasnippet to do its thing in org files)
             ;; (org-set-local 'yas/trigger-key [tab])
             ;; (define-key yas/keymap [tab] 'yas/next-field-group)
