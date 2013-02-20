@@ -3,6 +3,16 @@
 (setq initial-major-mode 'text-mode)
 (setq initial-scratch-message nil)
 ;; (load-file "~/.emacs.d/plugins/cedet-1.1/common/cedet.el")
+;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/.emacs.d/.
+
+(custom-set-variables
+  '(auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/\\1" t)))
+  '(backup-directory-alist '((".*" . "~/.emacs.d/auto-save-list/"))))
+
+;; create the autosave dir if necessary, since emacs won't.
+;; (make-directory "~/.emacs.d/auto-save-list/" t)
+
+
 
 (global-unset-key [(f10)])
 (global-set-key [(f10)]
