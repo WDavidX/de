@@ -1,0 +1,37 @@
+;; Object serial/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "serial/"
+  :tables (list 
+   (semanticdb-table "sd.c"
+    :major-mode 'c-mode
+    :tags 
+        '( ("simdocs.h" include nil nil [217 237])
+            ("main" function
+               (:arguments 
+                  ( ("argc" variable (:type "int") (reparse-symbol arg-sub-list) [460 469])
+                    ("argv" variable
+                       (:pointer 1
+                        :dereference 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [470 483]))                  
+                :type "int")
+                nil [451 1558])
+            ("ComputeNeighbors" function
+               (:arguments 
+                  ( ("params" variable
+                       (:pointer 1
+                        :type ("params_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [1793 1810]))                  
+                :type "void")
+                nil [1771 3629]))          
+    :file "sd.c"
+    :pointmax 3639
+    :fsize 3630
+    :lastmodtime '(20781 15190)
+    :unmatched-syntax 'nil
+    )
+   )
+  :file "!home!xuxxx625!p!hw2ser!serial!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.0"
+  )

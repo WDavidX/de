@@ -122,7 +122,7 @@
 (setq-default tab-always-indent -1)
 (setq message-log-max 512)
 ;; (setq c-auto-newline 1)
-(remove-hook 'codinnnnnnnnnng-hook 'turn-on-hl-line-mode)
+(remove-hook 'coding-hook 'turn-on-hl-line-mode)
 (setq comint-buffer-maximum-size 10240)
 (setq font-lock-maximum-decoration t)
 ;;================================================================================

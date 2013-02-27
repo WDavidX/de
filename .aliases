@@ -1,0 +1,36 @@
+#-----------------------------------------------------------------------------
+#   Default user .aliases
+#     (last changed Sept 5, 1996)
+#
+#   This is an important setup file for your account. If you decide to change
+#   this file, keep a working copy until you are certain that your changes
+#   work.
+#
+
+alias a		'alias \!:*'
+alias cd	'cd \!:*; echo $cwd'
+alias pwd	'echo $cwd'
+alias ls        'ls -hpF --color=auto'
+alias la        'ls -aCFh -loghnp --color=auto'
+alias ll	'ls  -lF --color=auto'
+alias rm	'rm -r'
+alias mv	'mv '
+alias cp	'cp -r'
+alias j		'jobs -l'
+alias h		'history'
+alias py 'python '
+
+alias grep 'grep --color=auto'
+alias fgrep 'fgrep --color=auto'
+alias egrep 'egrep --color=auto'
+
+alias dua       'du --max-depth=0 -ahc * && echo " "'
+alias dus       'du --max-depth=0 -kc -a * | sort && echo " " '
+alias duf 	   'du -sk * | sort -n | perl -ne '\''($s,$f)=split(m{\t});for (qw(K M G)) {if($s<1024) {printf("%.1f",$s);print "$_\t$f"; last};$s=$s/1024}'\'
+alias icfb      'cd ~/cds_opdk/ && virtuoso &'
+# alias emacs     'emacs \!:1 &'
+alias gedit     'gedit \!:* &'
+alias em     'emacs \!:* &'
+
+alias ssh       'ssh -i ~/.ssh/dkey'
+alias scp       'scp -i ~/.ssh/dkey'

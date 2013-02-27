@@ -1,0 +1,21 @@
+;; Object p/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "p/"
+  :tables (list 
+   (semanticdb-table "maxmalloc.c"
+    :major-mode 'c-mode
+    :tags 
+        '( ("stdlib.h" include (:system-flag t) nil [1 20])
+            ("stdio.h" include (:system-flag t) nil [21 39])
+            ("main" function (:type "int") nil [41 127]))          
+    :file "maxmalloc.c"
+    :pointmax 128
+    :fsize 127
+    :lastmodtime '(20773 7958)
+    :unmatched-syntax 'nil
+    )
+   )
+  :file "!home!xuxxx625!p!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.0"
+  )
