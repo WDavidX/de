@@ -1,0 +1,118 @@
+;; Object fz3temp-1/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "fz3temp-1/"
+  :tables (list 
+   (semanticdb-table "sd.c"
+    :major-mode 'c-mode
+    :tags 
+        '( ("simdocs.h" include nil nil [217 237])
+            ("pthread.h" include nil nil [238 258])
+            ("NTHREADS" variable (:constant-flag t) nil [473 481])
+            ("TESTROWNUM" variable (:constant-flag t) nil [545 555])
+            ("threadpack_t" type
+               (:typedef ("" type
+                     (:members 
+                        ( ("mat_ptr" variable
+                             (:pointer 1
+                              :type ("gk_csr_t" type (:type "class") nil nil))
+                              (reparse-symbol classsubparts) [584 602])
+                          ("params_ptr" variable
+                             (:pointer 1
+                              :type ("params_t" type (:type "class") nil nil))
+                              (reparse-symbol classsubparts) [604 625])
+                          ("refrow" variable (:type "int") (reparse-symbol classsubparts) [628 643])
+                          ("blk" variable (:type "int") (reparse-symbol classsubparts) [628 643])
+                          ("cand" variable
+                             (:pointer 1
+                              :type ("gk_fkv_t" type (:type "class") nil nil))
+                              (reparse-symbol classsubparts) [646 668])
+                          ("hits" variable
+                             (:pointer 1
+                              :type ("gk_fkv_t" type (:type "class") nil nil))
+                              (reparse-symbol classsubparts) [646 668])
+                          ("marker" variable
+                             (:pointer 1
+                              :type ("int32_t" type (:type "class") nil nil))
+                              (reparse-symbol classsubparts) [670 686])
+                          ("blk_nhits" variable (:type "int") (reparse-symbol classsubparts) [689 703]))                        
+                      :type "struct")
+                      nil nil)
+                :type "typedef")
+                nil [567 720])
+            ("threads" variable
+               (:dereference 1
+                :type ("pthread_t" type (:type "class") nil nil))
+                nil [722 750])
+            ("threadpack" variable
+               (:dereference 1
+                :type ("threadpack_t" type (:type "class") nil nil))
+                nil [751 785])
+            ("blk_matptr" variable
+               (:pointer 1
+                :dereference 1
+                :type ("gk_csr_t" type (:type "class") nil nil))
+                nil [786 817])
+            ("blk_nrows" variable
+               (:dereference 1
+                :type "int")
+                nil [818 865])
+            ("blk_rstart" variable
+               (:dereference 1
+                :type "int")
+                nil [818 865])
+            ("lastblocksize" variable (:type "int") nil [867 895])
+            ("blocksize" variable (:type "int") nil [867 895])
+            ("workingthread" function
+               (:prototype-flag t
+                :pointer 1
+                :arguments 
+                  ( ("threadpackptr" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [916 936]))                  
+                :type "void")
+                nil [896 937])
+            ("main" function
+               (:arguments 
+                  ( ("argc" variable (:type "int") (reparse-symbol arg-sub-list) [1158 1167])
+                    ("argv" variable
+                       (:pointer 1
+                        :dereference 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [1168 1181]))                  
+                :type "int")
+                nil [1149 2307])
+            ("ComputeNeighbors" function
+               (:arguments 
+                  ( ("params" variable
+                       (:pointer 1
+                        :type ("params_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2542 2559]))                  
+                :type "void")
+                nil [2520 7452])
+            ("threadcheck" variable (:type ("pthread_mutex_t" type (:type "class") nil nil)) nil [7454 7510])
+            ("workingthread" function
+               (:pointer 1
+                :arguments 
+                  ( ("threadpackptr" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [7532 7552]))                  
+                :type "void")
+                nil [7512 8214]))          
+    :file "sd.c"
+    :pointmax 8217
+    :fsize 8216
+    :lastmodtime '(20784 22663)
+    :unmatched-syntax 'nil
+    :lexical-table 
+        '(("NTHREADS" . ((number "8" 482 . 483)))
+          ("TESTROWNUM" . ((number "40" 556 . 558)))
+          )
+
+    )
+   )
+  :file "!tmp!fz3temp-1!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.0"
+  )
