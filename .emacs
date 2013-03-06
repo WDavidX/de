@@ -151,13 +151,13 @@
 ;;   (add-to-list 'ac-sources 'ac-source-yasnippet))
 
 ;;================================================================================
-(add-to-list 'load-path "~/.emacs.d/plugins/color-theme-660")
-(add-to-list 'load-path "~/.emacs.d/plugins/color-theme-660/themes")
-(require 'color-theme)
-(eval-after-load "color-theme"
-  '(progn
-     (color-theme-initialize)
-     (color-theme-arjen)))
+;; (add-to-list 'load-path "~/.emacs.d/plugins/color-theme-660")
+;; (add-to-list 'load-path "~/.emacs.d/plugins/color-theme-660/themes")
+;; (require 'color-theme)
+;; (eval-after-load "color-theme"
+;;   '(progn
+;;      (color-theme-initialize)
+;;      (color-theme-arjen)))
 ;;================================================================================
 
 
@@ -186,7 +186,7 @@
 (require 'icomplete+)
 (require 'iswitchb-fc)
 (require 'isearch+)
-;; (require 'color-theme-single) (color-theme-arjen)
+(require 'color-theme-single) (color-theme-arjen)
 ;(require 'kill-ring-ido)
 (require 'browse-kill-ring+)
 (require 'auto-show)(auto-show-mode 1)(setq-default auto-show-mode t)
