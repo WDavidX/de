@@ -198,7 +198,7 @@
 (global-unset-key "\C-c \C-c")
 (custom-set-variables
  '(ac-trigger-key "TAB")
- '(ac-auto-start nil)
+ '(ac-auto-start t)
  '(ac-use-menu-map t))
 
 (require 'cursor-chg)  ; Load the library

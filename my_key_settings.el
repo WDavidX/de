@@ -47,7 +47,7 @@ point."
 ;; set new method of kill a whole line
 (defadvice kill-ring-save (before slickcopy activate compile)
   "When called interactively with no active region, copy a single line instead."
-  (interactive
+n  (interactive
    (if mark-active (list (region-beginning) (region-end))
      (list (line-beginning-position)
            (line-beginning-position 2)))))
@@ -207,9 +207,9 @@ With argument, do this that many times."
 ;; ==================== Add hooks ====================
 (add-hook 'emacs-lisp-mode-hook (lambda () (define-key emacs-lisp-mode-map "\C-\\" 'eval-last-sexp)))
 ;; ==================== Keyboard Definition ====================
-(global-set-key "\C-g" 'keyboard-escape-quit)
+;; (global-set-key "\C-g" 'keyboard-escape-quit)
 (global-set-key "\C-x\C-b" 'ibuffer)
-(global-set-key "\C-xk" 'kill-this-buffer)
+;; (global-set-key "\C-xk" 'kill-this-buffer-if-not-scratch)
 (global-set-key (kbd "C-S-k") 'kill-line)
 (global-set-key (kbd "M-\'") 'split-window-horizontally)
 (global-set-key (kbd "C-\"") 'delete-windows-on)
@@ -225,7 +225,7 @@ With argument, do this that many times."
 (global-set-key "\C-z" 'undo)
 (global-set-key "\M-z" 'repeat-complex-command)
 (require 'redo+)(global-set-key (kbd "C-S-z") 'redo)
-(require 'buffcycle) (global-set-key "\C-x\C-k" 'kill-this-buffer-if-not-scratch)
+(require 'buffcycle) (global-set-key "\C-xk" 'kill-this-buffer-if-not-scratch)
 (global-set-key "\C-q" '(lambda() (interactive) (switch-to-buffer (other-buffer))))
 (global-set-key (kbd "C-S-b") 'kill-line)
 ;; (global-set-key "\C-t" 'comment-dwim-line)
@@ -269,7 +269,7 @@ With argument, do this that many times."
 
 ;; ==================== org mode org-mode ====================
  (setq load-path (cons "~/.emacs.d/plugins/org-7.9.2/lisp" load-path))
- (when (< emacs-major-version 25)
+ (when (< emacs-major-version 23)
 	 (require 'org-install))
  (add-to-list 'auto-mode-alist '("\\.md$" . org-mode))
  (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
@@ -312,16 +312,6 @@ With argument, do this that many times."
 						(local-set-key (kbd "C-S-k") 'forward-word)
 						(local-set-key "\C-j" 'backward-char)
 						(local-set-key (kbd "C-S-j") 'backward-word)
-						;; (load-file "~/.emacs.d/plugins/cedet-1.1/common/cedet.el")
-						;; (global-ede-mode 1)		; Enable the Project management system
-						(global-ede-mode 1)
-						(require 'semantic/sb)
-						(semantic-mode 1)
-   					;; (global-srecode-minor-mode 1)	; Enable template insertion menu
-						;; (semantic-load-enable-code-helpers)	; Enable prototype help and smart completion
-            ;; yasnippet (allow yasnippet to do its thing in org files)
-            ;; (org-set-local 'yas/trigger-key [tab])
-            ;; (define-key yas/keymap [tab] 'yas/next-field-group)
             (local-set-key "\C-k" 'forward-char)
 						(local-set-key (kbd "C-S-k") 'forward-word)
 						(local-set-key "\C-j" 'backward-char)
@@ -371,16 +361,16 @@ With argument, do this that many times."
 
 ;; Fonts in linux
 (if (eq window-system 'x)
-		(set-frame-font "Monospace 12")
+		(set-frame-font "Monospace 14")
 	)  ;good
 
-(if (> emacs-major-version 23)
-		(progn
-(require 'maxframe) (maximize-frame))
-(progn
-(setq initial-frame-alist '((top . 0) (left . 0) (width . 80) (height . 25)))
-	)
-		)
+;; (if (> emacs-major-version 23)
+;; 		(progn
+;; (require 'maxframe) (maximize-frame))
+;; (progn
+;; (setq initial-frame-alist '((top . 0) (left . 0) (width . 80) (height . 25)))
+;; 	)
+;; 		)
 
 ;; Font in window
 

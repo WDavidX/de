@@ -11,3 +11,5 @@ desktop-save
 ./*~
 eshell
 *~*~
+
+session.*
