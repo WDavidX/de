@@ -339,17 +339,20 @@ With argument, do this that many times."
 (global-set-key [(f12)] 	(lambda() (interactive)(save-some-buffers (buffer-file-name))(eval-buffer)))
 (global-set-key [(control f1)] 'repeat-complex-command)
 
-
 (global-set-key [backspace] 'delete-backward-char)
 (global-set-key [delete] 'delete-char)
 (global-set-key [C-delete] 'kill-word)
 (define-key global-map [home] `beginning-of-line)
 (define-key global-map [end] `end-of-line)
 (global-set-key [insert] 'onekey-compile)
-(define-key isearch-mode-map '[backspace] 'isearch-delete-char)
 (require 'ebs)(ebs-initialize)(global-set-key [(control tab)] 'ebs-switch-buffer)
 (define-key global-map (kbd "RET") 'newline-and-indent)
 
+;; ======================= Winows onts =======================
+(define-key isearch-mode-map '[backspace] 'isearch-del-char)
+(define-key isearch-mode-map "\C-f" 'isearch-del-char)
+;; (define-key isearch-mode-map "\C-k" 'forward-char)
+;; (define-key isearch-mode-map "\C-j" 'backward-char)
 ;; ======================= Windows Fonts =======================
 (if (eq window-system 'w32)
 		(set-frame-font "Monaco 12")
@@ -371,6 +374,7 @@ With argument, do this that many times."
 ;; (setq initial-frame-alist '((top . 0) (left . 0) (width . 80) (height . 25)))
 ;; 	)
 ;; 		)
+
 
 ;; Font in window
 
